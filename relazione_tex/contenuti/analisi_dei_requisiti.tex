@@ -1,0 +1,237 @@
+
+\section{Analisi dei requisiti}
+\subsection{Descrizione testuale}
+Si vuole realizzare una base di dati per l'applicazione \textit{Gestionale servizi del diporto} che dovrà gestire tutti i dati relativi ad le imbarcazioni che vi sosteranno, i servizi offerti e i dati relativi ai clienti.
+
+Ogni marina solitamente contiene da 50 fino ad anche 500 \textbf{posti barca} con un commisurato traffico di imbarcazioni, persone e quindi informazioni. Alcuni dei clienti del marina sono occasionali, ad esempio persone che effettuano crociere e bazzicano di porto in porto; Altri clienti sono abituali e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato. Si vorrà poi sapere da quanto tempo un posto barca appartiene ad una persona.
+
+Ognuno di questi marina è caratterizzato da un indirizzo, \textit{un nome}, e \textit{le coordinate geografiche} a cui i naviganti possono dirigere per raggiungerlo. Esso possiede inoltre una quantità più o meno varia di moli\footnote{Sinonimo di posto barca} di cui si vuole tenere traccia l'occupazione nel tempo per fini statistici\footnote{Quando e per quanto}. per ogni molo sono registrate le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo), gli allacciamenti\footnote{Si intendono allacciamenti idrici, elettrici, di aria compressa} e lo stato di occupazione.
+
+Gli allacciamenti hanno un nome, un'unità di misura ed un costo unitario.
+
+Relativamente agli allacciamenti ne vengono anche registrati i consumi da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore all'arrivo dell'imbarcazione ed una lettura del contatore alla partenza della stessa. Se l'imbarcazione non ha una data di prevista partenza, ad esempio un cliente che ormeggia la sua imbarcazione a tempo indefinito la lettura viene fatta mensilmente e registrata, la quantità da pagare mensilmente viene quindi fatturata al cliente e viene registrato se la fattura è stata pagata oppure no.
+
+%per ogni sosta di un'imbarcazione in un molo si vuole memorizzare la data in cui l'imbarcazione è arrivata e la data in cui l'imbarcazione è partita. 
+
+%Degli allacciamenti è importante il tipo di allacciamento, il prezzo unitario e l'unità di misura.
+
+Nel marina sosteranno le \textbf{imbarcazioni}, queste imbarcazioni sosteranno nel tempo in più moli differenti. Chiaramente i moli saranno nel tempo utilizzati da più imbarcazioni(o anche da nessuna(ad esempio un marina appena inaugurato)).
+
+Di ogni \textbf{imbarcazione} vengono registrati codice internazionale, la bandiera battuta,l'armatore, il capitano le dimensioni, il numero di posti letto e se è presente anche il nome. Queste informazioni vengono memorizzate assieme ai dati dei clienti per onorare gli obblighi di registrazione portuale.
+
+I clienti sono coloro che ormeggiano un'imbarcazione all'interno del marina e di loro ne viene salvato il nome, il cognome, il codice fiscale, gli eventuali contatti, la residenza, la cittadinanza, la data di nascita.
+
+Ogni cliente può quindi prenotare un molo del marina preventivamente. Ogni \textbf{prenotazione} è caratterizzata da una data prevista di arrivo, una data prevista di partenza, l'imbarcazione interessata, ed il cliente prenotante.
+
+%Per controllare se un posto è disponibile bisogna quindi controllare se il molo è disponibile e inoltre se esistono già delle prenotazioni per quelle date. In realtà le prenotazioni non sono obbligatoriamente associate ad un molo, ma sono associate alle dimensioni. Infatti è importante trovare il best match tra imbarcazioni e moli, ma non serve che un molo sia forzatamente prenotato per un'imbarcazione.
+
+Il marina offre una serie di servizi utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni servizio è caratterizzato da un nome unico per ogni marina e gli orari di apertura e chiusura.
+
+Ogni servizio è amministrato da un \textbf{addetto} del quale ci interessa la data di inizio contratto e la fine. Se la fine non è segnata allora lavorerà li a tempo indeterminato.
+
+Come terzo ed ultimo metodo di sostentamento il marina offre anche dei \textbf{corsi}, questi corsi utilizzano a volte le imbarcazioni messe a disposizione da alcune persone e ne viene registrato il nome, il prezzo per la partecipazione, la data di inizio e la data di fine del corso. Esisteranno quindi dei clienti senza imbarcazione ma che partecipano ad uno dei corsi offerti dal marina.
+ 
+ 
+%%%%%%%%%%%%
+%Il conto di un cliente in fine equivale alla somma di tutti i servizi di cui ha usufruito e dei giorni in cui ha sostato.
+%%%%%%%%%%%%
+
+\subsection{Glossario dei termini}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|p{2.4cm}|p{8cm}|p{2.4cm}|X|}
+        \hline
+        \textbf{Entità} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{collegamenti} \\
+        \hline
+        Marina & Il luogo in cui si trovano tutte le imbarcazioni ed i servizi  & area portuale & molo, servizio, imbarcazione\\
+        
+        \hline
+        Imbarcazione & Il mezzo di trasporto parcheggiato nei moli & barca & persona, molo\\
+        
+        \hline
+        Molo & Il luogo in cui le imbarcazioni riposano & posto barca, ormeggio & persona, imbarcazione\\
+        
+        \hline
+        Cliente& Persona che possiede un'imbarcazione ormeggiata nel marina & armatore & imbarcazione\\
+        
+        \hline
+        Prenotazione &&&molo, cliente \\
+        
+        \hline
+        Servizio &&&Marina \\
+        
+        \hline
+        Addetto & Persona con responsabilità relative ad un servizio & & servizio \\
+        
+        \hline
+        Allacciamento & Un servizio consumabile tipo acqua, elettricità disponibile ad un molo& & molo\\
+        \hline
+        Corso & & &marina, imbarcazione, cliente\\
+        \hline
+        Fattura &&& cliente, consumo\\
+        \hline
+        Consumo & La lettura di un contatore degli allacciamenti presenti ai moli.& & fattura, cliente, molo\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\subsection{Strutturazione dei requisiti}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Marina}}\\
+        \hline
+        Ogni marina solitamente contiene da 50 fino ad anche 500posti barca. \\
+        
+        Ognuno di questi marina è caratterizzato da un indirizzo, \textit{un nome}, e \textit{le coordinate geografiche} a cui i naviganti possono dirigere per raggiungerlo. Esso possiede inoltre una quantità più o meno varia di moli\\
+        
+        Nel marina sosteranno le imbarcazioni,queste imbarcazioni sosteranno nel tempo in più moli differenti.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Imbarcazione}}\\
+        \hline
+        queste imbarcazioni sosteranno nel tempo in più moli differenti.\\
+        Di ogni \textbf{imbarcazione} vengono registrati codice internazionale, la bandiera battuta,l'armatore, il capitano le dimensioni, il numero di posti letto e se è presente anche il nome. Queste informazioni vengono memorizzate assieme ai dati dei clienti per onorare gli obblighi di registrazione portuale.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Molo}}\\
+        \hline
+        moli di cui si vuole tenere traccia l’occupazione nel tempo per fini statistici. per ogni molo sono registrate le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo),gli allacciamenti e lo stato di occupazione.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Cliente}}\\
+        \hline
+        Alcuni dei clienti del marina sono occasionali, ad esempio persone che effettuano crociere e bazzicano di porto in porto; Altri clienti sono abituali e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato.\\
+        
+        I clienti sono coloro che ormeggiano un'imbarcazione all'interno del marina e di loro ne viene salvato il nome, il cognome, il codice fiscale, gli eventuali contatti, la residenza, la cittadinanza, la data di nascita.\\
+
+Ogni cliente può quindi prenotare un molo del marina preventivamente.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Prenotazione}}\\
+        \hline
+        Ogni \textbf{prenotazione} è caratterizzata da una data prevista di arrivo, una data prevista di partenza, l'imbarcazione interessata, ed il cliente prenotante.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Servizio}}\\
+        \hline
+        Il marina offre una serie di servizi utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni servizio è caratterizzato da un nome unico per ogni marina e gli orari di apertura e chiusura.\\
+        
+        Ogni servizio è amministrato da un \textbf{addetto} \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Addetto}}\\
+        \hline
+        un \textbf{addetto} del quale ci interessa la data di inizio contratto e la fine. Se la fine non è segnata allora lavorerà li a tempo indeterminato.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Allacciamento}}\\
+        \hline
+        Gli allacciamenti hanno un nome, un'unità di misura ed un costo unitario.\\
+        Relativamente agli allacciamenti ne vengono anche registrati i consumi da parte di ogni cliente\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Corso}}\\
+        \hline
+        Questi corsi utilizzano a volte le imbarcazioni messe a disposizione da alcune persone e ne viene registrato il nome, il prezzo per la partecipazione, la data di inizio e la data di fine del corso. Esisteranno quindi dei clienti senza imbarcazione ma che partecipano ad uno dei corsi offerti dal marina.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Fattura}}\\
+        \hline
+        la quantità da pagare mensilmente viene quindi fatturata al cliente e viene registrato se la fattura è stata pagata oppure no.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{1}{|c|}{\textbf{Frasi relative a Consumo}}\\
+        \hline
+        vengono anche registrati i consumi da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore all'arrivo dell'imbarcazione ed una lettura del contatore alla partenza della stessa. Se l'imbarcazione non ha una data di prevista partenza, ad esempio un cliente che ormeggia la sua imbarcazione a tempo indefinito la lettura viene fatta mensilmente e registrata.\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+\subsection{Operazioni tipiche}
+Contando che ad un marina appartengono dai 50 ai 500 moli e una delle aziende o associazioni che utilizzerà l'applicativo potrebbe possedere da 1 a 5 marina in media le operazioni effettuate nel marina con annessa frequenza sono le seguenti.
+\begin{center}
+    \begin{tabularx}{\textwidth}{|p{90mm}|X|}
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Operazione} & \textbf{Frequenza}\\
+        \hline
+        1. Stampa della fattura di pagamento del cliente & 40 volte al giorno\\
+        \hline
+        2. Controllo dei posti disponibili per una certa imbarcazione(Controllo delle dimensioni)& 40 volte al giorno\\
+        \hline
+        3. Organizzazione di un corso & 30 volte l'anno\\
+        \hline
+        4. Cambio dell'addetto ad un servizio & 1-2 volte ogni due anni\\
+        \hline
+        5. Prenotazioni di posti barca & 30-50 volte al giorno\\
+        \hline
+        6. Arrivo di un'imbarcazione in uno dei marina & 30-40 volte al giorno\\
+        \hline
+        7. Espletamento degli obblighi doganali & 140 volte a settimana\\
+        \hline
+    \end{tabularx}
+\end{center}

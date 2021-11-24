@@ -1,0 +1,59 @@
+\section{Progettazione logica}
+
+\subsection{Analisi delle ridondanze}
+Le ridondanze corrispondono alla presenza di dati che possono essere derivati da altri. È quindi importante domandarsi se questa ridondanza crei solo confusione o velocizzi veramente le operazioni.
+
+Nello schema concettuale possiamo individuare 
+
+stato di occupazione è deducibile dalla relazione sosta che presenta l'attributo data di arrivo e data di partenza.
+
+L'operazione coinvolta è la numero 2 che presenta una frequenza di 40 volte al giorno.
+
+Si procede alla valutazione del costo totale in termini di accessi nel caso di ridondanza e di assenza di essi.
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|p{90mm}|X|}
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Operazione} & \textbf{Frequenza}\\
+        \hline
+        2. Controllo dei posti disponibili per una certa imbarcazione(Controllo delle dimensioni)& 40 volte al giorno\\
+        \hline
+    \end{tabularx}
+\end{center}
+
+Ci riferiremo per i nostri calcoli a dei volumi plausibili durante il periodo di una settimana in medio-alta stagione. I moli non variano particolarmente di numero, le imbarcazioni vengono registrate al loro primo accesso e le soste aumentano ogni giorno.
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|X|X|X|X|}
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Concetto} & \textbf{Tipo} & \textbf{Volume} & \textbf{Note} \\
+        \hline
+        Molo & ENTITÀ & 1600 & Sono i moli presenti in 5 marina\\
+        \hline
+        Imbarcazione & ENTITÀ & 5000 & Sono le imbarcazioni registrate nel programma a fine settimana\\
+        \hline
+        Sosta & RELAZIONE & 1050 & Sono le soste tipiche di una settimana \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+Numero medio 
+
+
+\subsubsection{altre ridondanze}
+
+\subsection{Eliminazione delle generalizzazioni}
+
+\subsection{Partizionamento/Accorpamento di entità e relazioni}
+
+\subsection{Scelta degli identificatori primari}
+
+\subsection{Traduzione verso il modello relazionale}
+%Qui e dove definisco come devono essere scritti nel db le tabelle
+
+\subsection{Schema concettuale ristrutturato - Schema logico}
+%\includegraphics[width=\textwidth]{}
+
+\subsection{vincoli di integrità referenziale}
