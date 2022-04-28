@@ -199,7 +199,11 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Fattura}}\\
         \hline
-        Codice & INTEGER & Identifica univocamente la fattura nel programma & Chiave \\
+        Codice_fattura & INTEGER & Identifica univocamente la fattura nel programma & Chiave \\
+        \hline
+        Data_scadenza & DATE & \multicolumn{2}{l|}{Identifica la scadenza della fattura} \\
+        \hline
+        Pagato & DATE & \multicolumn{2}{l|}{Identifica lo stato del pagamento della fattura} \\
         \hline
     \end{tabularx}
 \end{center}
@@ -305,6 +309,12 @@ La relazione possiede gli attributi: data arrivo e data partenza per indicare un
         \item Un marina può emettere molte fatture relative a molti consumi (0,N);
         \item Un Consumo può essere inserito solo nell'emissione di una fattura da un marina (1,1);
         \item Una fattura può essere relativa solo ad un marina e ad un consumo (1,1);
+    \end{itemize}
+    
+    \item Consumo - Allacciamento: \textbf{Utilizzo}
+    \begin{itemize}
+        \item Un consumo utilizza uno e un solo allacciamento(1,1);
+        \item Un allacciamento può essere utilizzato da 0 a molte fatture(0,N);
     \end{itemize}
     
 %Come gestisco le fatture già pagate?

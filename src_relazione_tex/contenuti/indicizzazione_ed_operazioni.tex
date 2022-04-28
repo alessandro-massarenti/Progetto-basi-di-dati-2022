@@ -1,12 +1,74 @@
-\section{Casistiche di utilizzo della base di dati}
+%\section{Casistiche di utilizzo della base di dati}
 
--	Quando un utente va via dovrà quindi pagare il conto, che è la somma di tutti i servizi di cui ha usufruito
--	Avere facilmente in vista tutte le persone all’interno del marina
--	Conoscere rapidamente quanti posti disponibili relativamente a certe dimensioni ci sono
--	Ottenere i dati necessari a compilare i documenti doganali e relativi al soggiorno in uno stato estero per gli utenti con nazionalità differente dal marina
-o
+%-	Quando un utente va via dovrà quindi pagare il conto, che è la somma di tutti i servizi di cui ha usufruito
+%-	Avere facilmente in vista tutte le persone all’interno del marina
+%-	Conoscere rapidamente quanti posti disponibili relativamente a certe dimensioni ci sono
+%-	Ottenere i dati necessari a compilare i documenti doganali e relativi al soggiorno in uno stato estero per gli utenti con nazionalità differente dal marina
+
+
+\section{Query}
+
+\subsection{Classifica clienti più spendenti}
+\subsection{Entrate di ogni anno divise in ricevute e da ricevere}
+\subsection{Quantità di moli di ogni marina}
+
+\begin{lstlisting}
+CREATE VIEW NumeroMoliMarina(Marina,Numero_moli) AS
+SELECT M.nome, COUNT(idmolo) FROM "Molo"
+JOIN "Marina" M on M.coordinate_geografiche = "Molo".marina group by M.nome;
+\end{lstlisting}
+
+\subsection{Moli disponibili in un certo periodo per una barca in un certo marina}
+
+\begin{lstlisting}
+SELECT idmolo,dimensioni,marina from "Molo"
+--SELECT count(idmolo) from "Molo"
+JOIN "Dimensioni" d on d.id_dimensioni = "Molo".dimensioni
+
+WHERE idmolo not in (
+SELECT molo FROM "sosta"
+WHERE data_arrivo<='2022-01-20 22:16:37.000000'
+AND '2022-12-26 8:16:37.000000' <= data_partenza)
+
+AND idmolo not in (
+SELECT molo FROM "Prenotazione"
+WHERE previsione_arrivo<='2022-01-20 22:16:37.000000'
+AND '2022-12-26 8:16:37.000000' <= previsione_partenza)
+
+AND lunghezza >= 9 and larghezza>= 3 and pescaggio >= 3
+AND marina = '{45.47186543638522000,12.44861260105955800}'
+ORDER BY dimensioni ASC;
+LIMIT 10;
+\end{lstlisting}
+
+\subsection{Tutte le soste fatte dall'imbarcazione "Alexandra"}
+
+Tutte le soste effettuate dall'imbarcazione "Alexandra" in uno dei marina ed in che date è arrivata in quel marina
+
+\begin{lstlisting}
+SELECT Mar.nome, I.nome, sosta.data_arrivo  FROM sosta
+JOIN "Imbarcazione"  I on sosta.imbarcazione = I.codice_internazionale
+JOIN "Molo" M on M.idmolo = sosta.molo
+JOIN "Marina" Mar on M.marina = Mar.coordinate_geografiche
+
+WHERE I.nome = 'Alexandra';
+\end{lstlisting}
+
+\subsection{Clienti con barca norvegese che hanno sostato a Portoferraio nel 2022}
+
+\begin{lstlisting}
+SELECT DISTINCT P.nome,P.cognome FROM sosta
+JOIN "Imbarcazione" I on I.codice_internazionale = sosta.imbarcazione
+JOIN "Molo" M on M.idmolo = sosta.molo
+JOIN "Marina" mar on M.marina = mar.coordinate_geografiche
+JOIN "Cliente" C on I.proprietario = C.persona
+JOIN "Persona" P on C.persona = P.cf
+WHERE data_arrivo>= '2022-01-01 00:00:00.000000'
+AND data_partenza <= '2022-12-31 00:00:00.000000'
+AND I.bandiera = 'Norvegia'
+AND mar.citta = 'Portoferraio';
+\end{lstlisting}
+
 \section{Indicizzazione}
-\subsection{Casi d'uso}
 \subsection{Identificazione delle tabelle da indicizzare}
 \subsection{Creazione dell'indice}
-\subsection{Query}

@@ -168,12 +168,68 @@ Persona avrà da 0 a 1 Cliente e da 0 a 1 Addetto. In Addetto e Cliente posizion
 
 \subsection{Partizionamento/Accorpamento di entità e relazioni}
 
+Le Entità Molo e Imbarcazione condividono l'attributo composto \textbf{Dimensioni}. Le 2 entità possono contenere le stesse dimensioni, quindi gli attributi risultano ridondanti. Viene creata un'entità dimensioni che avrà relazione 1 a molti con Molo ed Imbarcazione.
+
+Inoltre si accorpa l'attributo indirizzo a Marina che avrà quindi gli attributi: Via, provincia, Città, numero civico.
+
 \subsection{Scelta degli identificatori primari}
 
-\subsection{Traduzione verso il modello relazionale}
-%Qui e dove definisco come devono essere scritti nel db le tabelle
+Le occorrenze di addetto e Cliente vengono identificate dal CF di Persona. 
+Orario viene identificato dal nome del servizio e dal marina che lo offre.
+Contatto viene identificato dall'indirizzo di contatto e dal CF di persona.
+
+Alcune entità, ovvero: Consumo, Corso, Dimensioni, Molo, Allacciamento, Prenotazione non hanno un identificatore primario concettuale gli daremo quindi un id auto-incrementante.
 
 \subsection{Schema concettuale ristrutturato - Schema logico}
-%\includegraphics[width=\textwidth]{}
+\includegraphics[width=\textwidth]{img/erlogico.png}
 
-\subsection{vincoli di integrità referenziale}
+
+\subsection{Descrizione schema relazionale}
+
+Consumo(\underline{id\_consumo},data inizio lettura,data fine lettura,quantità consumata);
+
+Fattura(\underline{codice\_fattura},data\_scadenza,pagato) 
+
+Marina(\underline{coordinate\_geografiche},citta,Nome,quantita moli, numero civico,via,provincia);
+
+Servizio(\underline{marina,Nome});
+
+Orario(\underline{marina,nome\_servizio, orario\_apertura, orario\_chiusura});
+
+Addetto(\underline{persona},data\_inizio\_contratto,data\_fine\_contratto);
+
+Contatto(\underline{persona,indirizzo});
+
+Persona(\underline{CF},data di nascita,nome,cognome);
+
+Molo(\underline{id\_molo},stato di occupazione);
+
+Corso(\underline{id\_corso},prezzo,data inizio,data fine,nome,);
+
+Dimensione(\underline{id\_dimensioni},larghezza,lunghezza,pescaggio);
+
+Allacciamento(\underline{nome},prezzo\_unitario,unita\_di misura);
+
+Prenotazione(\underline{id\_prenotazione},previsione arrivo,previsione\_partenza);
+
+Cliente(\underline{persona},cittadinanza,residenza,marina visitati,data primo arrivo);
+
+Imbarcazione(\underline{codice\_internazionale} ,bandiera,capitano,quantità posti letto, nome);
+
+
+\subsection{Vincoli di integrità referenziali}
+
+\textbf{Fattura}.cliente -> Cliente.persona\\
+\textbf{Addetto}.persona -> Persona.CF\\
+\textbf{Cliente}.persona -> Persona.CF\\
+\textbf{Molo}.dimensioni -> dimensioni.id\_dimensioni\\
+\textbf{Imbarcazione}.dimensioni -> dimensioni.id\_dimensioni\\
+\textbf{Servizio}.marina -> Marina.coordinate geografiche\\
+\textbf{Contatto}.persona -> Persona.CF\\
+\textbf{Orario}.servizio ->Servizio.nome\\
+\textbf{Orario}.marina -> Marina.coordinate\_geografiche\\
+\textbf{Fattura}.consumo -> Consumo.id\_consumo\\
+\textbf{Consumo}.marina -> Marina.coordinate\_geografiche\\
+\textbf{Servizio}.addetto -> Addetto.persona\\
+\textbf{Prenotazione}.molo -> Molo.id\_molo\\
+\textbf{Molo}.marina -> Marina.coordinate\_geografiche\\

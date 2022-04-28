@@ -5,7 +5,27 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{mathtools}
+\usepackage[clean]{svg}
 \usepackage[bottom]{footmisc}
+
+\usepackage{listings}
+\usepackage{color}
+\renewcommand\lstlistingname{Quelltext} % Change language of section name
+\lstset{ % General setup for the package
+    language=SQL,
+    basicstyle=\small\sffamily,
+    numbers=left,
+     numberstyle=\tiny,
+    frame=tb,
+    tabsize=4,
+    columns=fixed,
+    showstringspaces=false,
+    showtabs=false,
+    keepspaces,
+    commentstyle=\color{red},
+    keywordstyle=\color{blue}
+}
+
 \geometry{
 a4paper,
 total = {170mm, 240mm},
