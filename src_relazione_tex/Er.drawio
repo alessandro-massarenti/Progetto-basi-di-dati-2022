@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-07T17:38:29.771Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="KBu_hfzAKYHo4GDhzTN7" version="18.0.1" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-07T17:43:40.361Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="TA1JXTof5ng2RxokFkMC" version="18.0.1" type="github" pages="4">
   <diagram id="APr3xvJTwMFM9qsmsEbl" name="Concettuale">
     <mxGraphModel dx="3569" dy="3151" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2398,7 +2398,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="Lb8NKgurd6Q8IvhMMRqe" name="Concettuale ridotto">
-    <mxGraphModel dx="1235" dy="1855" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2920" dy="2791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
