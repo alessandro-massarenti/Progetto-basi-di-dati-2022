@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-07T22:13:53.190Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="8Duqhf_MNW8spFzSqe6A" version="18.0.1" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-07T22:19:08.555Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="fdxoWdmynis4x2wvG6SK" version="18.0.1" type="github" pages="4">
   <diagram id="APr3xvJTwMFM9qsmsEbl" name="Concettuale">
     <mxGraphModel dx="3569" dy="3151" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2404,7 +2404,7 @@
         <mxCell id="1" parent="0" />
         <UserObject label="Data inizio contratto" lucidchartObjectId="qG3w~g5rz1pi" id="IZg3AnJUHfxiXuIaxrN7-1">
           <mxCell style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;fontSize=17;fontColor=#000000;spacing=0;fillColor=#ffffff;strokeWidth=1.5;strokeColor=none;" vertex="1" parent="1">
-            <mxGeometry x="1788" y="-230" width="163" height="40" as="geometry" />
+            <mxGeometry x="1710" y="-241" width="163" height="40" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="Orario chiusura&lt;br&gt;(0,N)" lucidchartObjectId="qG3wzOogJra3" id="IZg3AnJUHfxiXuIaxrN7-2">
@@ -2459,7 +2459,7 @@
         </UserObject>
         <UserObject label="Data fine contratto&#xa;(0,1)" lucidchartObjectId="qG3wbWLWPdAv" id="IZg3AnJUHfxiXuIaxrN7-17">
           <mxCell style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;fontSize=17;fontColor=#000000;spacing=0;fillColor=#ffffff;strokeWidth=1.5;strokeColor=none;" vertex="1" parent="1">
-            <mxGeometry x="1765" y="-330" width="151" height="37" as="geometry" />
+            <mxGeometry x="1765.25" y="-340" width="151" height="37" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="Quantità posti letto" lucidchartObjectId="qG3wauGdlq0J" id="IZg3AnJUHfxiXuIaxrN7-18">
@@ -2838,9 +2838,9 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <UserObject label="" lucidchartObjectId="qG3wSR7629fp" id="IZg3AnJUHfxiXuIaxrN7-119">
-          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=17;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;startArrow=none;endArrow=oval;endFill=0;endSize=16;entryX=0.439;entryY=1.108;entryPerimeter=0;entryDx=0;entryDy=0;exitX=0.798;exitY=0.009;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="IZg3AnJUHfxiXuIaxrN7-45" target="IZg3AnJUHfxiXuIaxrN7-1">
+          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=17;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;startArrow=none;endArrow=oval;endFill=0;endSize=16;entryX=0.439;entryY=1.108;entryPerimeter=0;entryDx=0;entryDy=0;exitX=0.137;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="IZg3AnJUHfxiXuIaxrN7-45" target="IZg3AnJUHfxiXuIaxrN7-1">
             <mxGeometry width="100" height="100" relative="1" as="geometry">
-              <mxPoint x="1860" y="-150" as="sourcePoint" />
+              <mxPoint x="1782" y="-150" as="sourcePoint" />
             </mxGeometry>
           </mxCell>
         </UserObject>
@@ -2954,7 +2954,7 @@
           </mxCell>
         </UserObject>
         <UserObject label="" lucidchartObjectId="qG3wHQuYIb9o" id="IZg3AnJUHfxiXuIaxrN7-150">
-          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=17;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;startArrow=none;endArrow=oval;endFill=0;endSize=16;exitX=0.112;exitY=-0.018;exitPerimeter=0;entryX=0.104;entryY=1;entryPerimeter=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IZg3AnJUHfxiXuIaxrN7-45" target="IZg3AnJUHfxiXuIaxrN7-17">
+          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=17;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;startArrow=none;endArrow=oval;endFill=0;endSize=16;exitX=0.817;exitY=0.018;exitPerimeter=0;entryX=0.75;entryY=1;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IZg3AnJUHfxiXuIaxrN7-45" target="IZg3AnJUHfxiXuIaxrN7-17">
             <mxGeometry width="100" height="100" relative="1" as="geometry" />
           </mxCell>
         </UserObject>
