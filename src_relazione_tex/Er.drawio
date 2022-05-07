@@ -814,7 +814,7 @@
           </mxCell>
         </UserObject>
         <UserObject label="" lucidchartObjectId="qG3w.aXREcjN" id="Z3lHiF9pWhcNN7oMNmmU-162">
-          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=17;strokeColor=#0F00F0;strokeWidth=1.5;rounded=1;arcSize=12;edgeStyle=orthogonalEdgeStyle;startArrow=none;endArrow=none;exitX=1.009;exitY=0.21;exitPerimeter=0;entryX=0.5;entryY=0.004;entryPerimeter=0;" parent="1" source="Z3lHiF9pWhcNN7oMNmmU-45" target="Z3lHiF9pWhcNN7oMNmmU-161" edge="1">
+          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=17;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;edgeStyle=orthogonalEdgeStyle;startArrow=none;endArrow=none;exitX=1.009;exitY=0.21;exitPerimeter=0;entryX=0.5;entryY=0.004;entryPerimeter=0;" parent="1" source="Z3lHiF9pWhcNN7oMNmmU-45" target="Z3lHiF9pWhcNN7oMNmmU-161" edge="1">
             <mxGeometry width="100" height="100" relative="1" as="geometry">
               <Array as="points">
                 <mxPoint x="2134" y="-258" />
@@ -1798,10 +1798,6 @@
         <UserObject label="" lucidchartObjectId="Jf3w-ZauPC8g" id="MiA3Lhsyqf2v3zLrPXSK-124">
           <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=13;strokeColor=#3333FF;strokeWidth=1.5;rounded=1;arcSize=12;curved=1;startArrow=none;endArrow=oval;endFill=0;endSize=16;exitX=0.358;exitY=1.012;exitPerimeter=0;entryX=1;entryY=0.244;entryPerimeter=0;" parent="MiA3Lhsyqf2v3zLrPXSK-1" source="MiA3Lhsyqf2v3zLrPXSK-42" target="MiA3Lhsyqf2v3zLrPXSK-41" edge="1">
             <mxGeometry width="100" height="100" relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="1361" y="894" />
-                <mxPoint x="1412" y="801" />
-              </Array>
             </mxGeometry>
           </mxCell>
         </UserObject>
