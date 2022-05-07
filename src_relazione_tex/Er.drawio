@@ -2430,10 +2430,6 @@
         <UserObject label="" lucidchartObjectId=".zixhP9SAd3J" id="MiA3Lhsyqf2v3zLrPXSK-219">
           <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=13;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;curved=1;startArrow=none;endArrow=oval;endFill=0;endSize=16;exitX=0.842;exitY=1.012;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="MiA3Lhsyqf2v3zLrPXSK-1" source="MiA3Lhsyqf2v3zLrPXSK-145" target="MiA3Lhsyqf2v3zLrPXSK-218">
             <mxGeometry width="100" height="100" relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="1084" y="196" />
-                <mxPoint x="972" y="52" />
-              </Array>
             </mxGeometry>
           </mxCell>
         </UserObject>
