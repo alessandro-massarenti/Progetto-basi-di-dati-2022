@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-07T09:45:02.430Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="FjVe7YAh2AEaAGkpWd2A" version="18.0.1" type="github" pages="3">
+<mxfile host="app.diagrams.net" modified="2022-05-07T09:46:25.489Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="uWNzFXTePVZWMBRuOQ6a" version="18.0.1" type="github" pages="3">
   <diagram id="APr3xvJTwMFM9qsmsEbl" name="Concettuale">
     <mxGraphModel dx="2677" dy="2537" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -1646,13 +1646,8 @@
           </mxCell>
         </UserObject>
         <UserObject label="" lucidchartObjectId="Jf3w-BvX7W3n" id="MiA3Lhsyqf2v3zLrPXSK-100">
-          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=13;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;curved=1;startArrow=none;endArrow=oval;endFill=0;endSize=16;exitX=-0.009;exitY=0.5;exitPerimeter=0;entryX=1;entryY=0.497;entryPerimeter=0;" parent="MiA3Lhsyqf2v3zLrPXSK-1" source="MiA3Lhsyqf2v3zLrPXSK-48" target="MiA3Lhsyqf2v3zLrPXSK-20" edge="1">
-            <mxGeometry width="100" height="100" relative="1" as="geometry">
-              <Array as="points">
-                <mxPoint x="1131" y="210" />
-                <mxPoint x="1413" y="210" />
-              </Array>
-            </mxGeometry>
+          <mxCell style="html=1;jettySize=18;whiteSpace=wrap;fontSize=13;strokeColor=#000000;strokeWidth=1.5;rounded=1;arcSize=12;startArrow=none;endArrow=oval;endFill=0;endSize=16;exitX=-0.009;exitY=0.5;exitPerimeter=0;entryX=1;entryY=0.497;entryPerimeter=0;" parent="MiA3Lhsyqf2v3zLrPXSK-1" source="MiA3Lhsyqf2v3zLrPXSK-48" target="MiA3Lhsyqf2v3zLrPXSK-20" edge="1">
+            <mxGeometry width="100" height="100" relative="1" as="geometry" />
           </mxCell>
         </UserObject>
         <UserObject label="Gestione" lucidchartObjectId="Jf3wencyFdpE" id="MiA3Lhsyqf2v3zLrPXSK-101">
