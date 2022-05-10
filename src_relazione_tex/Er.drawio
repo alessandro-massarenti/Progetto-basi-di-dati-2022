@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-05-10T11:59:12.863Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36" etag="k7_IH94syuZlC-RjN5Cy" version="18.0.2" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2022-05-10T12:14:17.091Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36" etag="fZ72VkyMS1X8SULtKU5a" version="18.0.2" type="github" pages="5">
   <diagram id="APr3xvJTwMFM9qsmsEbl" name="Concettuale">
     <mxGraphModel dx="1606" dy="2062" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -3315,7 +3315,7 @@
             <mxGeometry x="1306" y="218" width="124" height="55" as="geometry" />
           </mxCell>
         </UserObject>
-        <UserObject label="Gestione" lucidchartObjectId="qG3wfe9licWh" id="1YzMPZEgrB3gBiXrtrJ6-4">
+        <UserObject label="Apertura" lucidchartObjectId="qG3wfe9licWh" id="1YzMPZEgrB3gBiXrtrJ6-4">
           <mxCell style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;rhombus;fontSize=17;fontColor=#000000;spacing=3.8;strokeColor=#000000;strokeOpacity=100;rounded=1;absoluteArcSize=1;arcSize=9;strokeWidth=2.3;" parent="1" vertex="1">
             <mxGeometry x="1369" y="-90" width="120" height="90" as="geometry" />
           </mxCell>
@@ -3341,7 +3341,7 @@
             </mxGeometry>
           </mxCell>
         </UserObject>
-        <mxCell id="1YzMPZEgrB3gBiXrtrJ6-10" value="(1,1)" style="text;html=1;resizable=0;labelBackgroundColor=default;align=center;verticalAlign=middle;fontStyle=1;fontColor=#000000;fontSize=17;" parent="1YzMPZEgrB3gBiXrtrJ6-9" vertex="1">
+        <mxCell id="1YzMPZEgrB3gBiXrtrJ6-10" value="(1,N)" style="text;html=1;resizable=0;labelBackgroundColor=default;align=center;verticalAlign=middle;fontStyle=1;fontColor=#000000;fontSize=17;" parent="1YzMPZEgrB3gBiXrtrJ6-9" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <UserObject label="Giorno apertura" lucidchartObjectId="qG3wzOogJra3" id="1YzMPZEgrB3gBiXrtrJ6-11">
