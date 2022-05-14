@@ -1,3 +1,13 @@
 
 */.DS_Store
 .DS_Store
+*.aux
+
+*.fdb_latexmk
+
+*.fls
+
+*.log
+*.gz
+*.xdv
+src_relazione_tex/*.pdf
