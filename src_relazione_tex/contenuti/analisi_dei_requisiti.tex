@@ -3,38 +3,37 @@
 \subsection{Descrizione testuale}
 Si vuole realizzare una base di dati per l'applicazione \textit{Gestionale servizi del diporto} che dovrà gestire tutti i dati relativi ad un marina e le imbarcazioni che vi sosteranno, i servizi offerti e i dati relativi ai clienti.
 
-Ogni marina solitamente contiene da 50 fino ad anche 500 \textbf{posti barca} con un commisurato traffico di imbarcazioni, persone e quindi informazioni. Alcuni dei clienti del marina sono occasionali, ad esempio persone che effettuano crociere e bazzicano di porto in porto; Altri clienti sono abituali e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato. Si vorrà poi sapere da quanto tempo un posto barca appartiene ad una persona.
+Le fuznzioni desiderate prevedono: il calcolo del conto dei clienti; la conoscenza dei moli liberi nel marina
 
-Ognuno di questi marina è caratterizzato da un indirizzo, \textit{un nome}, e \textit{le coordinate geografiche} a cui i naviganti possono dirigere per raggiungerlo. Esso possiede inoltre una quantità più o meno varia di moli\footnote{Sinonimo di posto barca} di cui si vuole tenere traccia l'occupazione nel tempo per fini statistici\footnote{Quando e per quanto}. per ogni molo sono registrate le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo), gli allacciamenti\footnote{Si intendono allacciamenti idrici, elettrici, di aria compressa} e lo stato di occupazione.
+Il marina in esame ha 250 \textbf{posti barca}, numero che cambia solo in caso di ristrutturazioni particolari. Il traffico di imbarcazioni, persone ed informazioni è quindi commisurato al numero di posti barca.
 
-Gli allacciamenti hanno un nome, un'unità di misura ed un costo unitario.
+Alcuni dei clienti del marina sono occasionali, ad esempio persone che effettuano crociere e navigano di porto in porto; Altri clienti sono abituali e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato. Dei primi si vuole sapere quante volte avranno ormeggiato nel marina, dei secondi si vuole tenere nota del loro sconto personale applicato alle fatture. Spesso un cliente occasionale diventa un cliente abituale e quando questo accade gli viene assegnato uno sconto deciso per persona.
 
-Relativamente agli allacciamenti ne vengono anche registrati i consumi da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore all'arrivo dell'imbarcazione ed una lettura del contatore alla partenza della stessa. Se l'imbarcazione non ha una data di prevista partenza, ad esempio un cliente che ormeggia la sua imbarcazione a tempo indefinito la lettura viene fatta mensilmente e registrata, la quantità da pagare mensilmente viene quindi fatturata al cliente e viene registrato se la fattura è stata pagata oppure no.
+Dei moli\footnote{Sinonimo di posto barca} si vuole tenere traccia la loro occupazione nel tempo per fini statistici\footnote{Ad esempio il molo preferito da una determinata persona}. Per ogni molo, identificato da un numero positivo, è importante memorizzare le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo),il prezzo giornaliero , gli allacciamenti\footnote{Si intendono allacciamenti idrici, elettrici, di aria compressa} e lo stato di occupazione.
+
+Gli allacciamenti sono identificati dal nome e hanno un'unità di misura ed un costo unitario.
+
+Relativamente agli allacciamenti ne vengono anche registrati i consumi da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore ogni inizio del mese\footnote{Chiaramente solo se c'è una barca in sosta}. Se l'imbarcazione arriva e/o parte in momenti differenti dall'inizio del mese la lettura viene fatta in quelle due occasioni.
+
+Questi consumi vengono poi fatturati al cliente e viene registrato se la fattura è stata pagata oppure no.
+
+
 
 %per ogni sosta di un'imbarcazione in un molo si vuole memorizzare la data in cui l'imbarcazione è arrivata e la data in cui l'imbarcazione è partita. 
 
-%Degli allacciamenti è importante il tipo di allacciamento, il prezzo unitario e l'unità di misura.
+Nel marina sosteranno le \textbf{imbarcazioni}, queste imbarcazioni sosteranno nel tempo in più moli differenti. Chiaramente i moli saranno nel tempo utilizzati da più imbarcazioni, o anche da nessuna. Ad esempio quando il marina metterà in funzione per la prima volta l'applicativo o nel caso il marina sia appena inaugurato\footnote{Le soste si iniziano a registrare da quel momento li}.
 
-Nel marina sosteranno le \textbf{imbarcazioni}, queste imbarcazioni sosteranno nel tempo in più moli differenti. Chiaramente i moli saranno nel tempo utilizzati da più imbarcazioni(o anche da nessuna(ad esempio un marina appena inaugurato)).
-
-Di ogni \textbf{imbarcazione} vengono registrati codice internazionale, la bandiera battuta,l'armatore, il capitano le dimensioni, il numero di posti letto e se è presente anche il nome. Queste informazioni vengono memorizzate assieme ai dati dei clienti per onorare gli obblighi di registrazione portuale.
+Di ogni \textbf{imbarcazione} vengono registrati codice internazionale univoco, la bandiera battuta, il nome del capitano, le dimensioni\footnote{Definite come: Pescaggio,Larghezza e lunghezza fuoritutto con acronimo inglese LOA}, il numero di posti letto e se è presente anche il nome. Queste informazioni vengono memorizzate assieme ai dati dei clienti, ovvero i proprietari delle suddette imbarcazioni per onorare gli obblighi di registrazione portuale.
 
 I clienti sono coloro che ormeggiano un'imbarcazione all'interno del marina e di loro ne viene salvato il nome, il cognome, il codice fiscale, gli eventuali contatti, la residenza, la cittadinanza, la data di nascita.
 
-Ogni cliente può quindi prenotare un molo del marina preventivamente. Ogni \textbf{prenotazione} è caratterizzata da una data prevista di arrivo, una data prevista di partenza, l'imbarcazione interessata, ed il cliente prenotante.
+Ogni cliente può quindi prenotare un molo del marina preventivamente. Ogni \textbf{prenotazione} è caratterizzata da una data prevista di arrivo, una data prevista di partenza, il molo interessato, ed il cliente prenotante.
 
-%Per controllare se un posto è disponibile bisogna quindi controllare se il molo è disponibile e inoltre se esistono già delle prenotazioni per quelle date. In realtà le prenotazioni non sono obbligatoriamente associate ad un molo, ma sono associate alle dimensioni. Infatti è importante trovare il best match tra imbarcazioni e moli, ma non serve che un molo sia forzatamente prenotato per un'imbarcazione.
+Per controllare se un molo è disponibile bisogna quindi controllare se il molo è disponibile e inoltre se esistono già delle prenotazioni per quelle date.
 
-Il marina offre una serie di servizi utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni servizio è caratterizzato da un nome unico per ogni marina e gli orari di apertura e chiusura.
+Il marina offre una serie di \textbf{servizi} utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni servizio è caratterizzato da un nome unico e gli orari di apertura e chiusura per ogni giorno.
 
 Ogni servizio è amministrato da un \textbf{addetto} del quale ci interessa la data di inizio contratto e la fine. Se la fine non è segnata allora lavorerà li a tempo indeterminato.
-
-Come terzo ed ultimo metodo di sostentamento il marina offre anche dei \textbf{corsi}, questi corsi utilizzano a volte le imbarcazioni messe a disposizione da alcune persone e ne viene registrato il nome, il prezzo per la partecipazione, la data di inizio e la data di fine del corso. Esisteranno quindi dei clienti senza imbarcazione ma che partecipano ad uno dei corsi offerti dal marina.
- 
- 
-%%%%%%%%%%%%
-%Il conto di un cliente in fine equivale alla somma di tutti i servizi di cui ha usufruito e dei giorni in cui ha sostato.
-%%%%%%%%%%%%
 
 \subsection{Glossario dei termini}
 
