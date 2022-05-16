@@ -1,21 +1,24 @@
 
 \section{Analisi dei requisiti}
 \subsection{Descrizione testuale}
-Si vuole realizzare una base di dati per l'applicazione \textit{Gestionale servizi del diporto} che dovrà gestire tutti i dati relativi ad un marina e le imbarcazioni che vi sosteranno, i servizi offerti e i dati relativi ai clienti.
+Si vuole realizzare una base di dati per l'applicazione \textit{Gestionale servizi del diporto} che dovrà gestire tutti i dati relativi ad un marina e le \textbf{imbarcazioni} che vi sosteranno, i \textbf{servizi} offerti e i dati relativi ai \textbf{clienti}.
 
-Le fuznzioni desiderate prevedono: il calcolo del conto dei clienti; la conoscenza dei moli liberi nel marina
+Le fuznzioni desiderate prevedono: il calcolo delle \textbf{fatture} dei clienti; la gestione di \textbf{soste} e \textbf{prenotazioni} con recupero dei posti disponibili; la presentazione dei \textbf{servizi} aperti ai clienti.
 
-Il marina in esame ha 250 \textbf{posti barca}, numero che cambia solo in caso di ristrutturazioni particolari. Il traffico di imbarcazioni, persone ed informazioni è quindi commisurato al numero di posti barca.
+Il marina in esame ha circa 250 \textbf{posti barca}, numero che cambia solo in caso di ristrutturazioni particolari o durante ampliamenti del marina. Il traffico di \textbf{imbarcazioni}, persone ed informazioni è quindi commisurato a questo numero di \textbf{posti barca}.
 
-Alcuni dei clienti del marina sono occasionali, ad esempio persone che effettuano crociere e navigano di porto in porto; Altri clienti sono abituali e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato. Dei primi si vuole sapere quante volte avranno ormeggiato nel marina, dei secondi si vuole tenere nota del loro sconto personale applicato alle fatture. Spesso un cliente occasionale diventa un cliente abituale e quando questo accade gli viene assegnato uno sconto deciso per persona.
+Alcuni dei \textbf{clienti} del marina sono \textit{occasionali}, ad esempio persone che effettuano crociere e navigano di porto in porto; Altri clienti sono \textit{abituali} e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato. Dei primi si vuole sapere quante volte hanno ormeggiato nel marina, dei secondi si vuole tenere nota del loro sconto personale applicato alle fatture. Spesso un \textit{cliente occasionale} diventa un \textit{cliente abituale} e quando questo accade gli viene assegnato uno sconto deciso per persona.
 
-Dei moli\footnote{Sinonimo di posto barca} si vuole tenere traccia la loro occupazione nel tempo per fini statistici\footnote{Ad esempio il molo preferito da una determinata persona}. Per ogni molo, identificato da un numero positivo, è importante memorizzare le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo),il prezzo giornaliero , gli allacciamenti\footnote{Si intendono allacciamenti idrici, elettrici, di aria compressa} e lo stato di occupazione.
+Dei \textbf{moli}\footnote{Sinonimo di posto barca} si vuole tenere traccia della loro occupazione nel tempo per fini statistici\footnote{Ad esempio il molo preferito da una determinata persona o il molo più utilizzato}. Per ogni \textbf{molo}, identificato da un numero positivo, è importante memorizzare le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo),il prezzo giornaliero , gli allacciamenti\footnote{Si intendono allacciamenti idrici, elettrici, di aria compressa} e lo stato di occupazione.
 
-Gli allacciamenti sono identificati dal nome e hanno un'unità di misura ed un costo unitario.
+Gli \textbf{allacciamenti} sono identificati dal nome e hanno un'unità di misura ed un costo unitario.
 
-Relativamente agli allacciamenti ne vengono anche registrati i consumi da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore ogni inizio del mese\footnote{Chiaramente solo se c'è una barca in sosta}. Se l'imbarcazione arriva e/o parte in momenti differenti dall'inizio del mese la lettura viene fatta in quelle due occasioni.
+Relativamente agli \textbf{allacciamenti} ne vengono anche registrati i \textbf{consumi} da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore ogni inizio del mese\footnote{Chiaramente solo se c'è una barca in sosta}. Se l'imbarcazione arriva e/o parte in momenti differenti dall'inizio del mese la lettura viene fatta in quelle due occasioni.
 
-Questi consumi vengono poi fatturati al cliente e viene registrato se la fattura è stata pagata oppure no.
+Questi \textbf{consumi} vengono poi fatturati al cliente e viene registrato se la \textbf{fattura} è stata pagata oppure no.
+La \textbf{fattura} è identificata univocamente dal cliente destinatario e la data di scadenza della stessa.
+
+%Da continuare
 
 
 
