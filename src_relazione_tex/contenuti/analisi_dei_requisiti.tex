@@ -30,70 +30,59 @@ Ogni \textbf{cliente} può quindi prenotare un molo del marina preventivamente. 
 
 Per controllare se un \textbf{molo} è disponibile bisogna quindi controllare se il \textbf{molo} è al momento occupato e inoltre se esistono già delle \textbf{prenotazioni} per le date in cui si prevede che l'\textbf{imbarcazione} sosti. Se la \textbf{sosta} prevista è a tempo indeterminato ma una prenotazione parte più tardi,l'imbarcazione può essere spostata a sostare in un altro molo non prenotato.
 
-Il marina offre poi una serie di \textbf{servizi} utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni \textbf{servizio} è caratterizzato da un nome unico e gli orari di apertura e chiusura per ogni giorno.
+Il marina offre poi una serie di \textbf{servizi} utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni \textbf{servizio} è caratterizzato da un nome unico e gli \textbf{orari} in cui è aperto nei vari giorni di una settimana.
 
 Ogni servizio è amministrato da un \textbf{addetto} del quale ci interessa la data di inizio contratto e la fine. Se la fine non è segnata allora lavorerà li a tempo indeterminato. Ogni \textbf{addetto} è definito univocamente dalla data di inizio contratto e il servizio che gestisce.
 
 \subsection{Glossario dei termini}
 
 \begin{center}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|p{8cm}|p{2.4cm}|X|}
+    \begin{tabularx}{\textwidth}{|>{\RaggedRight}p{2cm}|p{7cm}|p{2.4cm}|>{\RaggedRight}X|}
         \hline
+        \rowcolor{gray!30}
         \textbf{Entità} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{collegamenti} \\
+        \hline
+        Imbarcazione & Il mezzo di trasporto ormeggiato nei moli &  & Cliente, Sosta\\
+        
+        \hline
+        Molo & Il luogo in cui le imbarcazioni sostano & Posto barca, ormeggio & Sosta, Prenotazione, Allacciamento\\
+        
+        \hline
+        Cliente& Persona che possiede un'imbarcazione ormeggiata nel  marina & Armatore & Entità figlia di Persona, Imbarcazione, Consumo, Prenotazione\\
+        
+        \hline
+        Cliente occasionale &Persone che viaggiano salturiamente & & Entità figlia di Cliente  \\
+         
+        \hline
+        Cliente abituale & Persone che utilizzano stabilmente un marina &  & Entità figlia di Cliente \\
+          
+        \hline
+        Persona& Tutte le persone che frequentano un marina   &  & Padre di Cliente e Addetto \\  
+        
+        \hline
+        Prenotazione & Tutte le prenotazioni dei clienti &  & Molo, cliente \\
+        
+        \hline
+        Servizio & Attività ti varia utilità rivolte ai clienti del marina &  & Periodo apertura, addetto \\
+        
+        \hline
+        Addetto & Persona che gestisce un servizio & Responsabile & Servizio, Persona \\
+         
+        \hline
+        Sosta & Possibilità data ai clienti delle imbarcazioni di un marina  & & Imbarcazione, Molo \\
+        
+        \hline
+        Allacciamento & Un servizio consumabile tipo acqua o elettricità disponibile ad un molo & Fornitura & Molo, Consumo\\
+        
+        \hline
+        Orario di apertura & Orari in cui un servizio è aperto durante la settimana & & Servizio\\
        
         \hline
-        Imbarcazione & Il mezzo di trasporto parcheggiato nei moli & barca & cliente,sosta\\
-        
-        \hline
-        Molo & Il luogo in cui le imbarcazioni riposano & posto barca, ormeggio &sosta,
-        prenotazione, 
-        allacciamento\\
-        
-        \hline
-        Cliente& Persona che possiede un'imbarcazione ormeggiata nel  marina & armatore & imbarcazione,
-        consumo,
-        prenotazione\\
-        
-        
-        \hline
-        Cliente occasionale &Persone che viaggiano salturiamente &occasionale & cliente  \\
-         
-        \hline
-        Cliente abituale & Persone che utilizzano stabilmente un marina & ordinario  & cliente \\
-        
-         
-        \hline
-        Persona& Tutte le persone che frequentano un marina   & individuo &cliente,addetto \\
-        
-        
-        \hline
-        Prenotazione &Registro orario e imbarcazione fatta da un cliente &fissare&molo, cliente \\
-        
-        \hline
-        Servizio &Varietà di servizi erogati al cliente da parte degli addetti &prestazione&Periodo apertura,Addetto \\
-        
-        \hline
-        Addetto & Persona con responsabilità relative ad un servizio & personale,
-        lavoratore & servizio,persona \\
-         
-        \hline
-        Sosta& Possibilità data ai clienti delle imbarcazioni di un marina  & fermata & imbarcazione,
-        molo \\
-        
-        \hline
-        Allacciamento & Un servizio consumabile tipo acqua, elettricità disponibile ad un molo& fornitura,
-        erogazione & molo,consumo\\
-        
-        \hline
-        Periodo 
-        apertura & Orari vigenti per un dato servizio & &servizio\\
-       
-        \hline
-        Fattura   &Ricevuta sui consumi e le soste effettuate da parte dei clienti &ricevuta,
-        scontrino& cliente, consumo,sosta\\
+        Fattura & Ricevuta sui consumi e le soste effettuate da parte dei clienti & ricevuta, scontrino & Cliente, Consumo, Sosta\\
       
         \hline
-        Consumo & La lettura di un contatore degli allacciamenti presenti ai moli.& uso & allacciamento, cliente,fattura \\
+        Consumo & Utilizzo misurato di un allacciamento presente ai moli & & Allacciamento, Cliente, Fattura \\
+        
         \hline
     \end{tabularx}
 \end{center}
