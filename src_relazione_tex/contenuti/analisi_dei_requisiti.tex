@@ -1,76 +1,90 @@
 
 \section{Analisi dei requisiti}
 \subsection{Descrizione testuale}
-Si vuole realizzare una base di dati per l'applicazione \textit{Gestionale servizi del diporto} che dovrà gestire tutti i dati relativi ad le imbarcazioni che vi sosteranno, i servizi offerti e i dati relativi ai clienti.
+Si vuole realizzare una base di dati per l'applicazione \textit{Gestionale servizi del diporto} che dovrà gestire tutti i dati relativi ad un marina e le \textbf{imbarcazioni} che vi sosteranno, i \textbf{servizi} offerti e i dati relativi ai \textbf{clienti}.
 
-Ogni marina solitamente contiene da 50 fino ad anche 500 \textbf{posti barca} con un commisurato traffico di imbarcazioni, persone e quindi informazioni. Alcuni dei clienti del marina sono occasionali, ad esempio persone che effettuano crociere e bazzicano di porto in porto; Altri clienti sono abituali e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato. Si vorrà poi sapere da quanto tempo un posto barca appartiene ad una persona.
+Le fuznzioni desiderate prevedono: il calcolo delle \textbf{fatture} dei clienti; la gestione di \textbf{soste} e \textbf{prenotazioni} con recupero dei posti disponibili; la presentazione dei \textbf{servizi} aperti ai clienti.
 
-Ognuno di questi marina è caratterizzato da un indirizzo, \textit{un nome}, e \textit{le coordinate geografiche} a cui i naviganti possono dirigere per raggiungerlo. Esso possiede inoltre una quantità più o meno varia di moli\footnote{Sinonimo di posto barca} di cui si vuole tenere traccia l'occupazione nel tempo per fini statistici\footnote{Quando e per quanto}. per ogni molo sono registrate le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo), gli allacciamenti\footnote{Si intendono allacciamenti idrici, elettrici, di aria compressa} e lo stato di occupazione.
+Il marina in esame ha circa 250 \textbf{posti barca}, numero che cambia solo in caso di ristrutturazioni particolari o durante ampliamenti del marina. Il traffico di \textbf{imbarcazioni}, persone ed informazioni è quindi commisurato a questo numero di \textbf{posti barca}.
 
-Gli allacciamenti hanno un nome, un'unità di misura ed un costo unitario.
+Alcuni dei \textbf{clienti} del marina sono \textit{occasionali}, ad esempio persone che effettuano crociere e navigano di porto in porto; Altri clienti sono \textit{abituali} e tengono ormeggiate le loro imbarcazioni nel marina per molti mesi all'anno se non addirittura a tempo indeterminato. Dei primi si vuole sapere quante volte hanno ormeggiato nel marina, dei secondi si vuole tenere nota del loro sconto personale applicato alle fatture. Spesso un \textit{cliente occasionale} diventa un \textit{cliente abituale} e quando questo accade gli viene assegnato uno sconto deciso per persona.
 
-Relativamente agli allacciamenti ne vengono anche registrati i consumi da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore all'arrivo dell'imbarcazione ed una lettura del contatore alla partenza della stessa. Se l'imbarcazione non ha una data di prevista partenza, ad esempio un cliente che ormeggia la sua imbarcazione a tempo indefinito la lettura viene fatta mensilmente e registrata, la quantità da pagare mensilmente viene quindi fatturata al cliente e viene registrato se la fattura è stata pagata oppure no.
+Dei \textbf{moli}\footnote{Sinonimo di posto barca} si vuole tenere traccia della loro occupazione nel tempo per fini statistici\footnote{Ad esempio il molo preferito da una determinata persona o il molo più utilizzato}. Per ogni \textbf{molo}, identificato da un numero positivo, è importante memorizzare le dimensioni(Molto importanti, poiché solo le imbarcazioni più piccole di queste dimensioni potranno ormeggiare in questo molo),il prezzo giornaliero , gli allacciamenti\footnote{Si intendono allacciamenti idrici, elettrici, di aria compressa} e lo stato di occupazione.
 
-%per ogni sosta di un'imbarcazione in un molo si vuole memorizzare la data in cui l'imbarcazione è arrivata e la data in cui l'imbarcazione è partita. 
+Gli \textbf{allacciamenti} sono identificati dal nome e hanno un'unità di misura ed un costo unitario.
 
-%Degli allacciamenti è importante il tipo di allacciamento, il prezzo unitario e l'unità di misura.
+Relativamente agli \textbf{allacciamenti} ne vengono anche registrati i \textbf{consumi} da parte di ogni cliente, come procedura interna del marina viene fatta una lettura del contatore ogni inizio del mese\footnote{Chiaramente solo se c'è una barca in sosta}. Se l'imbarcazione arriva e/o parte in momenti differenti dall'inizio del mese la lettura viene fatta in quelle due occasioni.
 
-Nel marina sosteranno le \textbf{imbarcazioni}, queste imbarcazioni sosteranno nel tempo in più moli differenti. Chiaramente i moli saranno nel tempo utilizzati da più imbarcazioni(o anche da nessuna(ad esempio un marina appena inaugurato)).
+Questi \textbf{consumi}, assieme alle \textbf{soste} effettuate, vengono poi fatturati al cliente e viene registrato se la \textbf{fattura} è stata pagata oppure no.
+La \textbf{fattura} è identificata univocamente dal cliente destinatario e la data di scadenza della stessa.
 
-Di ogni \textbf{imbarcazione} vengono registrati codice internazionale, la bandiera battuta,l'armatore, il capitano le dimensioni, il numero di posti letto e se è presente anche il nome. Queste informazioni vengono memorizzate assieme ai dati dei clienti per onorare gli obblighi di registrazione portuale.
+Da quando l'applicativo verrà messo in funzione si inizieranno a memorizzare le \textbf{soste}.
 
-I clienti sono coloro che ormeggiano un'imbarcazione all'interno del marina e di loro ne viene salvato il nome, il cognome, il codice fiscale, gli eventuali contatti, la residenza, la cittadinanza, la data di nascita.
+Le \textbf{imbarcazioni} che sosteranno nel marina sosteranno nel tempo in più moli differenti, e chiaramente i \textbf{moli} accoglieranno nel tempo imbarcazioni differenti, ma non contemporaneamente. Un \textbf{molo} può infatti accogliere solo un' \textbf{imbarcazione} alla volta.
 
-Ogni cliente può quindi prenotare un molo del marina preventivamente. Ogni \textbf{prenotazione} è caratterizzata da una data prevista di arrivo, una data prevista di partenza, l'imbarcazione interessata, ed il cliente prenotante.
+Di ogni \textbf{imbarcazione} vengono registrati codice internazionale univoco, la bandiera battuta, il nome del capitano, le dimensioni\footnote{Definite come: Pescaggio,Larghezza e lunghezza fuoritutto con acronimo inglese LOA}, il numero di posti letto e se è presente anche il nome. Queste informazioni vengono memorizzate assieme ai dati dei \textbf{clienti}, ovvero i proprietari delle suddette \textbf{imbarcazioni} per onorare gli obblighi di registrazione doganale.
 
-%Per controllare se un posto è disponibile bisogna quindi controllare se il molo è disponibile e inoltre se esistono già delle prenotazioni per quelle date. In realtà le prenotazioni non sono obbligatoriamente associate ad un molo, ma sono associate alle dimensioni. Infatti è importante trovare il best match tra imbarcazioni e moli, ma non serve che un molo sia forzatamente prenotato per un'imbarcazione.
+I \textbf{clienti} sono coloro che possiedono un'\textbf{imbarcazione} ormeggiata all'interno del marina e di loro ne viene salvato il nome, il cognome, il codice fiscale, gli eventuali contatti, la residenza, la cittadinanza, la data di nascita.
 
-Il marina offre una serie di servizi utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni servizio è caratterizzato da un nome unico per ogni marina e gli orari di apertura e chiusura.
+Ogni \textbf{cliente} può quindi prenotare un molo del marina preventivamente. Ogni \textbf{prenotazione} è caratterizzata da una data prevista di arrivo, una data prevista di partenza, il molo interessato, ed il cliente prenotante.
 
-Ogni servizio è amministrato da un \textbf{addetto} del quale ci interessa la data di inizio contratto e la fine. Se la fine non è segnata allora lavorerà li a tempo indeterminato.
+Per controllare se un \textbf{molo} è disponibile bisogna quindi controllare se il \textbf{molo} è al momento occupato e inoltre se esistono già delle \textbf{prenotazioni} per le date in cui si prevede che l'\textbf{imbarcazione} sosti. Se la \textbf{sosta} prevista è a tempo indeterminato ma una prenotazione parte più tardi,l'imbarcazione può essere spostata a sostare in un altro molo non prenotato.
 
-Come terzo ed ultimo metodo di sostentamento il marina offre anche dei \textbf{corsi}, questi corsi utilizzano a volte le imbarcazioni messe a disposizione da alcune persone e ne viene registrato il nome, il prezzo per la partecipazione, la data di inizio e la data di fine del corso. Esisteranno quindi dei clienti senza imbarcazione ma che partecipano ad uno dei corsi offerti dal marina.
- 
- 
-%%%%%%%%%%%%
-%Il conto di un cliente in fine equivale alla somma di tutti i servizi di cui ha usufruito e dei giorni in cui ha sostato.
-%%%%%%%%%%%%
+Il marina offre poi una serie di \textbf{servizi} utili ai naviganti\footnote{Ad esempio lavanderie a gettoni, ristoranti, cantieri} . Ogni \textbf{servizio} è caratterizzato da un nome unico e gli \textbf{orari} in cui è aperto nei vari giorni di una settimana.
+
+Ogni servizio è amministrato da un \textbf{addetto} del quale ci interessa la data di inizio contratto e la fine. Se la fine non è segnata allora lavorerà li a tempo indeterminato. Ogni \textbf{addetto} è definito univocamente dalla data di inizio contratto e il servizio che gestisce. per questioni legate al loro contratto di lavoro ci interessa di loro anche il codice fiscale e la data di nascita, oltre al loro nome, cognome e ai loro contatti.
+
+Gli \textbf{addetti} inoltre spesso sono anche \textbf{clienti}.
 
 \subsection{Glossario dei termini}
 
 \begin{center}
-    \begin{tabularx}{\textwidth}{|p{2.4cm}|p{8cm}|p{2.4cm}|X|}
+    \begin{tabularx}{\textwidth}{|>{\RaggedRight}p{2cm}|p{7cm}|p{2.4cm}|>{\RaggedRight}X|}
         \hline
+        \rowcolor{gray!30}
         \textbf{Entità} & \textbf{Descrizione} & \textbf{Sinonimi} & \textbf{collegamenti} \\
         \hline
-        Marina & Il luogo in cui si trovano tutte le imbarcazioni ed i servizi  & area portuale & molo, servizio, imbarcazione\\
+        Imbarcazione & Il mezzo di trasporto ormeggiato nei moli &  & Cliente, Sosta\\
         
         \hline
-        Imbarcazione & Il mezzo di trasporto parcheggiato nei moli & barca & persona, molo\\
+        Molo & Il luogo in cui le imbarcazioni sostano & Posto barca, ormeggio & Sosta, Prenotazione, Allacciamento\\
         
         \hline
-        Molo & Il luogo in cui le imbarcazioni riposano & posto barca, ormeggio & persona, imbarcazione\\
+        Cliente& Persona che possiede un'imbarcazione ormeggiata nel  marina & Armatore & Entità figlia di Persona, Imbarcazione, Consumo, Prenotazione\\
         
         \hline
-        Cliente& Persona che possiede un'imbarcazione ormeggiata nel marina & armatore & imbarcazione\\
+        Cliente occasionale &Persone che viaggiano salturiamente & & Entità figlia di Cliente  \\
+         
+        \hline
+        Cliente abituale & Persone che utilizzano stabilmente un marina &  & Entità figlia di Cliente \\
+          
+        \hline
+        Persona& Tutte le persone che frequentano un marina   &  & Padre di Cliente e Addetto \\  
         
         \hline
-        Prenotazione &&&molo, cliente \\
+        Prenotazione & Tutte le prenotazioni dei clienti &  & Molo, cliente \\
         
         \hline
-        Servizio &&&Marina \\
+        Servizio & Attività ti varia utilità rivolte ai clienti del marina &  & Periodo apertura, addetto \\
         
         \hline
-        Addetto & Persona con responsabilità relative ad un servizio & & servizio \\
+        Addetto & Persona che gestisce un servizio & Responsabile & Servizio, Persona \\
+         
+        \hline
+        Sosta & Possibilità data ai clienti delle imbarcazioni di un marina  & & Imbarcazione, Molo \\
         
         \hline
-        Allacciamento & Un servizio consumabile tipo acqua, elettricità disponibile ad un molo& & molo\\
+        Allacciamento & Un servizio consumabile tipo acqua o elettricità disponibile ad un molo & Fornitura & Molo, Consumo\\
+        
         \hline
-        Corso & & &marina, imbarcazione, cliente\\
+        Orario di apertura & Orari in cui un servizio è aperto durante la settimana & & Servizio\\
+       
         \hline
-        Fattura &&& cliente, consumo\\
+        Fattura & Ricevuta sui consumi e le soste effettuate da parte dei clienti & ricevuta, scontrino & Cliente, Consumo, Sosta\\
+      
         \hline
-        Consumo & La lettura di un contatore degli allacciamenti presenti ai moli.& & fattura, cliente, molo\\
+        Consumo & Utilizzo misurato di un allacciamento presente ai moli & & Allacciamento, Cliente, Fattura \\
+        
         \hline
     \end{tabularx}
 \end{center}

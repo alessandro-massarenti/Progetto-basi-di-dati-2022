@@ -7,3 +7,4 @@
 *.xdv
 *.log
 *.fls
+src_relazione_tex/*.pdf
