@@ -184,12 +184,12 @@
     \end{tabularx}
 \end{center}
 
-%Oraro di apertura
+%Periodo di apertura
 \begin{center}
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{4}{|c|}{\textbf{Oraro di apertura}}\\
+        \multicolumn{4}{|c|}{\textbf{Periodo di apertura}}\\
         \hline
         Giorno di apertura & CHAR(3) & Giorno a cui si riferisce l'orario di apertura & Chiave \\
         \hline
@@ -231,107 +231,94 @@
 \end{center}
 
 
-
 \subsection{Generalizzazioni}
 
 \begin{itemize}
-    \item Persona è generalizzazione totale sovrapposta di Addetto e Cliente;
+    \item Persona è generalizzazione parziale esclusiva di Addetto;
+    \item Persona è generalizzazione parziale esclusiva di Cliente;
     \item Cliente è generalizzazione totale esclusiva di cliente abituale e cliente occasionale;
 \end{itemize}
 
 \subsection{Analisi delle relazioni e delle cardinalità}
 
 \begin{itemize}
-    \item corso - imbarcazione: \textbf{Uso}
-    \begin{itemize}
-        \item Un corso usa più imbarcazioni (0,N)
-        \item Un'imbarcazione può essere usata in più corsi (0,N)
-    \end{itemize}
     
-    \item Marina - corso: \textbf{Organizzazione}
-    \begin{itemize}
-        \item Un marina può organizzare più corsi (0,N)
-        \item Un corso può essere organizzato da un solo marina (1,1)
-    \end{itemize}
-    
-    \item Molo - Marina: \textbf{Appartenenza}
-    \begin{itemize}
-        \item Un molo può appartenere ad un solo marina (1,1)
-        \item Ad un marina possono appartenere molti molti (0,N)
-    \end{itemize}
-    
-    \item Imbarcazione - Molo: \textbf{Sosta}
-    \begin{itemize}
-        \item Un imbarcazione può essere presente in più moli(0,N)
-        \item Un molo può permettere la sosta di più imbarcazioni(0,N)
-    \end{itemize}
-\end{itemize}
-
-%Da controllare come questione.
-La relazione possiede gli attributi: data arrivo e data partenza per indicare univocamente una sosta. Infatti un'imbarcazione può essere presente in più moli solo in tempi differenti. Ci interessa infatti lo storico delle soste per fini statistici.
-
-\begin{itemize}
-    
-    \item Marina - Servizio: \textbf{Offerta}
-    \begin{itemize}
-        \item Un marina offre da zero a più servizi(0,N);
-        \item Un servizio è offerto da uno e un solo marina (1,1);
-    \end{itemize}
-    
-    \item Molo - Allacciamento: \textbf{Possessione}
+    \item Molo - Allacciamento: \textbf{Fornitura}
     \begin{itemize}
         \item Un Molo possiede più allacciamenti o nessuno (0,N);
         \item Un allacciamento può essere posseduto da più moli o da nessuno(0,N);
     \end{itemize}
-    
-    \item Prenotazione - Molo: \textbf{Riserva}
+
+    \item Consumo - Allacciamento: \textbf{Utilizzo}
+    \begin{itemize}
+        \item Un consumo utilizza uno e un solo allacciamento(1,1);
+        \item Un allacciamento può essere utilizzato da 0 a molti consumi(0,N);
+    \end{itemize}
+
+    \item Consumo - Fattura: \textbf{Riga fattura consumo}
+    \begin{itemize}
+        \item Un consumo è riga di una o nessuna fattura(0,1);
+        \item Una fattura ha da 0 a molte righe relative ai consumi(0,N);
+    \end{itemize}
+
+    \item Sosta - Fattura: \textbf{Riga fattura sosta}
+    \begin{itemize}
+        \item Una sosta è riga di una o nessuna fattura(0,1);
+        \item Una fattura ha da 0 a molte righe relative alle soste (0,N);
+    \end{itemize}
+
+    \item Fattura - Cliente: \textbf{Destinatario fattura}
+    \begin{itemize}
+        \item Una fattura è destinata ad uno e un solo cliente(0,1);
+        \item Un cliente può avere da 0 a molte fatture destinategli(0,N);
+    \end{itemize}
+
+    \item Addetto - Servizio: \textbf{Gestione}
+    \begin{itemize}
+        \item Un addetto gestisce uno e un solo servizio (1,1);
+        \item Un servizio è gestito da un addetto o da nessuno (0,1);
+    \end{itemize}
+
+    \item Servizio - Periodo apertura: \textbf{Apertura}
+    \begin{itemize}
+        \item Un servizio ha da uno a molte aperture(1,N);
+        \item Periodo di apetura definisce aperte da uno a molti servizi (1,N);
+    \end{itemize}
+
+    \item Consumo - Cliente: \textbf{Consumazione}
+    \begin{itemize}
+        \item Un Cliente effettua da 0 a molte consumazioni di consumazione(0,N);
+        \item Un consumo è consumazione di uno e un solo cliente (1,1);
+    \end{itemize}
+
+    \item Prenotazione - Molo: \textbf{Riserve}
     \begin{itemize}
         \item Una prenotazione Riserva uno e un solo molo (1,1);
         \item Un molo può essere riservato da più prenotazioni o da nessuna (0,N);
     \end{itemize}
-    
-    \item Cliente - Imbarcazione: \textbf{Possiede}
+
+    \item Cliente - Imbarcazione: \textbf{Proprietà}
     \begin{itemize}
         \item Un cliente può possedere più imbarcazioni(Almeno una) (1,N);
-        \item Un imbarcazione è posseduta da una e una sola una persona(1,1);
+        \item Un imbarcazione è posseduta da una e una sola una persona oppure da nessuno\footnote{Barca abbandonata}(0,1);
     \end{itemize}
     
-    \item Cliente - Prenotazione: \textbf{Effettua}
+    \item Cliente - Prenotazione: \textbf{Prenotazioni effettuate}
     \begin{itemize}
-        \item Un cliente può effettuare da 1 a molte prenotazioni(1,N);
-        \item Una prenotazione può essere effettuata al massimo da un cliente (1,1);
+        \item Un cliente può aver effettuato da 0 a molte prenotazioni(0,N);
+        \item Una prenotazione può essere stata effettuata al massimo da un cliente (1,1);
     \end{itemize}
-    
-    \item Addetto - Servizio: \textbf{Gestione}
+
+    \item Molo - Sosta: \textbf{M\_S}
     \begin{itemize}
-        \item Un addetto gestisce uno e un solo servizio (1,1);
-        \item Un servizio è gestito da uno e un solo addetto (1,1);
+        \item Un molo può accogliere da 0 a molte soste(0,N);
+        \item Una sosta è relativa a uno e un solo molo(1,1);
     \end{itemize}
-    
-    \item Marina - Consumo - Fattura: \textbf{Emissione}
+
+    \item Sosta - Imbarcazione: \textbf{S\_I}
     \begin{itemize}
-        \item Un marina può emettere molte fatture relative a molti consumi (0,N);
-        \item Un Consumo può essere inserito solo nell'emissione di una fattura da un marina (1,1);
-        \item Una fattura può essere relativa solo ad un marina e ad un consumo (1,1);
-    \end{itemize}
-    
-    \item Consumo - Allacciamento: \textbf{Utilizzo}
-    \begin{itemize}
-        \item Un consumo utilizza uno e un solo allacciamento(1,1);
-        \item Un allacciamento può essere utilizzato da 0 a molte fatture(0,N);
-    \end{itemize}
-    
-%Come gestisco le fatture già pagate?
-    \item Cliente - Fattura: \textbf{Deve pagare}
-    \begin{itemize}
-        \item Un cliente deve pagare da 0 a molte fatture (0,N);
-        \item Una fattura deve essere pagata solo da un cliente (1,1);
-    \end{itemize}
-    
-    \item Cliente - Consumo: \textbf{Generazione}
-    \begin{itemize}
-        \item Un cliente può generare molteplici consumi (0,N);
-        \item Un consumo può essere generato da un solo cliente (1,1);
+        \item Una sosta è relativa ad una e una sola imbarcazione(1,1);
+        \item Un imbarcazione può sostare da 0 a molte volte (0,N);
     \end{itemize}
     
 \end{itemize}
