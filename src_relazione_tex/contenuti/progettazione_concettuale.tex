@@ -2,22 +2,6 @@
 
 \subsection{Analisi delle entità}
 
-%Marina
-\begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|l|X|}
-        \hline
-        \rowcolor{gray!30}
-        \multicolumn{4}{|c|}{\textbf{Marina}}\\
-        \hline
-        CoordinateGeografiche & VARCHAR & Identifica univocamente la posizione del marina & Chiave \\
-        \hline
-        Nome & VARCHAR & \multicolumn{2}{l|}{il nome del marina} \\
-        \hline
-        QtMoli & INTEGER & \multicolumn{2}{l|}{Quantità di moli presenti nel marina} \\
-        \hline
-    \end{tabularx}
-\end{center}
-
 %Imbarcazione
 \begin{center}
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
@@ -54,22 +38,35 @@
     \end{tabularx}
 \end{center}
 
-%Persona
+%servizio
 \begin{center}
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{4}{|c|}{\textbf{Persona}}\\
+        \multicolumn{4}{|c|}{\textbf{Servizio}}\\
         \hline
-        CF & VARCHAR & Identifica univocamente una persona & Chiave \\
+        Nome & VARCHAR & Il nome del servizio & Chiave \\
         \hline
-        Nome & VARCHAR & \multicolumn{2}{l|}{Il nome della persona} \\
+        NomeMarina & VARCHAR & Il nome del marina che offre questo servizio & Chiave \\
         \hline
-        Cognome & VARCHAR & \multicolumn{2}{l|}{Il cognome della persona} \\
+        OrariApertura & TIME & \multicolumn{2}{l|}{Gli orari a cui il servizio apre(multi-valore)} \\
         \hline
-        DataNascita & DATE & \multicolumn{2}{l|}{La data di nascita della persona} \\
+        OrariChiusura & TIME & \multicolumn{2}{l|}{Gli orari a cui il servizio chiude(multi-valore)} \\
         \hline
-        Contatto & VARCHAR & \multicolumn{2}{l|}{I contatti della persona(multi-valore)} \\
+    \end{tabularx}
+\end{center}
+
+
+%Addetto
+\begin{center}
+    \begin{tabularx}{\textwidth}{|l|l|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{3}{|c|}{\textbf{Addetto}}\\
+        \hline
+        DataInizioContratto & DATE & È la data in cui il contratto è iniziato\\
+        \hline
+        DataFineContratto & DATE & È la data in cui il contratto è finito o finirà.(NULL se il contratto è indeterminato)\\
         \hline
     \end{tabularx}
 \end{center}
@@ -112,6 +109,26 @@
     \end{tabularx}
 \end{center}
 
+%Persona
+\begin{center}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{4}{|c|}{\textbf{Persona}}\\
+        \hline
+        CF & VARCHAR & Identifica univocamente una persona & Chiave \\
+        \hline
+        Nome & VARCHAR & \multicolumn{2}{l|}{Il nome della persona} \\
+        \hline
+        Cognome & VARCHAR & \multicolumn{2}{l|}{Il cognome della persona} \\
+        \hline
+        DataNascita & DATE & \multicolumn{2}{l|}{La data di nascita della persona} \\
+        \hline
+        Contatto & VARCHAR & \multicolumn{2}{l|}{I contatti della persona(multi-valore)} \\
+        \hline
+    \end{tabularx}
+\end{center}
+
 %Prenotazione
 \begin{center}
     \begin{tabularx}{\textwidth}{|l|l|X|}
@@ -126,34 +143,20 @@
     \end{tabularx}
 \end{center}
 
-%servizio
-\begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|l|X|}
-        \hline
-        \rowcolor{gray!30}
-        \multicolumn{4}{|c|}{\textbf{Servizio}}\\
-        \hline
-        Nome & VARCHAR & Il nome del servizio & Chiave \\
-        \hline
-        NomeMarina & VARCHAR & Il nome del marina che offre questo servizio & Chiave \\
-        \hline
-        OrariApertura & TIME & \multicolumn{2}{l|}{Gli orari a cui il servizio apre(multi-valore)} \\
-        \hline
-        OrariChiusura & TIME & \multicolumn{2}{l|}{Gli orari a cui il servizio chiude(multi-valore)} \\
-        \hline
-    \end{tabularx}
-\end{center}
-
-%Addetto
+%Sosta
 \begin{center}
     \begin{tabularx}{\textwidth}{|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{3}{|c|}{\textbf{Addetto}}\\
+        \multicolumn{3}{|c|}{\textbf{Sosta}}\\
         \hline
-        DataInizioContratto & DATE & È la data in cui il contratto è iniziato\\
+        Nome & VARCHAR & Il nome esplicativo del corso \\
         \hline
-        DataFineContratto & DATE & È la data in cui il contratto è finito o finirà.(NULL se il contratto è indeterminato)\\
+        Prezzo & DECIMAL & Il prezzo per partecipare al corso\\
+        \hline
+        DataInizio & DATETIME & La data e l'orario della prima lezione del corso\\
+        \hline
+        DataFine & DATETIME & La data e l'orario dell'ultima lezione del corso\\
         \hline
     \end{tabularx}
 \end{center}
@@ -174,36 +177,22 @@
     \end{tabularx}
 \end{center}
 
-%Corso
-\begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|X|}
-        \hline
-        \rowcolor{gray!30}
-        \multicolumn{3}{|c|}{\textbf{Corso}}\\
-        \hline
-        Nome & VARCHAR & Il nome esplicativo del corso \\
-        \hline
-        Prezzo & DECIMAL & Il prezzo per partecipare al corso\\
-        \hline
-        DataInizio & DATETIME & La data e l'orario della prima lezione del corso\\
-        \hline
-        DataFine & DATETIME & La data e l'orario dell'ultima lezione del corso\\
-        \hline
-    \end{tabularx}
-\end{center}
-
-%Fattura
+%Oraro di apertura
 \begin{center}
     \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{4}{|c|}{\textbf{Fattura}}\\
+        \multicolumn{4}{|c|}{\textbf{Oraro di apertura}}\\
         \hline
-        Codice\_fattura & INTEGER & Identifica univocamente la fattura nel programma & Chiave \\
+        DataInizioLettura & DATETIME & Data dell'inizio del conteggio & Chiave \\
         \hline
-        Data\_scadenza & DATE & \multicolumn{2}{l|}{Identifica la scadenza della fattura} \\
+        DataFineLettura & DATETIME & Data della fine del conteggio & Chiave \\
         \hline
-        Pagato & DATE & \multicolumn{2}{l|}{Identifica lo stato del pagamento della fattura} \\
+        CFCliente & VARCHAR & Il codice fiscale del cliente a cui la lettura è riferita & Chiave \\
+        \hline
+        NomeAllacciamento & VARCHAR & \multicolumn{2}{l|}{Il nome della quantità consumata, è una quantità di un allacciamento.} \\
+        \hline
+        QtConsumata & DECIMAL & \multicolumn{2}{l|}{La quantità consumata nel periodo} \\
         \hline
     \end{tabularx}
 \end{center}
@@ -227,6 +216,24 @@
         \hline
     \end{tabularx}
 \end{center}
+
+%Fattura
+\begin{center}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+        \hline
+        \rowcolor{gray!30}
+        \multicolumn{4}{|c|}{\textbf{Fattura}}\\
+        \hline
+        Codice\_fattura & INTEGER & Identifica univocamente la fattura nel programma & Chiave \\
+        \hline
+        Data\_scadenza & DATE & \multicolumn{2}{l|}{Identifica la scadenza della fattura} \\
+        \hline
+        Pagato & DATE & \multicolumn{2}{l|}{Identifica lo stato del pagamento della fattura} \\
+        \hline
+    \end{tabularx}
+\end{center}
+
+
 
 \subsection{Generalizzazioni}
 
