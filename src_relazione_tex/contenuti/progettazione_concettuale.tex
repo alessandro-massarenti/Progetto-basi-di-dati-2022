@@ -9,31 +9,46 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Imbarcazione}}\\
         \hline
-        Coordinate internazionale & VARCHAR & Identifica univocamente un'imbarcazione nel mondo & Chiave \\
+        Codice internazionale & VARCHAR & Identifica univocamente un'imbarcazione nel mondo & Chiave\\
         \hline
         Nome & VARCHAR & \multicolumn{2}{l|}{Il nome dell'imbarcazione} \\
         \hline
         QtPostiLetto & INTEGER & \multicolumn{2}{l|}{La quantità di posti letto dell'imbarcazione} \\
         \hline
-        Capitano & VARCHAR & \multicolumn{2}{l|}{Il nome del capitano} \\
+        Nome del capitano & VARCHAR & \multicolumn{2}{l|}{Il nome del capitano} \\
         \hline
         Bandiera & VARCHAR & \multicolumn{2}{l|}{Nome dello stato di cui batte bandiera l'imbarcazione} \\
         \hline
-        Dimensioni & VARCHAR & \multicolumn{2}{l|}{Attributo composto: Pescaggio, Larghezza, Lunghezza} \\
+        Dimensioni &  & \multicolumn{2}{l|}{Attributo composto: Pescaggio, Larghezza, LOA} \\
+        \hline
+        Pescaggio & DECIMAL & \multicolumn{2}{l|}{La misura del punto più in profondità dell'imbarcazione} \\
+        \hline
+        Larghezza & DECIMAL & \multicolumn{2}{l|}{La misura della larghezza al baglio massimo dell'imbarcazione} \\
+        \hline
+        LOA & DECIMAL & \multicolumn{2}{l|}{La misura della lunghezza fuoritutto dell'imbarcazione} \\
         \hline
     \end{tabularx}
 \end{center}
 
 %Molo
 \begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|X|}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{3}{|c|}{\textbf{Molo}}\\
+        \multicolumn{4}{|c|}{\textbf{Molo}}\\
+
         \hline
-        Occupato & BOOLEAN & Lo stato di occupazione del molo\\
+        Numero molo & INTEGER & Identifica univocamente un molo & Chiave\\
         \hline
-        Dimensioni & VARCHAR & Attributo composto: Pescaggio, Larghezza, Lunghezza \\
+        Stato di occupazione & BOOLEAN &\multicolumn{2}{l|}{ Lo stato di occupazione del molo}\\
+        \hline
+        Dimensioni &  & \multicolumn{2}{l|}{Attributo composto: Profondità minima, Larghezza, Lunghezza} \\
+        \hline
+        Profondità minima & DECIMAL & \multicolumn{2}{l|}{La profondità misurata alla più bassa marea sizigiale} \\
+        \hline
+        Larghezza & DECIMAL & \multicolumn{2}{l|}{La misura della larghezza del molo} \\
+        \hline
+        Lunghezza & DECIMAL & \multicolumn{2}{l|}{La misura della lunghezza del molo} \\
         \hline
     \end{tabularx}
 \end{center}
@@ -47,26 +62,20 @@
         \hline
         Nome & VARCHAR & Il nome del servizio & Chiave \\
         \hline
-        NomeMarina & VARCHAR & Il nome del marina che offre questo servizio & Chiave \\
-        \hline
-        OrariApertura & TIME & \multicolumn{2}{l|}{Gli orari a cui il servizio apre(multi-valore)} \\
-        \hline
-        OrariChiusura & TIME & \multicolumn{2}{l|}{Gli orari a cui il servizio chiude(multi-valore)} \\
-        \hline
     \end{tabularx}
 \end{center}
 
 
 %Addetto
 \begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|X|}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{3}{|c|}{\textbf{Addetto}}\\
+        \multicolumn{4}{|c|}{\textbf{Addetto}}\\
         \hline
-        DataInizioContratto & DATE & È la data in cui il contratto è iniziato\\
+        DataInizioContratto & DATE & È la data in cui il contratto è iniziato & Chiave\\
         \hline
-        DataFineContratto & DATE & È la data in cui il contratto è finito o finirà.(NULL se il contratto è indeterminato)\\
+        DataFineContratto & DATE &\multicolumn{2}{l|}{ È la data in cui il contratto è finito o finirà.(nullo se il contratto è indeterminato)}\\
         \hline
     \end{tabularx}
 \end{center}
@@ -80,7 +89,7 @@
         \hline
         Cittadinanza & VARCHAR & Lo stato di cui il cliente è cittadino\\
         \hline
-        Residenza & VARCHAR & Lo stato in cui il cliente è residente \\
+        Residenza & VARCHAR & La città in cui il cliente è residente \\
         \hline
     \end{tabularx}
 \end{center}
@@ -92,7 +101,7 @@
         \rowcolor{gray!30}
         \multicolumn{3}{|c|}{\textbf{Cliente occasionale}}\\
         \hline
-        MarinaVisitati & INTEGER & Il numero di marina che il cliente ha visitato \\
+        Quantità di soste & INTEGER & Il numero di soste che il cliente ha effettuato presso la struttura \\
         \hline
     \end{tabularx}
 \end{center}
@@ -104,7 +113,7 @@
         \rowcolor{gray!30}
         \multicolumn{3}{|c|}{\textbf{Cliente abituale}}\\
         \hline
-        DataPrimoArrivo & DATE & La data in cui il cliente ha sostato per la prima volta nel marina \\
+        Sconto personale & DECIMAL & Lo sconto percentuale applicato alle sue fatture \\
         \hline
     \end{tabularx}
 \end{center}
@@ -136,43 +145,41 @@
         \rowcolor{gray!30}
         \multicolumn{3}{|c|}{\textbf{Prenotazione}}\\
         \hline
-        PrevisioneArrivo & DATE & La data in cui si prevede il cliente arrivi\\
+        Previsione arrivo & DATE & La data in cui si prevede il cliente arrivi\\
         \hline
-        PrevisionePartenza & DATE & La data in cui si prevede il cliente parta\\
+        Previsione partenza & DATE & La data in cui si prevede il cliente parta\\
+        \hline
+        Stato di arrivo & BOOLEAN & Rappresenta se il cliente ha trasformato oppure no la prenotazione in sosta\\
         \hline
     \end{tabularx}
 \end{center}
 
 %Sosta
 \begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|X|}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{3}{|c|}{\textbf{Sosta}}\\
+        \multicolumn{4}{|c|}{\textbf{Sosta}}\\
         \hline
-        Nome & VARCHAR & Il nome esplicativo del corso \\
+        Data arrivo & TIMESTAMP & Data in cui l'imbarcazione ha ormeggiato & Chiave \\
         \hline
-        Prezzo & DECIMAL & Il prezzo per partecipare al corso\\
-        \hline
-        DataInizio & DATETIME & La data e l'orario della prima lezione del corso\\
-        \hline
-        DataFine & DATETIME & La data e l'orario dell'ultima lezione del corso\\
+        Data arrivo & TIMESTAMP & \multicolumn{2}{l|}{Data in cui l'imbarcazione ha sciolto gli ormeggi} \\
         \hline
     \end{tabularx}
 \end{center}
 
 %Allacciamento
 \begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|X|}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{3}{|c|}{\textbf{Allacciamento}}\\
+        \multicolumn{4}{|c|}{\textbf{Allacciamento}}\\
         \hline
-        Nome & VARCHAR & Il nome che identifica la tipologia di allacciamento\\
+        Nome & VARCHAR & Il nome che identifica la tipologia di allacciamento &Chiave\\
         \hline
-        PrezzoUnitario & DECIMAL & Il prezzo unitario dell'allacciamento\\
+        Prezzo unitario & DECIMAL & Il prezzo unitario dell'allacciamento\\
         \hline
-        UMisura & VARCHAR & L'unità di misura utilizzata per conteggiarne il consumo\\
+        Unità di misura & VARCHAR & L'unità di misura utilizzata per conteggiarne il consumo\\
         \hline
     \end{tabularx}
 \end{center}
@@ -184,15 +191,11 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Oraro di apertura}}\\
         \hline
-        DataInizioLettura & DATETIME & Data dell'inizio del conteggio & Chiave \\
+        Giorno di apertura & CHAR(3) & Giorno a cui si riferisce l'orario di apertura & Chiave \\
         \hline
-        DataFineLettura & DATETIME & Data della fine del conteggio & Chiave \\
+        Orario di apertura & TIME & Orario a cui il servizio apre nel giorno & Chiave \\
         \hline
-        CFCliente & VARCHAR & Il codice fiscale del cliente a cui la lettura è riferita & Chiave \\
-        \hline
-        NomeAllacciamento & VARCHAR & \multicolumn{2}{l|}{Il nome della quantità consumata, è una quantità di un allacciamento.} \\
-        \hline
-        QtConsumata & DECIMAL & \multicolumn{2}{l|}{La quantità consumata nel periodo} \\
+        Orario di chiusura & TIME & Orario a cui il servizio cudehi nel giorno & Chiave \\
         \hline
     \end{tabularx}
 \end{center}
@@ -204,15 +207,11 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Consumo}}\\
         \hline
-        DataInizioLettura & DATETIME & Data dell'inizio del conteggio & Chiave \\
+        Data inizio lettura & TIMESTAMP & Momento dell'inizio del conteggio & Chiave \\
         \hline
-        DataFineLettura & DATETIME & Data della fine del conteggio & Chiave \\
+        Data fine lettura & TIMESTAMP & \multicolumn{2}{l|}{Momento della fine del conteggio}\\
         \hline
-        CFCliente & VARCHAR & Il codice fiscale del cliente a cui la lettura è riferita & Chiave \\
-        \hline
-        NomeAllacciamento & VARCHAR & \multicolumn{2}{l|}{Il nome della quantità consumata, è una quantità di un allacciamento.} \\
-        \hline
-        QtConsumata & DECIMAL & \multicolumn{2}{l|}{La quantità consumata nel periodo} \\
+        Quantità consumata & DECIMAL & \multicolumn{2}{l|}{La quantità consumata nel periodo} \\
         \hline
     \end{tabularx}
 \end{center}
@@ -224,11 +223,9 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Fattura}}\\
         \hline
-        Codice\_fattura & INTEGER & Identifica univocamente la fattura nel programma & Chiave \\
+        Data scadenza & TIMESTAMP & Identifica la scadenza della fattura & Chiave \\
         \hline
-        Data\_scadenza & DATE & \multicolumn{2}{l|}{Identifica la scadenza della fattura} \\
-        \hline
-        Pagato & DATE & \multicolumn{2}{l|}{Identifica lo stato del pagamento della fattura} \\
+        Pagato & TIMESTAMP & \multicolumn{2}{l|}{Identifica quando è stata pagata e lo stato del pagamento della fattura} \\
         \hline
     \end{tabularx}
 \end{center}
