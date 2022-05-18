@@ -73,9 +73,11 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Addetto}}\\
         \hline
-        DataInizioContratto & DATE & È la data in cui il contratto è iniziato & Chiave\\
+        Servizio & VARCHAR & È il servizio in cui lavora & \multirow{2}{*}{Chiave}\\
+        \hhline{---}
+        DataInizioContratto & DATE & È la data in cui il contratto è iniziat& \\
         \hline
-        DataFineContratto & DATE &\multicolumn{2}{l|}{ È la data in cui il contratto è finito o finirà.(nullo se il contratto è indeterminato)}\\
+        DataFineContratto & DATE &\multicolumn{2}{l|}{ È la data in cui il contratto è finito o finirà.}\\
         \hline
     \end{tabularx}
 \end{center}
@@ -140,16 +142,20 @@
 
 %Prenotazione
 \begin{center}
-    \begin{tabularx}{\textwidth}{|l|l|X|}
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
         \hline
         \rowcolor{gray!30}
-        \multicolumn{3}{|c|}{\textbf{Prenotazione}}\\
+        \multicolumn{4}{|c|}{\textbf{Prenotazione}}\\
         \hline
-        Previsione arrivo & DATE & La data in cui si prevede il cliente arrivi\\
+        CF & VARCHAR & Il codice fiscale del cliente prenotante & \multirow{3}{*}{Chiave}\\
+        \hhline{---}
+        Molo & INTEGER & Il molo prenotante &\\
+        \hhline{---}
+        Previsione arrivo & DATE & La data in cui si prevede il cliente arrivo &\\
         \hline
-        Previsione partenza & DATE & La data in cui si prevede il cliente parta\\
+        Previsione partenza & DATE & \multicolumn{2}{l|}{La data in cui si prevede il cliente parta}\\
         \hline
-        Stato di arrivo & BOOLEAN & Rappresenta se il cliente ha trasformato oppure no la prenotazione in sosta\\
+        Stato di arrivo & BOOLEAN & \multicolumn{2}{l|}{Il cliente ha trasformato oppure no la prenotazione in sosta}\\
         \hline
     \end{tabularx}
 \end{center}
@@ -160,10 +166,13 @@
         \hline
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Sosta}}\\
+        Imbarcazione & VARCHAR & Il codice internazionale dell'imbarcazione & \multirow{3}{*}{Chiave}\\
+        \hhline{---}
+        Molo & INTEGER & Il molo della sosta &\\
+        \hhline{---}
+        Data arrivo & TIMESTAMP & Data in cui l'imbarcazione ha ormeggiato & \\
         \hline
-        Data arrivo & TIMESTAMP & Data in cui l'imbarcazione ha ormeggiato & Chiave \\
-        \hline
-        Data arrivo & TIMESTAMP & \multicolumn{2}{l|}{Data in cui l'imbarcazione ha sciolto gli ormeggi} \\
+        Data partenza & TIMESTAMP & \multicolumn{2}{l|}{Data in cui l'imbarcazione ha sciolto gli ormeggi} \\
         \hline
     \end{tabularx}
 \end{center}
@@ -191,11 +200,11 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Periodo di apertura}}\\
         \hline
-        Giorno di apertura & CHAR(3) & Giorno a cui si riferisce l'orario di apertura & Chiave \\
-        \hline
-        Orario di apertura & TIME & Orario a cui il servizio apre nel giorno & Chiave \\
-        \hline
-        Orario di chiusura & TIME & Orario a cui il servizio cudehi nel giorno & Chiave \\
+        Giorno di apertura & CHAR(3) & Giorno a cui si riferisce l'orario di apertura &\multirow{3}{*}{Chiave}\\
+        \hhline{---}
+        Orario di apertura & TIME & Orario a cui il servizio apre nel giorno & \\
+        \hhline{---}
+        Orario di chiusura & TIME & Orario a cui il servizio cudehi nel giorno & \\
         \hline
     \end{tabularx}
 \end{center}
@@ -206,8 +215,13 @@
         \hline
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Consumo}}\\
+
         \hline
-        Data inizio lettura & TIMESTAMP & Momento dell'inizio del conteggio & Chiave \\
+        Cliente & VARCHAR & Cliente consumante & \multirow{3}{*}{Chiave} \\
+        \hhline{---}
+        Allacciamento & VARCHAR & il tipo di allacciamento consumato &\\
+        \hhline{---}
+        Data inizio lettura & TIMESTAMP & Momento dell'inizio del conteggio & \\
         \hline
         Data fine lettura & TIMESTAMP & \multicolumn{2}{l|}{Momento della fine del conteggio}\\
         \hline
@@ -223,7 +237,11 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Fattura}}\\
         \hline
-        Data scadenza & TIMESTAMP & Identifica la scadenza della fattura & Chiave \\
+
+        \hline
+        Cliente & VARCHAR & Cliente ricevente & \multirow{2}{*}{Chiave} \\
+        \hhline{---}
+        Data scadenza & TIMESTAMP & Identifica la scadenza della fattura & \\
         \hline
         Pagato & TIMESTAMP & \multicolumn{2}{l|}{Identifica quando è stata pagata e lo stato del pagamento della fattura} \\
         \hline
