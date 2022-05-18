@@ -32,12 +32,14 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
         \hline
         Imbarcazione & ENTITÀ & 5000\\
         \hline
-        Sosta & RELAZIONE & 13500\\ % Contando che ogni imbarcazione sosta in media due volte per molo.
+        Sosta & ENTITÀ & 13500\\ % Contando che ogni imbarcazione sosta in media due volte per molo.
+        \hline
+        M\_S & RELAZIONE & 13500\\ % Contando che ogni imbarcazione sosta in media due volte per molo.
         \hline
     \end{tabularx}
 \end{center}
 
-\paragraph{operazione 2}
+\paragraph{operazione 3}
 
 \begin{center}
     \begin{minipage}{.48\linewidth}
@@ -64,6 +66,8 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
             \hline
             Sosta & E & 13500 & L\\
             \hline
+            M\_S & R & 13500 & L\\
+            \hline
             Molo & E & 250 & L\\
             \hline
         \end{tabularx}
@@ -72,14 +76,17 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
 
 \underline{Con ridondanza}
 \begin{itemize}
-    \item Totale accessi(Solo in lettura): $250*40 = 10000$
+    \item Totale accessi(Solo in lettura): $250\xrightarrow{*40} 10000$
 \end{itemize}
+
 \underline{Senza ridondanza}
 \begin{itemize}
-    \item Totale accessi(Solo in lettura): $250*13500*40 = 135000000$ Giornalieri
+    \item Totale accessi(Solo in lettura): $250+13500+13500 = 27250 \xrightarrow{*40} 1090000$ Giornalieri
 \end{itemize}
 
 \paragraph{operazione 6}
+
+Assumo che l'imbarcazione sia già presente perché l'esserci o non esserci non cambia il calcolo della ridondanza.
 
 \begin{center}
 \begin{tabularx}{\linewidth}{|X|}
@@ -87,9 +94,7 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
     \rowcolor{gray!30}
     \multicolumn{1}{|c|}{\textbf{Operazioni principali}}\\
     \hline
-    Controllo se l'imbarcazione esiste già nella base dati\\
-    \hline
-    Se non c'è la aggiungo alla base dati\\
+    Cerco l'imbarcazione\\
     \hline
     Cerco i moli disponibili\\
     \hline
@@ -111,9 +116,7 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
             \rowcolor{gray!15}
             Concetto & Costrutto & Accessi & Tipo\\
             \hline
-            Imbarcazione & E & 5000 & L\\
-            \hline
-            Imbarcazione & E & 1 & S\\
+            Imbarcazione & E & 1 & L\\
             \hline
             Molo & E & 250 & L\\
             \hline
@@ -132,11 +135,11 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
             \rowcolor{gray!15}
             Concetto & Costrutto & Accessi & Tipo\\
             \hline
-            Imbarcazione & E & 5000 & L\\
-            \hline
-            Imbarcazione & E & 1 & S\\
+            Imbarcazione & E & 1 & L\\
             \hline
             Sosta & E & 13500 & L\\
+            \hline
+            M\_S & R & 13500 & L\\
             \hline
             Molo & E & 250 & L\\
             \hline
@@ -147,17 +150,17 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
 \end{center}
 
 
-Con ridondanza
-\begin{itemize}
-    \item Totale scritture: $1 + 1 + 1 = 3 \xrightarrow{*2} 6$ 
-    \item Totale letture: $250 + 5000 = 5250$
-    \item Totale accessi: $6+5250 = 5256 \xrightarrow{*40} 210240$ Giornalieri
-\end{itemize}
-Senza ridondanza
+\underline{Con ridondanza}
 \begin{itemize}
     \item Totale scritture: $1 + 1 = 2 \xrightarrow{*2} 4$ 
-    \item Totale letture: $5000 + 13500 + 250 = 18750$
-    \item Totale accessi: $4+18750 = 18754 \xrightarrow{*40} 750160$ Giornalieri
+    \item Totale letture: $250 + 1 = 251$
+    \item Totale accessi: $4+251 = 255 \xrightarrow{*40} 102000$ Giornalieri
+\end{itemize}
+\underline{Senza ridondanza}
+\begin{itemize}
+    \item Totale scritture: $1 \xrightarrow{*2} 2$ 
+    \item Totale letture: $1 + 13500 + 13500 + 250 = 27251$
+    \item Totale accessi: $2+27251 = 27253 \xrightarrow{*40} 1090120$ Giornalieri
 \end{itemize}
 
 \paragraph{In conclusione}
