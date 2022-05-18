@@ -1,11 +1,9 @@
 \section{Progettazione logica}
 
 \subsection{Analisi delle ridondanze}
-Le ridondanze corrispondono alla presenza di dati che possono essere derivati da altri. È quindi importante domandarsi se questa ridondanza crei solo confusione o velocizzi veramente le operazioni.
+Nello schema concettuale possiamo individuare stato di occupazione che è attributo di molo e deducibile dalla relazione sosta, la quale presenta l'attributo data di arrivo e data di partenza.
 
-Nello schema concettuale possiamo individuare stato di occupazione che è deducibile dalla relazione sosta che presenta l'attributo data di arrivo e data di partenza.
-
-Le operazioni coinvolte sono la numero 2 e la numero 6 che presentano una frequenza di 40 volte al giorno e 30-40 volte ogni giorno.
+Le operazioni coinvolte sono la numero 3 e la numero 6 che presentano una frequenza di 40 volte al giorno e 30-40 volte ogni giorno.
 
 Si procede alla valutazione del costo totale in termini di accessi nel caso di ridondanza e di assenza di essa.
 
@@ -15,9 +13,9 @@ Si procede alla valutazione del costo totale in termini di accessi nel caso di r
         \rowcolor{gray!30}
         \textbf{Operazione} & \textbf{Frequenza}\\
         \hline
-        2. Controllo dei posti disponibili per una certa imbarcazione(Controllo delle dimensioni)& 40 volte al giorno\\
+        3. Controllo dei posti disponibili per una certa imbarcazione(Controllo delle dimensioni)& 40 volte al giorno\\
         \hline
-        6. Arrivo di un'imbarcazione in uno dei marina & 30-40 volte al giorno\\
+        6. Arrivo di un'imbarcazione nel marina & 30-40 volte al giorno\\
         \hline
     \end{tabularx}
 \end{center}
@@ -30,7 +28,7 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
         \rowcolor{gray!30}
         \textbf{Concetto} & \textbf{Tipo} & \textbf{Volume}\\
         \hline
-        Molo & ENTITÀ & 1600\\
+        Molo & ENTITÀ & 250\\
         \hline
         Imbarcazione & ENTITÀ & 5000\\
         \hline
@@ -51,7 +49,7 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
             \rowcolor{gray!15}
             Concetto & Costrutto & Accessi & Tipo\\
             \hline
-            Molo & E & 1600 & L\\
+            Molo & E & 250 & L\\
             \hline
         \end{tabularx}
     \end{minipage}
@@ -64,9 +62,9 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
             \rowcolor{gray!15}
             Concetto & Costrutto & Accessi & Tipo\\
             \hline
-            Sosta & R & 13500 & L\\
+            Sosta & E & 13500 & L\\
             \hline
-            Molo & E & 1600 & L\\
+            Molo & E & 250 & L\\
             \hline
         \end{tabularx}
     \end{minipage}
@@ -74,14 +72,34 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
 
 \underline{Con ridondanza}
 \begin{itemize}
-    \item Totale accessi(Solo in lettura): $1600*40 = 64000$
+    \item Totale accessi(Solo in lettura): $250*40 = 10000$
 \end{itemize}
 \underline{Senza ridondanza}
 \begin{itemize}
-    \item Totale accessi(Solo in lettura): $1600*13500*40 = 864000000$ Giornalieri
+    \item Totale accessi(Solo in lettura): $250*13500*40 = 135000000$ Giornalieri
 \end{itemize}
 
 \paragraph{operazione 6}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{|X|}
+    \hline
+    \rowcolor{gray!30}
+    \multicolumn{1}{|c|}{\textbf{Operazioni principali}}\\
+    \hline
+    Controllo se l'imbarcazione esiste già nella base dati\\
+    \hline
+    Se non c'è la aggiungo alla base dati\\
+    \hline
+    Cerco i moli disponibili\\
+    \hline
+    Confronto le dimensioni dell'imbarcazione con i moli disponibili\\
+    \hline
+    Scrivo la sosta\\
+    \hline
+\end{tabularx}
+\end{center}
+
 
 \begin{center}
     \begin{minipage}{.48\linewidth}
@@ -93,11 +111,13 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
             \rowcolor{gray!15}
             Concetto & Costrutto & Accessi & Tipo\\
             \hline
+            Imbarcazione & E & 5000 & L\\
+            \hline
             Imbarcazione & E & 1 & S\\
             \hline
-            Sosta & R & 1 & S\\
+            Molo & E & 250 & L\\
             \hline
-            Sosta & R & 1 & L\\
+            Sosta & E & 1 & S\\
             \hline
             Molo & E & 1 & S\\
             \hline
@@ -112,9 +132,15 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
             \rowcolor{gray!15}
             Concetto & Costrutto & Accessi & Tipo\\
             \hline
+            Imbarcazione & E & 5000 & L\\
+            \hline
             Imbarcazione & E & 1 & S\\
             \hline
-            Sosta & R & 1 & S\\
+            Sosta & E & 13500 & L\\
+            \hline
+            Molo & E & 250 & L\\
+            \hline
+            Sosta & E & 1 & S\\
             \hline
         \end{tabularx}
     \end{minipage}
@@ -123,23 +149,24 @@ Ci riferiremo per i nostri calcoli a dei volumi plausibili nella vita della base
 
 Con ridondanza
 \begin{itemize}
-    \item Totale scritture: $40 + 40 + 40 = 120 \xrightarrow{*2} 240$ 
-    \item Totale letture: $40$
-    \item Totale accessi: $240+40 = 280$ Giornalieri
+    \item Totale scritture: $1 + 1 + 1 = 3 \xrightarrow{*2} 6$ 
+    \item Totale letture: $250 + 5000 = 5250$
+    \item Totale accessi: $6+5250 = 5256 \xrightarrow{*40} 210240$ Giornalieri
 \end{itemize}
 Senza ridondanza
 \begin{itemize}
-    \item Totale accessi(Solo in scrittura): $40+40 = 80 \xrightarrow{*2} 160 $ Giornalieri
+    \item Totale scritture: $1 + 1 = 2 \xrightarrow{*2} 4$ 
+    \item Totale letture: $5000 + 13500 + 250 = 18750$
+    \item Totale accessi: $4+18750 = 18754 \xrightarrow{*40} 750160$ Giornalieri
 \end{itemize}
 
 \paragraph{In conclusione}
-nell'\textbf{operazione 2} risulta meno costosa in termini di accessi l'operazione con ridondanza, nell'\textbf{operazione 6} invece risulta meno costosa in termini di accessi l'operazione senza ridondanza. Notando però che la prima delle due operazioni diventa spropositamene pesante senza ridondanza qui si sceglie di mantenere la ridondanza.
+Nell'\textbf{operazione 2} e nell'\textbf{operazione 6} risulta meno costosa in termini di accessi l'operazione con ridondanza. Notando un grosso divario tra le operazioni con ridondanza e le operazioni senza ridondanza, qui si sceglie di mantenere la ridondanza diminuendo il numero di accessi necessari.
 
 \subsubsection{altre ridondanze}
 
 Le altre ridondanze sono:
 \begin{enumerate}
-    \item Quantità di moli in Marina è deducibile dalla relazione appartenenza e l'entità molo;
     \item Data prima arrivo in Cliente abituale è deducibile da Cliente possiede imbarcazione che sosta in un molo andando a vedere la data di arrivo più vecchia;
     \item Marina visitati in Cliente occasionale è deducibile da Cliente possiede imbarcazione che sosta in un molo andando a vedere quante soste hanno effettuato le sue imbarcazioni;
 \end{enumerate}
