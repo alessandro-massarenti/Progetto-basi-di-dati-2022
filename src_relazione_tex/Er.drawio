@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-05-19T13:59:19.062Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="b09TGyI5WqPi7XfUbiSX" version="18.0.6" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-05-19T14:19:36.848Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36" etag="dyqmuiPw4eeTN5jCwK8R" version="18.0.6" type="github" pages="4">
   <diagram id="Lb8NKgurd6Q8IvhMMRqe" name="Concettuale">
-    <mxGraphModel dx="862" dy="1651" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1231" dy="1776" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -377,7 +377,7 @@
             </mxGeometry>
           </mxCell>
         </UserObject>
-        <mxCell id="IZg3AnJUHfxiXuIaxrN7-108" value="(0,N)" style="text;html=1;resizable=0;labelBackgroundColor=default;align=center;verticalAlign=middle;fontStyle=1;fontColor=#000000;fontSize=17;" parent="IZg3AnJUHfxiXuIaxrN7-107" vertex="1">
+        <mxCell id="IZg3AnJUHfxiXuIaxrN7-108" value="(1,N)" style="text;html=1;resizable=0;labelBackgroundColor=default;align=center;verticalAlign=middle;fontStyle=1;fontColor=#000000;fontSize=17;" parent="IZg3AnJUHfxiXuIaxrN7-107" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <UserObject label="" lucidchartObjectId="qG3wOpRJFm6N" id="IZg3AnJUHfxiXuIaxrN7-109">
@@ -735,7 +735,7 @@
             </mxGeometry>
           </mxCell>
         </UserObject>
-        <mxCell id="IZg3AnJUHfxiXuIaxrN7-185" value="(1,1)" style="text;html=1;resizable=0;labelBackgroundColor=default;align=center;verticalAlign=middle;fontStyle=1;fontColor=#000000;fontSize=17;" parent="IZg3AnJUHfxiXuIaxrN7-184" vertex="1">
+        <mxCell id="IZg3AnJUHfxiXuIaxrN7-185" value="(0,1)" style="text;html=1;resizable=0;labelBackgroundColor=default;align=center;verticalAlign=middle;fontStyle=1;fontColor=#000000;fontSize=17;" parent="IZg3AnJUHfxiXuIaxrN7-184" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <UserObject label="Data scadenza" lucidchartObjectId="iyixKr._966A" id="IZg3AnJUHfxiXuIaxrN7-186">
@@ -2189,7 +2189,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="F9TJmAIph1LKERz1uW6O" name="Attributi-multivalore">
-    <mxGraphModel dx="35" dy="482" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="35" dy="425" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="eDi6kcc8hq0gWWM92izU-0" />
         <mxCell id="eDi6kcc8hq0gWWM92izU-1" parent="eDi6kcc8hq0gWWM92izU-0" />
