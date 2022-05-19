@@ -184,14 +184,13 @@ Abbiamo quindi reificato contatto in una relazione binaria come segue.
 
 \subsection{Eliminazione delle generalizzazioni}
 
-Poichè i sistemi tradizionali per la gestione delle basi di dati non permettono di rappresentare in maniera diretta una generalizzazione, è necessario trasformare questo costrutto in Entità e relazioni:
-
 \paragraph{Cliente}\mbox{}\\
-Si accorpano Cliente abituale e cliente occasionale a Cliente. Dato che il numero di marina visitati e la data di primo arrivo sono attributi utili per entrambe le tipologie di cliente, vengono semplicemente aggiunti questi due attributi a Cliente. Inoltre aggiungiamo un booleano che definisce la differenza tra abituale e occasionale.
-\paragraph{Persona}\mbox{}\\
-La generalizzazione di persona, per evitare inutili valori NULL in un eventuale accorpamento viene trasformata nell'entità "Persona", questa entità conterrà tutti i dati relativi alla persona e avrà due entità deboli collegate ovvero Addetto e Cliente.
+Si accorpano Cliente abituale e cliente occasionale a Cliente. Dato che la quantità di soste è un attributo utile per entrambe le tipologie di cliente. Lo sconto personale sarà invece impostato ad un valore che indica la percentuale di sconto se il cliente è abituale e a NULL se il cliente è occasionale.
 
-Persona avrà da 0 a 1 Cliente e da 0 a 1 Addetto. In Addetto e Cliente posizioneremo i dati relativi a queste due entità come da schema concettuale.
+\paragraph{Persona}\mbox{}\\
+Nelle generalizzazioni di persona, per evitare inutili valori NULL in un eventuale accorpamento \textbf{Persona} viene mantenuta come entità. Questa entità conterrà tutti i dati relativi alla persona e avrà due entità deboli collegate ovvero \textbf{Addetto} e \textbf{Cliente}.
+
+Persona avrà da 0 a 1 \textbf{Cliente} e da 0 a 1 \textbf{Addetto}. Chiaramente ogni \textbf{Cliente}  e \textbf{Addetto} avrà una e una sola persona legata. In \textbf{Addetto} e \textbf{Cliente} posizioneremo i dati relativi a queste due entità come da schema concettuale.
 
 \subsection{Partizionamento/Accorpamento di entità e relazioni}
 
