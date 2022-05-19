@@ -199,13 +199,20 @@ Persona avrà da 0 a 1 \textbf{Cliente} e da 0 a 1 \textbf{Addetto}. Chiaramente
 
 Le Entità Molo e Imbarcazione condividono l'attributo composto \textbf{Dimensioni}. Le 2 entità possono contenere le stesse dimensioni, quindi gli attributi risultano ridondanti. Viene creata un'entità dimensioni che avrà relazione 1 a molti con \textbf{Molo} ed \textbf{Imbarcazione}.
 
-\subsection{Scelta degli identificatori primari}
+\subsection{Modifiche, aggiunte e chiarimenti alle chiavi}
 
-Le occorrenze di addetto e Cliente vengono identificate dal CF di Persona. 
-Orario viene identificato dal nome del servizio e dal marina che lo offre.
-Contatto viene identificato dall'indirizzo di contatto e dal CF di persona.
+Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione concettuale, tranne nei seguenti casi.
 
-Alcune entità, ovvero: Consumo, Corso, Dimensioni, Molo, Allacciamento, Prenotazione non hanno un identificatore primario concettuale gli daremo quindi un id auto-incrementante.
+\paragraph{Imbarcazione} Ad \textbf{Imbarcazione} oltre alla sua chiave primaria Codice internazionale viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è scelto per poter utilizzare il costraint relativo alla sovrapposizione delle soste. 
+
+\paragraph{Persona} A \textbf{Persona} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. 
+
+\paragraph{Addetto} Addetto concettualmente eredita la chiave primaria di \textbf{Persona} ma come da progettazione concettuale mantiene la chiave su \underline{Servizio gestito, Data inizio contratto}. Come chiave primaria si sceglie quindi di utilizzare il \textit{codice fiscale} derivante da \textbf{persona} perché più leggero.
+
+\paragraph{Periodo di apertura} Per ridurre lo spazio utilizzato nella tabella che rappresenta la relazione \textit{Apertura}, a \textbf{Periodo di apertura} abbiamo aggiunto una chiave primaria tramite id autoincrementante. Chiaramente non abbiamo rimosso la chiave unica già presente, infatti essa garantisce l'unicità delle triple presenti.
+
+
+
 
 \subsection{Schema concettuale ristrutturato - Schema logico}
 \includegraphics[width=\textwidth]{img/erlogico.png}
@@ -242,6 +249,9 @@ Prenotazione(\underline{id\_prenotazione},previsione arrivo,previsione\_partenza
 Cliente(\underline{persona},cittadinanza,residenza,marina visitati,data primo arrivo);
 
 Imbarcazione(\underline{codice\_internazionale} ,bandiera,capitano,quantità posti letto, nome);
+
+\subsection{Check e costraint utilizzati}
+
 
 
 \subsection{Vincoli di integrità referenziali}
