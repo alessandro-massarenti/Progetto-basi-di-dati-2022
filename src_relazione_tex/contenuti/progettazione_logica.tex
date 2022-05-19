@@ -216,35 +216,40 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 \subsection{Descrizione schema relazionale}
 
-Consumo(\underline{id\_consumo},data inizio lettura,data fine lettura,quantità consumata);
+Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati sostituendo gli spazi con underscore, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.
 
-Fattura(\underline{codice\_fattura},data\_scadenza,pagato) 
+Imbarcazione(\underline{codice\_internazionale}, bandiera, nome capitano, qtpostiletto, nome, dimensioni, pescaggio, larghezza, LOA);
 
-Marina(\underline{coordinate\_geografiche},citta,Nome,quantita moli, numero civico,via,provincia);
+Molo(\underline{numero molo}, stato di occupazione,dimensioni, profondità minima, larghezza, lunghezza);
 
-Servizio(\underline{marina,Nome});
+Servizio(\underline{nome del servizio});
 
-Orario(\underline{marina,nome\_servizio, orario\_apertura, orario\_chiusura});
+Addetto(\underline{servizio}, \underline{Servizio, data\_inizio \_contratto}, data\_fine\_contratto);
 
-Addetto(\underline{persona},data\_inizio\_contratto,data\_fine\_contratto);
+Cliente (cittadinanza, residenza);
 
-Contatto(\underline{persona,indirizzo});
+Cliente occasionale(quantità\_sosta);
 
-Persona(\underline{CF},data di nascita,nome,cognome);
+Cliente abituale (sconto\_personale);
 
-Molo(\underline{id\_molo},stato di occupazione);
+Persona(\underline{CF},data di nascita, nome, cognome, contatto);
 
-Corso(\underline{id\_corso},prezzo,data inizio,data fine,nome,);
+Prenotazione(\underline{cf, id, previsione arrivo, molo}  previsione\_partenza);
 
-Dimensione(\underline{id\_dimensioni},larghezza,lunghezza,pescaggio);
+Sosta (\underline{imbarcazione, molo,data\_arrivo,} data partenza);
 
-Allacciamento(\underline{nome},prezzo\_unitario,unita\_di misura);
+Allacciamento(\underline{nome, prezzo\_unitario, unita\_di misura});
 
-Prenotazione(\underline{id\_prenotazione},previsione arrivo,previsione\_partenza);
+Periodo di apertura (\underline{giorno\_apertura,orario\_apertura, orario\_chiusura});
 
-Cliente(\underline{persona},cittadinanza,residenza,marina visitati,data primo arrivo);
 
-Imbarcazione(\underline{codice\_internazionale} ,bandiera,capitano,quantità posti letto, nome);
+Consumo(\underline{cliente, allaciamento, data inizio lettura}, data fine lettura, quantità consumata);
+
+Fattura(\underline{fattura, data\_scadenza}, pagato); 
+
+
+
+La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
 
 \subsection{Check e costraint}
 
