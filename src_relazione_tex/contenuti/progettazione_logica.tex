@@ -180,7 +180,10 @@ Contatto in Persona è multi-valore.
 
 Abbiamo quindi reificato contatto in una relazione binaria come segue.
 
-\includegraphics[width=\linewidth]{img/multi_valore.png}
+\begin{center}
+    \includegraphics[width=\linewidth / 2]{img/multi_valore.png}
+\end{center}
+
 
 \subsection{Eliminazione delle generalizzazioni}
 
@@ -194,9 +197,7 @@ Persona avrà da 0 a 1 \textbf{Cliente} e da 0 a 1 \textbf{Addetto}. Chiaramente
 
 \subsection{Partizionamento/Accorpamento di entità e relazioni}
 
-Le Entità Molo e Imbarcazione condividono l'attributo composto \textbf{Dimensioni}. Le 2 entità possono contenere le stesse dimensioni, quindi gli attributi risultano ridondanti. Viene creata un'entità dimensioni che avrà relazione 1 a molti con Molo ed Imbarcazione.
-
-Inoltre si accorpa l'attributo indirizzo a Marina che avrà quindi gli attributi: Via, provincia, Città, numero civico.
+Le Entità Molo e Imbarcazione condividono l'attributo composto \textbf{Dimensioni}. Le 2 entità possono contenere le stesse dimensioni, quindi gli attributi risultano ridondanti. Viene creata un'entità dimensioni che avrà relazione 1 a molti con \textbf{Molo} ed \textbf{Imbarcazione}.
 
 \subsection{Scelta degli identificatori primari}
 
