@@ -218,19 +218,15 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati sostituendo gli spazi con underscore, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.
 
-Imbarcazione(\underline{codice\_internazionale}, bandiera, nome capitano, qtpostiletto, nome, dimensioni, pescaggio, larghezza, LOA);
+Imbarcazione(\underline{codiceInternazionale}, \underline{id} bandiera, nome capitano, qtpostiletto, nome, dimensioni, pescaggio, larghezza, LOA);
 
 Molo(\underline{numero molo}, stato di occupazione,dimensioni, profondità minima, larghezza, lunghezza);
 
 Servizio(\underline{nome del servizio});
 
-Addetto(\underline{servizio}, \underline{Servizio, data\_inizio \_contratto}, data\_fine\_contratto);
+Addetto(\underline{servizio}, \underline{Servizio, dataInizioContratto}, dataFineContratto);
 
-Cliente (cittadinanza, residenza);
-
-Cliente occasionale(quantità\_sosta);
-
-Cliente abituale (sconto\_personale);
+Cliente (\underline{persona}, cittadinanza, residenza, quantitaSoste, scontoPersonale);
 
 Persona(\underline{CF},data di nascita, nome, cognome, contatto);
 
@@ -241,7 +237,6 @@ Sosta (\underline{imbarcazione, molo,data\_arrivo,} data partenza);
 Allacciamento(\underline{nome, prezzo\_unitario, unita\_di misura});
 
 Periodo di apertura (\underline{giorno\_apertura,orario\_apertura, orario\_chiusura});
-
 
 Consumo(\underline{cliente, allaciamento, data inizio lettura}, data fine lettura, quantità consumata);
 
