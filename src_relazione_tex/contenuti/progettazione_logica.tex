@@ -195,17 +195,13 @@ Nelle generalizzazioni di persona, per evitare inutili valori NULL in un eventua
 
 Persona avrà da 0 a 1 \textbf{Cliente} e da 0 a 1 \textbf{Addetto}. Chiaramente ogni \textbf{Cliente}  e \textbf{Addetto} avrà una e una sola persona legata. In \textbf{Addetto} e \textbf{Cliente} posizioneremo i dati relativi a queste due entità come da schema concettuale.
 
-\subsection{Partizionamento/Accorpamento di entità e relazioni}
-
-Le Entità Molo e Imbarcazione condividono l'attributo composto \textbf{Dimensioni}. Le 2 entità possono contenere le stesse dimensioni, quindi gli attributi risultano ridondanti. Viene creata un'entità dimensioni che avrà relazione 1 a molti con \textbf{Molo} ed \textbf{Imbarcazione}.
-
 \subsection{Modifiche, aggiunte e chiarimenti alle chiavi}
 
 Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione concettuale, tranne nei seguenti casi.
 
-\paragraph{Imbarcazione} Ad \textbf{Imbarcazione} oltre alla sua chiave primaria Codice internazionale viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è scelto per poter utilizzare il costraint relativo alla sovrapposizione delle soste. 
+\paragraph{Imbarcazione} Ad \textbf{Imbarcazione} oltre alla sua chiave primaria Codice internazionale viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle soste. Infatti esso funziona solo con attributi interi e non con Varchar\footnote{A meno di installare il pacchetto aggiuntivo di Postgres che lo permetta ma per lo scopo di questo progetto abbiamo preferito evitare per questioni di compatibilità.}.
 
-\paragraph{Persona} A \textbf{Persona} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. 
+\paragraph{Persona} A \textbf{Persona} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. Infatti esso funziona solo con attributi interi e non con Varchar.
 
 \paragraph{Addetto} Addetto concettualmente eredita la chiave primaria di \textbf{Persona} ma come da progettazione concettuale mantiene la chiave su \underline{Servizio gestito, Data inizio contratto}. Come chiave primaria si sceglie quindi di utilizzare il \textit{codice fiscale} derivante da \textbf{persona} perché più leggero.
 
