@@ -343,3 +343,35 @@
 
 \subsection{Schema ER concettuale}
 \includegraphics[width=\textwidth]{img/erconcettuale.png}
+
+\subsubsection{Vincoli non rappresentabili nello schema Relazionale}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{|p{30mm}|X|}
+        \hline
+        \rowcolor{gray!30}
+        \textbf{Entità / Relazione} & \textbf{Vincolo}\\
+        \hline
+        Molo & Lo stato di occupazione deve essere coerente con la sosta\\
+        \hline
+
+        Periodo di apertura & orario di chiusura deve essere postumo all'orario di apertura \\
+        \hline
+
+        Fattura & deve essere presente almeno una linea di consumo o una linea di sosta\\
+        \hline
+
+        Prenotazione & La previsione della partenza deve essere postuma alla previsione dell'arrivo\\
+        \hline
+
+        Prenotazione & Un molo non può essere prenotato nello stesso momento da due persone differenti e non può essere prenotato se c'è già una barca in sosta\\
+        \hline
+
+        Sosta & La data di partenza deve essere postuma alla data di arrivo\\
+
+        \hline
+        Sosta & Un molo non può essere utilizzato se è già occupato o è prenotato e un'imbarcazione non può occupare due moli contemporaneamente\\
+
+        \hline
+    \end{tabularx}
+\end{center}
