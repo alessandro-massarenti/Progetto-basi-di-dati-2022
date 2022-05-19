@@ -168,20 +168,17 @@ Nell'\textbf{operazione 2} e nell'\textbf{operazione 6} risulta meno costosa in 
 
 \subsubsection{altre ridondanze}
 
-Le altre ridondanze sono:
-\begin{enumerate}
-    \item Data prima arrivo in Cliente abituale è deducibile da Cliente possiede imbarcazione che sosta in un molo andando a vedere la data di arrivo più vecchia;
-    \item Marina visitati in Cliente occasionale è deducibile da Cliente possiede imbarcazione che sosta in un molo andando a vedere quante soste hanno effettuato le sue imbarcazioni;
-\end{enumerate}
+Un altra ridondanza è Quantità di soste in \textbf{Cliente occasionale} è deducibile da Cliente possiede imbarcazione che sosta in un molo andando a vedere quante soste hanno effettuato le sue imbarcazioni;
 
-In seguito all'analisi sugli accessi abbiamo stimato che tutte e tre risultino essere preferibili con ridondanza, relativamente ad eventuali operazioni di lettura e scrittura di questi valori. Pertanto si è deciso di mantenere le informazioni ridondanti.
+In seguito all'analisi sugli accessi abbiamo stimato che risulti essere preferibile mantenere la ridondanza relativamente ad eventuali operazioni di lettura e scrittura di questi valori, 
+pertanto si è deciso di mantenere la ridondanza.
 
 
 \subsection{Eliminazione degli attributi multi-valore}
 
-Contatto in Persona è multi-valore. Anche Orario apertura e orario chiusura in servizio sono multi-valore.
+Contatto in Persona è multi-valore.
 
-Dovrò quindi trasformarli in un'ER-relazione binaria. In particolare in servizio accorperò i due orari in orario di erogazione.
+Abbiamo quindi reificato contatto in una relazione binaria come segue.
 
 \includegraphics[width=\linewidth]{img/multi_valore.png}
 
