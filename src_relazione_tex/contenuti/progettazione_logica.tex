@@ -201,13 +201,13 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 \paragraph{Imbarcazione} Ad \textbf{Imbarcazione} oltre alla sua chiave primaria Codice internazionale viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle soste. Infatti esso funziona solo con attributi interi e non con Varchar\footnote{A meno di installare il pacchetto aggiuntivo di Postgres che lo permetta ma per lo scopo di questo progetto abbiamo preferito evitare per questioni di compatibilità.}.
 
-\paragraph{Persona} A \textbf{Persona} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. Infatti esso funziona solo con attributi interi e non con Varchar.
+\paragraph{Cliente} A \textbf{Cliente} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. Infatti esso funziona solo con attributi interi e non con Varchar.
 
 \paragraph{Addetto} Addetto concettualmente eredita la chiave primaria di \textbf{Persona} ma come da progettazione concettuale mantiene la chiave su \underline{Servizio gestito, Data inizio contratto}. Come chiave primaria si sceglie quindi di utilizzare il \textit{codice fiscale} derivante da \textbf{persona} perché più leggero.
 
 \paragraph{Periodo di apertura} Per ridurre lo spazio utilizzato nella tabella che rappresenta la relazione \textit{Apertura}, a \textbf{Periodo di apertura} abbiamo aggiunto una chiave primaria tramite id autoincrementante. Chiaramente non abbiamo rimosso la chiave unica già presente, infatti essa garantisce l'unicità delle triple presenti.
 
-
+\paragraph{Sosta} Per semplificare il lavoro con le prenotazioni trasformate in \textbf{Sosta} a sosta viene aggiunto un id autoincrementante come chiave. Questo id verrà utilizzato da \textbf{Prenotazione} per definire se la prenotazione è stata trasformata in sosta.
 
 
 \subsection{Schema concettuale ristrutturato - Schema logico}
@@ -216,53 +216,58 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 \subsection{Descrizione schema relazionale}
 
-Consumo(\underline{id\_consumo},data inizio lettura,data fine lettura,quantità consumata);
+Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati, utilizzando il camelCase, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.\\
 
-Fattura(\underline{codice\_fattura},data\_scadenza,pagato) 
+\textbf{Imbarcazione}(\underline{\textit{codiceInternazionale}}, \underline{id}, cliente, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
 
-Marina(\underline{coordinate\_geografiche},citta,Nome,quantita moli, numero civico,via,provincia);
+\textbf{Molo} (\underline{\textit{id}}, occupato, profonditaMinima, larghezza, lunghezza, prezzoGiorno);
 
-Servizio(\underline{marina,Nome});
+\textbf{Servizio} (\underline{\textit{nome}});
 
-Orario(\underline{marina,nome\_servizio, orario\_apertura, orario\_chiusura});
+\textbf{Addetto} (\underline{\textit{persona}}, \underline{servizio, inizioContratto}, fineContratto);
 
-Addetto(\underline{persona},data\_inizio\_contratto,data\_fine\_contratto);
+\textbf{Cliente} (\underline{\textit{persona}}, \underline{id}, cittadinanza, residenza, quantitaSoste, scontoPersonale);
 
-Contatto(\underline{persona,indirizzo});
+\textbf{Persona} (\underline{\textit{CF}}, dataNascita, nome, cognome);
 
-Persona(\underline{CF},data di nascita,nome,cognome);
+\textbf{Prenotazione} (\underline{\textit{cliente, prevArrivo, molo}}, prevPartenza, sosta);
 
-Molo(\underline{id\_molo},stato di occupazione);
+\textbf{Sosta} (\underline{\textit{imbarcazione, molo, arrivo}}, \underline{id}, partenza, fattura);
 
-Corso(\underline{id\_corso},prezzo,data inizio,data fine,nome,);
+\textbf{Allacciamento} (\underline{\textit{nome}}, prezzoUnitario, unitaMisura);
 
-Dimensione(\underline{id\_dimensioni},larghezza,lunghezza,pescaggio);
+\textbf{Fornitura} (\underline{\textit{allacciamento, molo}});
 
-Allacciamento(\underline{nome},prezzo\_unitario,unita\_di misura);
+\textbf{PeriodoApertura} (\underline{\textit{id}}, \underline{giorno, apertura, chiusura});
 
-Prenotazione(\underline{id\_prenotazione},previsione arrivo,previsione\_partenza);
+\textbf{AperturaServizio} (\underline{\textit{servizio, periodoApertura}});
 
-Cliente(\underline{persona},cittadinanza,residenza,marina visitati,data primo arrivo);
+\textbf{Consumo}(\underline{\textit{cliente, allaciamento, inizio}}, fine, quantita, fattura);
 
-Imbarcazione(\underline{codice\_internazionale} ,bandiera,capitano,quantità posti letto, nome);
+\textbf{Fattura}(\underline{\textit{id}},\underline{cliente, scadenza}, pagato);\\
 
-\subsection{Check e costraint utilizzati}
+La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
+
+\subsection{Check e costraint}
 
 
 
 \subsection{Vincoli di integrità referenziali}
 
-\textbf{Fattura}.cliente -> Cliente.persona\\
-\textbf{Addetto}.persona -> Persona.CF\\
-\textbf{Cliente}.persona -> Persona.CF\\
-\textbf{Molo}.dimensioni -> dimensioni.id\_dimensioni\\
-\textbf{Imbarcazione}.dimensioni -> dimensioni.id\_dimensioni\\
-\textbf{Servizio}.marina -> Marina.coordinate geografiche\\
-\textbf{Contatto}.persona -> Persona.CF\\
-\textbf{Orario}.servizio ->Servizio.nome\\
-\textbf{Orario}.marina -> Marina.coordinate\_geografiche\\
-\textbf{Fattura}.consumo -> Consumo.id\_consumo\\
-\textbf{Consumo}.marina -> Marina.coordinate\_geografiche\\
-\textbf{Servizio}.addetto -> Addetto.persona\\
-\textbf{Prenotazione}.molo -> Molo.id\_molo\\
-\textbf{Molo}.marina -> Marina.coordinate\_geografiche\\
+\textbf{Imbarcazione}.cliente -> \textit{Cliente}.persona\\
+\textbf{Addetto}.persona -> \textit{Persona}.CF\\
+\textbf{Cliente}.persona -> \textit{Persona}.CF\\
+\textbf{Prenotazione}.cliente -> \textit{Cliente}.id\\
+\textbf{Prenotazione}.molo -> \textit{Molo}.id\\
+\textbf{Prenotazione}.sosta -> \textit{Sosta}.id\\
+\textbf{Sosta}.imbarcazione -> \textit{Imbarcazione}.id\\
+\textbf{Sosta}.molo -> \textit{Molo}.id\\
+\textbf{Sosta}.fattura -> \textit{Fattura}.id\\
+\textbf{Fornitura}.allacciamento -> \textit{Allacciamento}.nome\\
+\textbf{Fornitura}.molo -> \textit{Molo}.id\\
+\textbf{AperturaServizio}.servizio -> \textit{Servizio}.nome\\
+\textbf{AperturaServizio}.periodoApertura -> \textit{PeriodoApertura}.id\\
+\textbf{Consumo}.cliente -> \textit{Cliente}.persona\\
+\textbf{Consumo}.allacciamento -> \textit{Allacciamento}.nome\\
+\textbf{Consumo}.fattura -> \textit{Fattura}.id\\
+\textbf{Fattura}.cliente -> \textit{Cliente}.persona\\

@@ -155,7 +155,7 @@
         \hline
         Previsione partenza & DATE & \multicolumn{2}{l|}{La data in cui si prevede il cliente parta}\\
         \hline
-        Stato di arrivo & BOOLEAN & \multicolumn{2}{l|}{Il cliente ha trasformato oppure no la prenotazione in sosta}\\
+        Sosta & SOSTA & \multicolumn{2}{l|}{La sosta in cui si è trasformata la presente prenotazione}\\
         \hline
     \end{tabularx}
 \end{center}
@@ -166,6 +166,7 @@
         \hline
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Sosta}}\\
+        \hline
         Imbarcazione & VARCHAR & Il codice internazionale dell'imbarcazione & \multirow{3}{*}{Chiave}\\
         \hhline{---}
         Molo & INTEGER & Il molo della sosta &\\
@@ -241,7 +242,7 @@
         \hline
         Cliente & VARCHAR & Cliente ricevente & \multirow{2}{*}{Chiave} \\
         \hhline{---}
-        Data scadenza & TIMESTAMP & Identifica la scadenza della fattura & \\
+        Data scadenza & DATE & Identifica la scadenza della fattura & \\
         \hline
         Pagato & TIMESTAMP & \multicolumn{2}{l|}{Identifica quando è stata pagata e lo stato del pagamento della fattura} \\
         \hline
@@ -337,6 +338,12 @@
     \begin{itemize}
         \item Una sosta è relativa ad una e una sola imbarcazione(1,1);
         \item Un imbarcazione può sostare da 0 a molte volte (0,N);
+    \end{itemize}
+
+    \item Prenotazione - Sosta: \textbf{Arrivato}
+    \begin{itemize}
+        \item Una prenotazione Arriva in 0 o 1 molo(0,1);
+        \item Un sosta ha in arrivo da 0 a una prenotazione (0,N);
     \end{itemize}
     
 \end{itemize}
