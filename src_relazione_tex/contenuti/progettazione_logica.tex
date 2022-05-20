@@ -201,7 +201,7 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 \paragraph{Imbarcazione} Ad \textbf{Imbarcazione} oltre alla sua chiave primaria Codice internazionale viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle soste. Infatti esso funziona solo con attributi interi e non con Varchar\footnote{A meno di installare il pacchetto aggiuntivo di Postgres che lo permetta ma per lo scopo di questo progetto abbiamo preferito evitare per questioni di compatibilità.}.
 
-\paragraph{Persona} A \textbf{Persona} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. Infatti esso funziona solo con attributi interi e non con Varchar.
+\paragraph{Cliente} A \textbf{Cliente} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. Infatti esso funziona solo con attributi interi e non con Varchar.
 
 \paragraph{Addetto} Addetto concettualmente eredita la chiave primaria di \textbf{Persona} ma come da progettazione concettuale mantiene la chiave su \underline{Servizio gestito, Data inizio contratto}. Come chiave primaria si sceglie quindi di utilizzare il \textit{codice fiscale} derivante da \textbf{persona} perché più leggero.
 
@@ -218,29 +218,33 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati, utilizzando il camelCase, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.
 
-Imbarcazione(\underline{codiceInternazionale}, \underline{id}, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
+\textbf{Imbarcazione}(\underline{\textit{codiceInternazionale}}, \underline{id}, cliente, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
 
-Molo(\underline{id}, occupato, profonditaMinima, larghezza, lunghezza);
+\textbf{Molo} (\underline{\textit{id}}, occupato, profonditaMinima, larghezza, lunghezza, prezzoGiorno);
 
-Servizio(\underline{nome});
+\textbf{Servizio} (\underline{\textit{nome}});
 
-Addetto(\underline{persona}, \underline{servizio, dataInizioContratto}, dataFineContratto);
+\textbf{Addetto} (\underline{\textit{persona}}, \underline{servizio, inizioContratto}, fineContratto);
 
-Cliente (\underline{persona}, cittadinanza, residenza, quantitaSoste, scontoPersonale);
+\textbf{Cliente} (\underline{\textit{persona}}, \underline{id}, cittadinanza, residenza, quantitaSoste, scontoPersonale);
 
-Persona(\underline{CF},dataNascita, nome, cognome);
+\textbf{Persona} (\underline{\textit{CF}}, dataNascita, nome, cognome);
 
-Prenotazione(\underline{persona, prevArrivo, molo}  prevPartenza);
+\textbf{Prenotazione} (\underline{\textit{cliente, prevArrivo, molo}}, prevPartenza, stato);
 
-Sosta (\underline{imbarcazione, molo, arrivo,} partenza);
+\textbf{Sosta} (\underline{\textit{imbarcazione, molo, arrivo}}, partenza, fattura);
 
-Allacciamento(\underline{nome, prezzoUnitario, unitaMisura});
+\textbf{Allacciamento} (\underline{\textit{nome}}, prezzoUnitario, unitaMisura);
 
-Periodo di apertura (\underline{giorno, apertura, chiusura});
+\textbf{Fornitura} (\underline{\textit{allacciamento,molo}});
 
-Consumo(\underline{cliente, allaciamento, inizio}, fine, quantita);
+\textbf{PeriodoApertura} (\underline{\textit{id}}, \underline{giorno, apertura, chiusura});
 
-Fattura(\underline{fattura, scadenza}, pagato); 
+\textbf{AperturaServizio} (\underline{\textit{servizio, periodoApertura}});
+
+\textbf{Consumo}(\underline{\textit{cliente, allaciamento, inizio}}, fine, quantita,fattura);
+
+\textbf{Fattura}(\underline{\textit{cliente, scadenza}}, pagato);\\
 
 La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
 
