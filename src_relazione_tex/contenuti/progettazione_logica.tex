@@ -248,10 +248,6 @@ Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi en
 
 La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
 
-\subsection{Check e costraint}
-
-
-
 \subsection{Vincoli di integrità referenziali}
 
 \textbf{Imbarcazione}.cliente -> \textit{Cliente}.persona\\
@@ -271,3 +267,29 @@ La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
 \textbf{Consumo}.allacciamento -> \textit{Allacciamento}.nome\\
 \textbf{Consumo}.fattura -> \textit{Fattura}.id\\
 \textbf{Fattura}.cliente -> \textit{Cliente}.persona\\
+
+\subsection{Check e costraint}
+
+\subsubsection{Vincoli non gestiti}
+Non è stato purtroppo possibile mantenere fede a tutti i vincoli posti nella progettazione concettuale, e relativamente ad essi viene lasciato al programmatore che utilizzerà la base dati l'onere di mantenerla consistente.
+
+\paragraph{Fattura}
+Non viene quindi gestito il vincolo relativo a fattura, per via di una dipendenza circolare tra la generazione della fattura e la creazione delle sue linee. Si considera quindi la fattura con zero linee come "\textit{fattura da riempire}".
+
+\paragraph{Molo}
+Per gestire la consistenza di \textbf{Molo} si possono utilizzare dei trigger che la controllino ad ogni variazione dei dati. Ma per ridurre la complessità si è deciso anche qui di lasciare l'onere della consistenza al programmatore.
+
+\subsubsection{Vincoli gestiti}
+
+\paragraph{PeriodoApertura}
+In \textbf{PeriodoApertura} è attivato un check che controlla che l'orario di chiusura sia sempre postumo all'orario di apertura.
+
+\paragraph{Prenotazione e Sosta}
+In \textbf{Prenotazione} ed in \textbf{Sosta} viene eseguito un check simile a quello di \textbf{PeriodoApertura}. In queste due entità viene quindi controllato che il momento della partenza sia sempre postumo al momento dell'arrivo, questo anche quando la partenza è non definita. Per fare questo si è quindi deciso di settare la partenza con valore di default ad "\textit{infinito}" in sosta.
+
+In queste due entità vengono inoltre fatti due controlli relativi alla sovrapposizione di soste e prenotazioni.
+
+Se un \textbf{Molo} è già occupato in un determinato periodo esso non sarà occupabile, e se un'\textbf{Imbarcazione} si trova già in un \textbf{Molo} non potrà sdoppiarsi ed essere sostante in più moli contemporaneamente.
+
+Come precedentemente accennato per implementare questo costraint sono state fatte delle modifiche alle chiavi di imbarcazione e di cliente, aggiungendo una chiave intera in modo da poter utilizzare i GIST\footnote{Generalized Search Tree, ovvero un albero di ricerca molto simile al B-Tree} nella versione standard di Postgres\footnote{DBMS scelto per il progetto presente}.
+
