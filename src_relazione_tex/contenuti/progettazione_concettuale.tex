@@ -155,7 +155,7 @@
         \hline
         Previsione partenza & DATE & \multicolumn{2}{l|}{La data in cui si prevede il cliente parta}\\
         \hline
-        Stato di arrivo & BOOLEAN & \multicolumn{2}{l|}{Il cliente ha trasformato oppure no la prenotazione in sosta}\\
+        Sosta & SOSTA & \multicolumn{2}{l|}{La sosta in cui si è trasformata la presente prenotazione}\\
         \hline
     \end{tabularx}
 \end{center}
@@ -338,6 +338,12 @@
     \begin{itemize}
         \item Una sosta è relativa ad una e una sola imbarcazione(1,1);
         \item Un imbarcazione può sostare da 0 a molte volte (0,N);
+    \end{itemize}
+
+    \item Prenotazione - Sosta: \textbf{Arrivato}
+    \begin{itemize}
+        \item Una prenotazione Arriva in 0 o 1 molo(0,1);
+        \item Un sosta ha in arrivo da 0 a una prenotazione (0,N);
     \end{itemize}
     
 \end{itemize}

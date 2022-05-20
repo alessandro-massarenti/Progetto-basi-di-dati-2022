@@ -207,7 +207,7 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 \paragraph{Periodo di apertura} Per ridurre lo spazio utilizzato nella tabella che rappresenta la relazione \textit{Apertura}, a \textbf{Periodo di apertura} abbiamo aggiunto una chiave primaria tramite id autoincrementante. Chiaramente non abbiamo rimosso la chiave unica già presente, infatti essa garantisce l'unicità delle triple presenti.
 
-
+\paragraph{Sosta} Per semplificare il lavoro con le prenotazioni trasformate in \textbf{Sosta} a sosta viene aggiunto un id autoincrementante come chiave. Questo id verrà utilizzato da \textbf{Prenotazione} per definire se la prenotazione è stata trasformata in sosta.
 
 
 \subsection{Schema concettuale ristrutturato - Schema logico}
@@ -230,9 +230,9 @@ Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi en
 
 \textbf{Persona} (\underline{\textit{CF}}, dataNascita, nome, cognome);
 
-\textbf{Prenotazione} (\underline{\textit{cliente, prevArrivo, molo}}, prevPartenza, stato);
+\textbf{Prenotazione} (\underline{\textit{cliente, prevArrivo, molo}}, prevPartenza, sosta);
 
-\textbf{Sosta} (\underline{\textit{imbarcazione, molo, arrivo}}, partenza, fattura);
+\textbf{Sosta} (\underline{\textit{imbarcazione, molo, arrivo}}, \underline{id}, partenza, fattura);
 
 \textbf{Allacciamento} (\underline{\textit{nome}}, prezzoUnitario, unitaMisura);
 
@@ -259,6 +259,7 @@ La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
 \textbf{Cliente}.persona -> \textit{Persona}.CF\\
 \textbf{Prenotazione}.cliente -> \textit{Cliente}.id\\
 \textbf{Prenotazione}.molo -> \textit{Molo}.id\\
+\textbf{Prenotazione}.sosta -> \textit{Sosta}.id\\
 \textbf{Sosta}.imbarcazione -> \textit{Imbarcazione}.id\\
 \textbf{Sosta}.molo -> \textit{Molo}.id\\
 \textbf{Sosta}.fattura -> \textit{Fattura}.id\\
