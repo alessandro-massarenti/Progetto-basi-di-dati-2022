@@ -216,7 +216,7 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 \subsection{Descrizione schema relazionale}
 
-Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati, utilizzando il camelCase, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.
+Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati, utilizzando il camelCase, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.\\
 
 \textbf{Imbarcazione}(\underline{\textit{codiceInternazionale}}, \underline{id}, cliente, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
 
@@ -236,15 +236,15 @@ Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi en
 
 \textbf{Allacciamento} (\underline{\textit{nome}}, prezzoUnitario, unitaMisura);
 
-\textbf{Fornitura} (\underline{\textit{allacciamento,molo}});
+\textbf{Fornitura} (\underline{\textit{allacciamento, molo}});
 
 \textbf{PeriodoApertura} (\underline{\textit{id}}, \underline{giorno, apertura, chiusura});
 
 \textbf{AperturaServizio} (\underline{\textit{servizio, periodoApertura}});
 
-\textbf{Consumo}(\underline{\textit{cliente, allaciamento, inizio}}, fine, quantita,fattura);
+\textbf{Consumo}(\underline{\textit{cliente, allaciamento, inizio}}, fine, quantita, fattura);
 
-\textbf{Fattura}(\underline{\textit{cliente, scadenza}}, pagato);\\
+\textbf{Fattura}(\underline{\textit{id}},\underline{cliente, scadenza}, pagato);\\
 
 La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
 
@@ -254,17 +254,19 @@ La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
 
 \subsection{Vincoli di integrità referenziali}
 
-\textbf{Fattura}.cliente -> Cliente.persona\\
-\textbf{Addetto}.persona -> Persona.CF\\
-\textbf{Cliente}.persona -> Persona.CF\\
-\textbf{Molo}.dimensioni -> dimensioni.id\_dimensioni\\
-\textbf{Imbarcazione}.dimensioni -> dimensioni.id\_dimensioni\\
-\textbf{Servizio}.marina -> Marina.coordinate geografiche\\
-\textbf{Contatto}.persona -> Persona.CF\\
-\textbf{Orario}.servizio ->Servizio.nome\\
-\textbf{Orario}.marina -> Marina.coordinate\_geografiche\\
-\textbf{Fattura}.consumo -> Consumo.id\_consumo\\
-\textbf{Consumo}.marina -> Marina.coordinate\_geografiche\\
-\textbf{Servizio}.addetto -> Addetto.persona\\
-\textbf{Prenotazione}.molo -> Molo.id\_molo\\
-\textbf{Molo}.marina -> Marina.coordinate\_geografiche\\
+\textbf{Imbarcazione}.cliente -> \textit{Cliente}.persona\\
+\textbf{Addetto}.persona -> \textit{Persona}.CF\\
+\textbf{Cliente}.persona -> \textit{Persona}.CF\\
+\textbf{Prenotazione}.cliente -> \textit{Cliente}.id\\
+\textbf{Prenotazione}.molo -> \textit{Molo}.id\\
+\textbf{Sosta}.imbarcazione -> \textit{Imbarcazione}.id\\
+\textbf{Sosta}.molo -> \textit{Molo}.id\\
+\textbf{Sosta}.fattura -> \textit{Fattura}.id\\
+\textbf{Fornitura}.allacciamento -> \textit{Allacciamento}.nome\\
+\textbf{Fornitura}.molo -> \textit{Molo}.id\\
+\textbf{AperturaServizio}.servizio -> \textit{Servizio}.nome\\
+\textbf{AperturaServizio}.periodoApertura -> \textit{PeriodoApertura}.id\\
+\textbf{Consumo}.cliente -> \textit{Cliente}.persona\\
+\textbf{Consumo}.allacciamento -> \textit{Allacciamento}.nome\\
+\textbf{Consumo}.fattura -> \textit{Fattura}.id\\
+\textbf{Fattura}.cliente -> \textit{Cliente}.persona\\
