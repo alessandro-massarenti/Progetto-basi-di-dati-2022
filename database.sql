@@ -69,9 +69,9 @@ CREATE TABLE Cliente
 DROP TABLE IF EXISTS Allacciamento;
 CREATE TABLE Allacciamento
 (
-    nome           VARCHAR(255) NOT NULL ,
-    prezzoUnitario DOUBLE PRECISION NOT NULL ,
-    unitaMisura    VARCHAR(255) NOT NULL ,
+    nome           VARCHAR(255)     NOT NULL,
+    prezzoUnitario DOUBLE PRECISION NOT NULL,
+    unitaMisura    VARCHAR(255)     NOT NULL,
     PRIMARY KEY (nome)
 );
 
@@ -251,6 +251,28 @@ group by (molo_libero_da.molo, mlfa.molo);
 -- Dati
 ----------------------------------------------------------------
 
+insert into public.servizio (nome)
+values  ('Lavanderia'),
+        ('Gru nord'),
+        ('Gru sud'),
+        ('Bacino di carenaggio'),
+        ('Falegnameria'),
+        ('Officina'),
+        ('Bar Aperto');
+
+insert into periodoapertura (id, giorno, apertura, chiusura)
+values (1, 'Lun', '08:00:00', '12:00:00'),
+       (2, 'Mar', '08:00:00', '12:00:00'),
+       (3, 'Mer', '08:00:00', '12:00:00'),
+       (4, 'Gio', '08:00:00', '12:00:00'),
+       (5, 'Ven', '08:00:00', '12:00:00'),
+       (6, 'Sab', '08:00:00', '12:00:00'),
+       (7, 'Lun', '13:00:00', '18:00:00'),
+       (8, 'Mar', '13:00:00', '18:00:00'),
+       (9, 'Mer', '13:00:00', '18:00:00'),
+       (10, 'Gio', '13:00:00', '18:00:00'),
+       (11, 'Ven', '13:00:00', '18:00:00');
+
 insert into persona (cf, datanascita, nome, cognome)
 values ('GLLGNN81A54G224W', '1981-01-14', 'Giovanna', 'Galli'),
        ('BRNRNS61D64G224W', '1961-04-24', 'Ortensia', 'Bernardi'),
@@ -354,282 +376,196 @@ values ('GLLGNN81A54G224W', '1981-01-14', 'Giovanna', 'Galli'),
        ('BRNLGU61S23G224M', '1961-11-23', 'Luigi', 'Bruno');
 
 insert into cliente (persona, id, cittadinanza, residenza, quantitasoste, scontopersonale)
-values  ('GLLGNN81A54G224W', 2, 'ita', 'Napoli', null, null),
-        ('SPSLRA03M70G224G', 31, 'ita', 'Napoli', null, null),
-        ('BRNRNS61D64G224W', 32, 'ita', 'Padova', null, null),
-        ('FRIFME76P50G224A', 33, 'ita', 'Padova', null, null),
-        ('PRSFNZ86H17G224I', 34, 'ita', 'Venezia', null, null),
-        ('GTTMNL80D23G224S', 35, 'ita', 'Padova', null, null),
-        ('FRIMRV60S67G224G', 36, 'ita', 'Venezia', null, null),
-        ('BTTDPE87L24G224C', 37, 'ita', 'Venezia', null, null),
-        ('RSSCTN98M28G224B', 38, 'ita', 'Padova', null, null),
-        ('MTATSE95R28G224U', 39, 'ita', 'Napoli', null, null),
-        ('MRTSVN62M13G224Z', 40, 'ita', 'Padova', null, null),
-        ('FNTCGL78B08G224E', 41, 'ita', 'Roma', null, null),
-        ('MRTSRT91H55G224R', 42, 'ita', 'Roma', null, null),
-        ('RZZPLP63L70G224M', 43, 'ita', 'Padova', null, null),
-        ('SNNMRV74S45G224C', 44, 'ita', 'Venezia', null, null),
-        ('MRNVNN00C58G224F', 45, 'ita', 'Padova', null, null),
-        ('CTTTMS64B16G224U', 46, 'ita', 'Padova', null, null),
-        ('CLMMNL00C10G224D', 47, 'ita', 'Padova', null, null),
-        ('LNELIA78E69G224J', 48, 'ita', 'Padova', null, null),
-        ('BNCRLA58A25G224U', 49, 'ita', 'Venezia', null, null),
-        ('MRNMRP81S70G224W', 50, 'ita', 'Napoli', null, null),
-        ('PLLGGR91P14G224J', 51, 'ita', 'Roma', null, null),
-        ('BLLMRK80D29G224M', 52, 'ita', 'Napoli', null, null),
-        ('MRCLRZ70B47G224O', 53, 'ita', 'Venezia', null, null),
-        ('FRILTT02A44G224C', 54, 'ita', 'Roma', null, null),
-        ('BNCCRI03T58G224W', 55, 'ita', 'Venezia', null, null),
-        ('MSSLRZ73M57G224S', 56, 'ita', 'Venezia', null, null),
-        ('GRCMRP69L58G224Q', 57, 'ita', 'Roma', null, null),
-        ('SLVRST98P02G224K', 58, 'ita', 'Roma', null, null),
-        ('BNDRMO78P17G224H', 59, 'ita', 'Roma', null, null),
-        ('GRCLRS80T10G224B', 60, 'ita', 'Roma', null, null);
+values ('GLLGNN81A54G224W', 2, 'ita', 'Napoli', null, null),
+       ('SPSLRA03M70G224G', 31, 'ita', 'Napoli', null, null),
+       ('BRNRNS61D64G224W', 32, 'ita', 'Padova', null, null),
+       ('FRIFME76P50G224A', 33, 'ita', 'Padova', null, null),
+       ('PRSFNZ86H17G224I', 34, 'ita', 'Venezia', null, null),
+       ('GTTMNL80D23G224S', 35, 'ita', 'Padova', null, null),
+       ('FRIMRV60S67G224G', 36, 'ita', 'Venezia', null, null),
+       ('BTTDPE87L24G224C', 37, 'ita', 'Venezia', null, null),
+       ('RSSCTN98M28G224B', 38, 'ita', 'Padova', null, null),
+       ('MTATSE95R28G224U', 39, 'ita', 'Napoli', null, null),
+       ('MRTSVN62M13G224Z', 40, 'ita', 'Padova', null, null),
+       ('FNTCGL78B08G224E', 41, 'ita', 'Roma', null, null),
+       ('MRTSRT91H55G224R', 42, 'ita', 'Roma', null, null),
+       ('RZZPLP63L70G224M', 43, 'ita', 'Padova', null, null),
+       ('SNNMRV74S45G224C', 44, 'ita', 'Venezia', null, null),
+       ('MRNVNN00C58G224F', 45, 'ita', 'Padova', null, null),
+       ('CTTTMS64B16G224U', 46, 'ita', 'Padova', null, null),
+       ('CLMMNL00C10G224D', 47, 'ita', 'Padova', null, null),
+       ('LNELIA78E69G224J', 48, 'ita', 'Padova', null, null),
+       ('BNCRLA58A25G224U', 49, 'ita', 'Venezia', null, null),
+       ('MRNMRP81S70G224W', 50, 'ita', 'Napoli', null, null),
+       ('PLLGGR91P14G224J', 51, 'ita', 'Roma', null, null),
+       ('BLLMRK80D29G224M', 52, 'ita', 'Napoli', null, null),
+       ('MRCLRZ70B47G224O', 53, 'ita', 'Venezia', null, null),
+       ('FRILTT02A44G224C', 54, 'ita', 'Roma', null, null),
+       ('BNCCRI03T58G224W', 55, 'ita', 'Venezia', null, null),
+       ('MSSLRZ73M57G224S', 56, 'ita', 'Venezia', null, null),
+       ('GRCMRP69L58G224Q', 57, 'ita', 'Roma', null, null),
+       ('SLVRST98P02G224K', 58, 'ita', 'Roma', null, null),
+       ('BNDRMO78P17G224H', 59, 'ita', 'Roma', null, null),
+       ('GRCLRS80T10G224B', 60, 'ita', 'Roma', null, null);
 
 insert into molo (id, occupato, profonditaminima, larghezza, lunghezza, prezzogiorno)
-values  (1, null, 10, 6, 14, 30),
-        (2, null, 10, 6, 14, 30),
-        (3, null, 10, 6, 14, 30),
-        (4, null, 10, 6, 14, 30),
-        (5, null, 10, 6, 14, 30),
-        (6, null, 10, 6, 14, 30),
-        (7, null, 10, 6, 14, 30),
-        (8, null, 10, 6, 14, 30),
-        (9, null, 10, 6, 14, 30),
-        (10, null, 10, 6, 14, 30),
-        (11, null, 10, 6, 14, 30),
-        (12, null, 10, 6, 14, 30),
-        (13, null, 10, 6, 14, 30),
-        (14, null, 10, 6, 14, 30),
-        (15, null, 10, 6, 14, 30),
-        (16, null, 10, 6, 14, 30),
-        (17, null, 10, 6, 14, 30),
-        (18, null, 10, 6, 14, 30),
-        (19, null, 10, 6, 14, 30),
-        (20, null, 10, 6, 14, 30),
-        (21, null, 10, 6, 14, 30),
-        (22, null, 10, 6, 14, 30),
-        (23, null, 10, 6, 14, 30),
-        (24, null, 10, 6, 14, 30),
-        (25, null, 10, 6, 14, 30),
-        (26, null, 10, 6, 14, 30),
-        (27, null, 10, 6, 14, 30),
-        (28, null, 10, 6, 14, 30),
-        (29, null, 10, 6, 14, 30),
-        (30, null, 10, 6, 14, 30),
-        (31, null, 10, 6, 14, 30),
-        (32, null, 10, 6, 14, 30),
-        (33, null, 10, 6, 14, 30),
-        (34, null, 10, 6, 14, 30),
-        (35, null, 10, 6, 14, 30),
-        (36, null, 10, 6, 14, 30),
-        (37, null, 10, 6, 14, 30),
-        (38, null, 10, 6, 14, 30),
-        (39, null, 10, 6, 14, 30),
-        (40, null, 10, 6, 14, 30),
-        (41, null, 10, 6, 14, 30),
-        (42, null, 10, 6, 14, 30),
-        (43, null, 10, 6, 14, 30),
-        (44, null, 10, 6, 14, 30),
-        (45, null, 10, 14, 30, 40),
-        (46, null, 10, 14, 30, 40),
-        (47, null, 10, 14, 30, 40),
-        (48, null, 10, 14, 30, 40),
-        (49, null, 10, 14, 30, 40),
-        (50, null, 10, 14, 30, 40),
-        (51, null, 10, 14, 30, 40),
-        (52, null, 10, 14, 30, 40),
-        (53, null, 10, 14, 30, 40),
-        (54, null, 10, 14, 30, 40),
-        (55, null, 10, 14, 30, 40),
-        (56, null, 10, 14, 30, 40),
-        (57, null, 10, 14, 30, 40),
-        (58, null, 10, 14, 30, 40),
-        (59, null, 10, 14, 30, 40),
-        (60, null, 10, 14, 30, 40),
-        (61, null, 10, 14, 30, 40),
-        (62, null, 10, 14, 30, 40),
-        (63, null, 10, 14, 30, 40),
-        (64, null, 10, 14, 30, 40),
-        (65, null, 10, 14, 30, 40),
-        (66, null, 10, 14, 30, 40),
-        (67, null, 10, 14, 30, 40),
-        (68, null, 10, 14, 30, 40),
-        (69, null, 15, 20, 40, 100),
-        (70, null, 15, 20, 40, 100),
-        (71, null, 15, 20, 40, 100),
-        (72, null, 15, 20, 40, 100),
-        (73, null, 15, 20, 40, 100),
-        (74, null, 15, 20, 40, 100),
-        (75, null, 15, 20, 40, 100),
-        (76, null, 15, 20, 40, 100),
-        (77, null, 15, 20, 40, 100),
-        (78, null, 15, 20, 40, 100),
-        (79, null, 15, 20, 40, 100),
-        (80, null, 15, 20, 40, 100),
-        (81, null, 15, 20, 40, 100),
-        (82, null, 15, 20, 40, 100),
-        (83, null, 15, 20, 40, 100),
-        (84, null, 15, 20, 40, 100),
-        (85, null, 15, 20, 40, 100),
-        (86, null, 15, 20, 40, 100),
-        (87, null, 15, 20, 40, 100),
-        (88, null, 15, 20, 40, 100),
-        (89, null, 15, 20, 40, 100),
-        (90, null, 15, 20, 40, 100),
-        (91, null, 15, 20, 40, 100),
-        (92, null, 15, 20, 40, 100),
-        (93, null, 15, 20, 40, 100),
-        (94, null, 15, 20, 40, 100),
-        (95, null, 15, 20, 40, 100),
-        (96, null, 15, 20, 40, 100),
-        (97, null, 15, 20, 40, 100),
-        (98, null, 15, 20, 40, 100),
-        (99, null, 15, 20, 40, 100),
-        (100, null, 15, 20, 40, 100),
-        (101, null, 15, 20, 40, 100),
-        (102, null, 15, 20, 40, 100),
-        (103, null, 15, 20, 40, 100),
-        (104, null, 15, 20, 40, 100),
-        (105, null, 15, 20, 40, 100),
-        (106, null, 15, 20, 40, 100),
-        (107, null, 15, 20, 40, 100),
-        (108, null, 15, 20, 40, 100),
-        (109, null, 15, 20, 40, 100),
-        (110, null, 15, 20, 40, 100),
-        (111, null, 15, 20, 40, 100),
-        (112, null, 15, 20, 40, 100),
-        (113, null, 15, 20, 40, 100),
-        (114, null, 15, 20, 40, 100),
-        (115, null, 15, 20, 40, 100),
-        (116, null, 15, 20, 40, 100),
-        (117, null, 15, 20, 40, 100),
-        (118, null, 15, 20, 40, 100),
-        (119, null, 15, 20, 40, 100),
-        (120, null, 15, 20, 40, 100),
-        (121, null, 15, 20, 40, 100),
-        (122, null, 20, 40, 100, 2340),
-        (123, null, 20, 40, 100, 2340),
-        (124, null, 20, 40, 100, 2340),
-        (125, null, 20, 40, 100, 2340);
+values (1, null, 10, 6, 14, 30),
+       (2, null, 10, 6, 14, 30),
+       (3, null, 10, 6, 14, 30),
+       (4, null, 10, 6, 14, 30),
+       (5, null, 10, 6, 14, 30),
+       (6, null, 10, 6, 14, 30),
+       (7, null, 10, 6, 14, 30),
+       (8, null, 10, 6, 14, 30),
+       (9, null, 10, 6, 14, 30),
+       (10, null, 10, 6, 14, 30),
+       (11, null, 10, 6, 14, 30),
+       (12, null, 10, 6, 14, 30),
+       (13, null, 10, 6, 14, 30),
+       (14, null, 10, 6, 14, 30),
+       (15, null, 10, 6, 14, 30),
+       (16, null, 10, 6, 14, 30),
+       (17, null, 10, 6, 14, 30),
+       (18, null, 10, 6, 14, 30),
+       (19, null, 10, 6, 14, 30),
+       (20, null, 10, 6, 14, 30),
+       (21, null, 10, 6, 14, 30),
+       (22, null, 10, 6, 14, 30),
+       (23, null, 10, 6, 14, 30),
+       (24, null, 10, 6, 14, 30),
+       (25, null, 10, 6, 14, 30),
+       (26, null, 10, 6, 14, 30),
+       (27, null, 10, 6, 14, 30),
+       (28, null, 10, 6, 14, 30),
+       (29, null, 10, 6, 14, 30),
+       (30, null, 10, 6, 14, 30),
+       (31, null, 10, 6, 14, 30),
+       (32, null, 10, 6, 14, 30),
+       (33, null, 10, 6, 14, 30),
+       (34, null, 10, 6, 14, 30),
+       (35, null, 10, 6, 14, 30),
+       (36, null, 10, 6, 14, 30),
+       (37, null, 10, 6, 14, 30),
+       (38, null, 10, 6, 14, 30),
+       (39, null, 10, 6, 14, 30),
+       (40, null, 10, 6, 14, 30),
+       (41, null, 10, 6, 14, 30),
+       (42, null, 10, 6, 14, 30),
+       (43, null, 10, 6, 14, 30),
+       (44, null, 10, 6, 14, 30),
+       (45, null, 10, 14, 30, 40),
+       (46, null, 10, 14, 30, 40),
+       (47, null, 10, 14, 30, 40),
+       (48, null, 10, 14, 30, 40),
+       (49, null, 10, 14, 30, 40),
+       (50, null, 10, 14, 30, 40),
+       (51, null, 10, 14, 30, 40),
+       (52, null, 10, 14, 30, 40),
+       (53, null, 10, 14, 30, 40),
+       (54, null, 10, 14, 30, 40),
+       (55, null, 10, 14, 30, 40),
+       (56, null, 10, 14, 30, 40),
+       (57, null, 10, 14, 30, 40),
+       (58, null, 10, 14, 30, 40),
+       (59, null, 10, 14, 30, 40),
+       (60, null, 10, 14, 30, 40),
+       (61, null, 10, 14, 30, 40),
+       (62, null, 10, 14, 30, 40),
+       (63, null, 10, 14, 30, 40),
+       (64, null, 10, 14, 30, 40),
+       (65, null, 10, 14, 30, 40),
+       (66, null, 10, 14, 30, 40),
+       (67, null, 10, 14, 30, 40),
+       (68, null, 10, 14, 30, 40),
+       (69, null, 15, 20, 40, 100),
+       (70, null, 15, 20, 40, 100),
+       (71, null, 15, 20, 40, 100),
+       (72, null, 15, 20, 40, 100),
+       (73, null, 15, 20, 40, 100),
+       (74, null, 15, 20, 40, 100),
+       (75, null, 15, 20, 40, 100),
+       (76, null, 15, 20, 40, 100),
+       (77, null, 15, 20, 40, 100),
+       (78, null, 15, 20, 40, 100),
+       (79, null, 15, 20, 40, 100),
+       (80, null, 15, 20, 40, 100),
+       (81, null, 15, 20, 40, 100),
+       (82, null, 15, 20, 40, 100),
+       (83, null, 15, 20, 40, 100),
+       (84, null, 15, 20, 40, 100),
+       (85, null, 15, 20, 40, 100),
+       (86, null, 15, 20, 40, 100),
+       (87, null, 15, 20, 40, 100),
+       (88, null, 15, 20, 40, 100),
+       (89, null, 15, 20, 40, 100),
+       (90, null, 15, 20, 40, 100),
+       (91, null, 15, 20, 40, 100),
+       (92, null, 15, 20, 40, 100),
+       (93, null, 15, 20, 40, 100),
+       (94, null, 15, 20, 40, 100),
+       (95, null, 15, 20, 40, 100),
+       (96, null, 15, 20, 40, 100),
+       (97, null, 15, 20, 40, 100),
+       (98, null, 15, 20, 40, 100),
+       (99, null, 15, 20, 40, 100),
+       (100, null, 15, 20, 40, 100),
+       (101, null, 15, 20, 40, 100),
+       (102, null, 15, 20, 40, 100),
+       (103, null, 15, 20, 40, 100),
+       (104, null, 15, 20, 40, 100),
+       (105, null, 15, 20, 40, 100),
+       (106, null, 15, 20, 40, 100),
+       (107, null, 15, 20, 40, 100),
+       (108, null, 15, 20, 40, 100),
+       (109, null, 15, 20, 40, 100),
+       (110, null, 15, 20, 40, 100),
+       (111, null, 15, 20, 40, 100),
+       (112, null, 15, 20, 40, 100),
+       (113, null, 15, 20, 40, 100),
+       (114, null, 15, 20, 40, 100),
+       (115, null, 15, 20, 40, 100),
+       (116, null, 15, 20, 40, 100),
+       (117, null, 15, 20, 40, 100),
+       (118, null, 15, 20, 40, 100),
+       (119, null, 15, 20, 40, 100),
+       (120, null, 15, 20, 40, 100),
+       (121, null, 15, 20, 40, 100),
+       (122, null, 20, 40, 100, 2340),
+       (123, null, 20, 40, 100, 2340),
+       (124, null, 20, 40, 100, 2340),
+       (125, null, 20, 40, 100, 2340);
 
-UPDATE sosta
-SET partenza = 'infinity',
-    fattura  = null
-WHERE molo = 2
-  AND imbarcazione = 1
-  AND arrivo = '2022-05-13 14:07:34.567000 +00:00';
-UPDATE sosta
-SET partenza = '2022-09-13 14:07:45.045000 +00:00',
-    fattura  = null
-WHERE molo = 3
-  AND imbarcazione = 2
-  AND arrivo = '2022-05-13 14:07:43.412000 +00:00';
-UPDATE sosta
-SET partenza = 'infinity',
-    fattura  = null
-WHERE molo = 4
-  AND imbarcazione = 3
-  AND arrivo = '2022-05-13 14:08:31.511000 +00:00';
-UPDATE sosta
-SET partenza = '2022-05-13 14:09:07.021000 +00:00',
-    fattura  = null
-WHERE molo = 1
-  AND imbarcazione = 4
-  AND arrivo = '2022-05-13 14:09:05.500000 +00:00';
-UPDATE sosta
-SET partenza = 'infinity',
-    fattura  = null
-WHERE molo = 5
-  AND imbarcazione = 5
-  AND arrivo = '2022-05-13 14:09:14.724000 +00:00';
-UPDATE sosta
-SET partenza = '2022-07-13 14:09:33.949000 +00:00',
-    fattura  = null
-WHERE molo = 12
-  AND imbarcazione = 6
-  AND arrivo = '2022-05-13 14:09:32.154000 +00:00';
-UPDATE sosta
-SET partenza = '2022-09-13 14:09:44.057000 +00:00',
-    fattura  = null
-WHERE molo = 12
-  AND imbarcazione = 7
-  AND arrivo = '2022-08-13 14:09:40.042000 +00:00';
-UPDATE sosta
-SET partenza = '2022-11-13 14:09:55.211000 +00:00',
-    fattura  = null
-WHERE molo = 3
-  AND imbarcazione = 8
-  AND arrivo = '2022-10-13 14:09:52.883000 +00:00';
-UPDATE sosta
-SET partenza = 'infinity',
-    fattura  = null
-WHERE molo = 6
-  AND imbarcazione = 9
-  AND arrivo = '2022-05-13 14:10:05.242000 +00:00';
-UPDATE sosta
-SET partenza = 'infinity',
-    fattura  = null
-WHERE molo = 7
-  AND imbarcazione = 10
-  AND arrivo = '2022-05-13 14:10:09.739000 +00:00';
-UPDATE sosta
-SET partenza = 'infinity',
-    fattura  = null
-WHERE molo = 8
-  AND imbarcazione = 11
-  AND arrivo = '2022-05-13 14:10:12.938000 +00:00';
-UPDATE sosta
-SET partenza = '2022-05-13 14:14:09.626000 +00:00',
-    fattura  = null
-WHERE molo = 9
-  AND imbarcazione = 12
-  AND arrivo = '2022-05-13 14:14:07.612000 +00:00';
-UPDATE sosta
-SET partenza = '2022-05-13 14:36:36.969000 +00:00',
-    fattura  = null
-WHERE molo = 10
-  AND imbarcazione = 13
-  AND arrivo = '2022-05-13 14:36:23.224000 +00:00';
-UPDATE sosta
-SET partenza = '2022-05-13 14:37:27.138000 +00:00',
-    fattura  = null
-WHERE molo = 11
-  AND imbarcazione = 13
-  AND arrivo = '2022-05-13 14:37:24.210000 +00:00';
-UPDATE sosta
-SET partenza = '2022-06-13 18:00:07.710000 +00:00',
-    fattura  = null
-WHERE molo = 10
-  AND imbarcazione = 13
-  AND arrivo = '2022-06-13 15:00:04.257000 +00:00';
-UPDATE sosta
-SET partenza = '2022-05-13 21:14:00.000000 +00:00',
-    fattura  = null
-WHERE molo = 9
-  AND imbarcazione = 14
-  AND arrivo = '2022-05-13 21:13:23.027000 +00:00';
-UPDATE sosta
-SET partenza = '2022-05-14 12:10:32.141000 +00:00',
-    fattura  = null
-WHERE molo = 9
-  AND imbarcazione = 15
-  AND arrivo = '2022-05-14 12:10:28.597000 +00:00';
-UPDATE sosta
-SET partenza = '2022-06-14 12:10:32.141000 +00:00',
-    fattura  = null
-WHERE molo = 9
-  AND imbarcazione = 15
-  AND arrivo = '2022-06-14 12:10:28.597000 +00:00';
-UPDATE sosta
-SET partenza = '2022-06-12 12:30:41.913000 +00:00',
-    fattura  = null
-WHERE molo = 9
-  AND imbarcazione = 15
-  AND arrivo = '2022-05-14 12:30:35.244000 +00:00';
-UPDATE sosta
-SET partenza = '2022-07-19 14:17:51.564000 +00:00',
-    fattura  = null
-WHERE molo = 99
-  AND imbarcazione = 16
-  AND arrivo = '2022-06-19 14:17:40.101000 +00:00';
+insert into imbarcazione (mmsi, id, cliente, bandiera, nomecapitano, npostiletto, nome, pescaggio, larghezza, loa)
+values ('8815920', 11, 'GLLGNN81A54G224W', 'ita', 'Marco', 6, 'ZENIT', 6, 11, 36),
+       ('8814093', 1, 'SPSLRA03M70G224G', 'ita', 'Mirko', 14, 'CELESTINA', 6, 8, 42),
+       ('9017575', 2, 'BRNRNS61D64G224W', 'ita', 'Luca', 18, 'NAUTILUS', 7, 9, 47),
+       ('5217555', 3, 'FRIFME76P50G224A', 'ita', 'Sara', 22, 'ALA', 8, 9, 51),
+       ('9112026', 4, 'PRSFNZ86H17G224I', 'ita', 'Filippo', 14, 'EUROFAST', 6, 9, 40),
+       ('8877124', 5, 'GLLGNN81A54G224W', 'ita', 'Nicola', 9, 'AZZURRA SECONDA', 6, 7, 28),
+       ('7945106', 6, 'SPSLRA03M70G224G', 'ita', 'Nunzio', 8, 'SEMPRE AVANTI T II', 5, 6, 27),
+       ('8836340', 7, 'BRNRNS61D64G224W', 'ita', 'Gaetano', 9, 'GIORGIONE', 5, 6, 28),
+       ('9212553', 8, 'FRIFME76P50G224A', 'ita', 'Marco', 10, 'MAZZORBO', 6, 6, 30),
+       ('7945144', 9, 'PRSFNZ86H17G224I', 'ita', 'Mirko', 7, 'ERIDANO', 4, 6, 26),
+       ('8745917', 10, 'GLLGNN81A54G224W', 'ger', 'Luca', 8, 'HORIZONT', 4, 6, 25),
+       ('8745929', 27, 'SPSLRA03M70G224G', 'ger', 'Sara', 7, 'INSEL RUEGEN', 4, 7, 25),
+       ('8745943', 28, 'BRNRNS61D64G224W', 'ger', 'Filippo', 6, 'NORDLICHT', 4, 6, 25),
+       ('8745890', 29, 'FRIFME76P50G224A', 'ger', 'Nicola', 8, 'DANA', 4, 7, 25),
+       ('5337771', 30, 'PRSFNZ86H17G224I', 'ger', 'Nunzio', 9, 'STADT KIEL', 5, 7, 28),
+       ('9855288', 31, 'BRNRNS61D64G224W', 'spa', 'Mirko', 2, 'ECO TERRA', 6, 9, 28),
+       ('9832236', 32, 'FRIFME76P50G224A', 'spa', 'Luca', 4, 'BENCHI EXPRESS', 5, 9, 26),
+       ('9809631', 33, 'PRSFNZ86H17G224I', 'spa', 'Sara', 2, 'ESPALMADOR JET', 6, 9, 28),
+       ('9264489', 34, 'FRIMRV60S67G224G', 'spa', 'Filippo', 5, 'AIGUES DE FORMENTERA', 5, 9, 27),
+       ('9844239', 35, 'BTTDPE87L24G224C', 'spa', 'Nicola', 6, 'ECO LUX', 6, 9, 28),
+       ('9850991', 36, 'FRIMRV60S67G224G', 'fra', 'Mirko', 4, 'TIGERS III', 4, 7, 20),
+       ('9866897', 37, 'BTTDPE87L24G224C', 'fra', 'Luca', 2, 'MERCATOR', 4, 8, 19),
+       ('9099391', 38, 'RSSCTN98M28G224B', 'fra', 'Sara', 3, 'BROCELIANDE', 5, 8, 18),
+       ('8229212', 39, 'MTATSE95R28G224U', 'fra', 'Filippo', 2, 'LE VICOMTE', 4, 7, 16),
+       ('9831581', 40, 'MRTSVN62M13G224Z', 'fra', 'Nicola', 2, 'LA TRINITE', 5, 8, 19),
+       ('9868041', 41, 'MRTSVN62M13G224Z', 'nor', 'Luca', 3, 'FROY STADT', 8, 13, 20),
+       ('9137765', 42, 'FRIMRV60S67G224G', 'nor', 'Sara', 2, 'VOLLEROSA', 7, 8, 20),
+       ('9180322', 43, 'BTTDPE87L24G224C', 'nor', 'Filippo', 4, 'BERGEN KREDS', 6, 7, 20),
+       ('8215510', 44, 'RSSCTN98M28G224B', 'nor', 'Nicola', 2, 'NCTB 7', 5, 9, 14),
+       ('9921207', 45, 'MTATSE95R28G224U', 'nor', 'Nunzio', 2, 'FOX INSPECTOR', 5, 8, 14);
+
+insert into prenotazione (cliente, molo, prevarrivo, prevpartenza, sosta)
+values  (32, 45, '2022-05-21 09:00:00.903000 +00:00', '2022-05-25 12:01:00.161000 +00:00', null);

@@ -279,6 +279,9 @@ Non viene gestito il vincolo relativo a fattura, per via di una dipendenza circo
 \paragraph{Molo}
 Per gestire la consistenza di \textbf{Molo} si possono utilizzare dei trigger che la controllino ad ogni variazione dei dati. Ma per ridurre la complessità si è deciso anche qui di lasciare l'onere della consistenza al programmatore. In caso di riscontrate inconsistenze sarà comunque sempre possibile fare affidamento sulle soste le quali saranno sempre consistenti.
 
+\paragraph{Sosta}
+Un altro vincolo purtroppo non gestito è la palese impossibilità di inserire un'imbarcazione in un molo più piccolo di essa. Questo vincolo non è gestibile, se non con soluzioni inutilmente complesse, in quanto al momento Postgres non permette di fare controlli su altre tabelle al momento dell'inserimento di un dato. Si può però comunque notare che questo vincolo sarà rispettato fisicamente nella realtà.
+
 \subsubsection{Vincoli gestiti}
 
 \paragraph{PeriodoApertura}
