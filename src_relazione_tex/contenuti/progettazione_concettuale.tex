@@ -9,7 +9,7 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Imbarcazione}}\\
         \hline
-        Codice internazionale & VARCHAR & Identifica univocamente un'imbarcazione nel mondo & Chiave\\
+        Codice internazionale & CHAR(9) & Identifica univocamente un'imbarcazione nel mondo & Chiave\\
         \hline
         Nome & VARCHAR & \multicolumn{2}{l|}{Il nome dell'imbarcazione} \\
         \hline
@@ -127,7 +127,7 @@
         \rowcolor{gray!30}
         \multicolumn{4}{|c|}{\textbf{Persona}}\\
         \hline
-        CF & VARCHAR & Identifica univocamente una persona & Chiave \\
+        CF & CHAR(16) & Identifica univocamente una persona & Chiave \\
         \hline
         Nome & VARCHAR & \multicolumn{2}{l|}{Il nome della persona} \\
         \hline
