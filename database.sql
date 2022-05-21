@@ -113,7 +113,7 @@ DROP TABLE IF EXISTS Fattura;
 CREATE TABLE Fattura
 (
     id       SERIAL,
-    cliente  CHAR(16)   not null references Cliente (persona),
+    cliente  CHAR(16)  not null references Cliente (persona),
     scadenza date      not null,
     pagato   timestamp not null,
     primary key (id),
@@ -353,7 +353,38 @@ values ('GLLGNN81A54G224W', '1981-01-14', 'Giovanna', 'Galli'),
        ('MRTMRM92T65G224D', '1992-12-25', 'Miriam', 'Martinelli'),
        ('BRNLGU61S23G224M', '1961-11-23', 'Luigi', 'Bruno');
 
-
+insert into public.cliente (persona, id, cittadinanza, residenza, quantitasoste, scontopersonale)
+values  ('GLLGNN81A54G224W', 2, 'ita', 'Napoli', null, null),
+        ('SPSLRA03M70G224G', 31, 'ita', 'Napoli', null, null),
+        ('BRNRNS61D64G224W', 32, 'ita', 'Padova', null, null),
+        ('FRIFME76P50G224A', 33, 'ita', 'Padova', null, null),
+        ('PRSFNZ86H17G224I', 34, 'ita', 'Venezia', null, null),
+        ('GTTMNL80D23G224S', 35, 'ita', 'Padova', null, null),
+        ('FRIMRV60S67G224G', 36, 'ita', 'Venezia', null, null),
+        ('BTTDPE87L24G224C', 37, 'ita', 'Venezia', null, null),
+        ('RSSCTN98M28G224B', 38, 'ita', 'Padova', null, null),
+        ('MTATSE95R28G224U', 39, 'ita', 'Napoli', null, null),
+        ('MRTSVN62M13G224Z', 40, 'ita', 'Padova', null, null),
+        ('FNTCGL78B08G224E', 41, 'ita', 'Roma', null, null),
+        ('MRTSRT91H55G224R', 42, 'ita', 'Roma', null, null),
+        ('RZZPLP63L70G224M', 43, 'ita', 'Padova', null, null),
+        ('SNNMRV74S45G224C', 44, 'ita', 'Venezia', null, null),
+        ('MRNVNN00C58G224F', 45, 'ita', 'Padova', null, null),
+        ('CTTTMS64B16G224U', 46, 'ita', 'Padova', null, null),
+        ('CLMMNL00C10G224D', 47, 'ita', 'Padova', null, null),
+        ('LNELIA78E69G224J', 48, 'ita', 'Padova', null, null),
+        ('BNCRLA58A25G224U', 49, 'ita', 'Venezia', null, null),
+        ('MRNMRP81S70G224W', 50, 'ita', 'Napoli', null, null),
+        ('PLLGGR91P14G224J', 51, 'ita', 'Roma', null, null),
+        ('BLLMRK80D29G224M', 52, 'ita', 'Napoli', null, null),
+        ('MRCLRZ70B47G224O', 53, 'ita', 'Venezia', null, null),
+        ('FRILTT02A44G224C', 54, 'ita', 'Roma', null, null),
+        ('BNCCRI03T58G224W', 55, 'ita', 'Venezia', null, null),
+        ('MSSLRZ73M57G224S', 56, 'ita', 'Venezia', null, null),
+        ('GRCMRP69L58G224Q', 57, 'ita', 'Roma', null, null),
+        ('SLVRST98P02G224K', 58, 'ita', 'Roma', null, null),
+        ('BNDRMO78P17G224H', 59, 'ita', 'Roma', null, null),
+        ('GRCLRS80T10G224B', 60, 'ita', 'Roma', null, null);
 
 UPDATE sosta
 SET partenza = 'infinity',
