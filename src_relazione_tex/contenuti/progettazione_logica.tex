@@ -282,6 +282,8 @@ Per gestire la consistenza di \textbf{Molo} si possono utilizzare dei trigger ch
 \paragraph{Sosta}
 Un altro vincolo purtroppo non gestito è la palese impossibilità di inserire un'imbarcazione in un molo più piccolo di essa. Questo vincolo non è gestibile, se non con soluzioni inutilmente complesse, in quanto al momento Postgres non permette di fare controlli su altre tabelle al momento dell'inserimento di un dato. Si può però comunque notare che questo vincolo sarà rispettato fisicamente nella realtà.
 
+\paragraph{Prenotazione} In prenotazione, per lo stesso motivo posto al paragrafo superiore non sarà possibile controllare nelle soste o nei moli se al moemento della prenotazione sono già occupati. Questo vincolo è però in buona parte rispettato dato che nelle soste si inseriscono solo date attuali o postume e non date relative al futuro, mentre in Prenotazioni si inseriscono date future. Si nota quindi come i problemi affrontati dalle due entità non collidano in molti posti, e sarà in buona parte necessario controllare solo in Prenotazione. Si lascia in ogni caso al programmatore l'onere di mantenere il vincolo.
+
 \subsubsection{Vincoli gestiti}
 
 \paragraph{PeriodoApertura}
