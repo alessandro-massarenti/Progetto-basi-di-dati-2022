@@ -13,13 +13,29 @@ void do_exit(PGconn *conn)
     exit(1);
 }
 
-void checkResults ( PGresult * res , const PGconn * conn ) {
-    if ( PQresultStatus(res) != PGRES_TUPLES_OK) {
-        std::cout << " Risultati inconsistenti ! " << PQerrorMessage(conn) << std::endl ;
-            PQclear(res) ;
-            exit (1) ;
-        }
-}
+class Dbable{
+    public:
+        void checkResults ( PGresult * res , const PGconn * conn );
+        virtual ~Dbable(){};
+};
+
+class Marina: Dbable{
+public: 
+    void printFreeDocks(PGconn* conn);
+};
+
+class Table{
+    friend std::ostream& operator<<(std::ostream& os,const Table& table);
+    public:
+        Table(PGresult* res);
+        int getRowsCount() const;
+        int getColsCount() const;
+        
+    private:
+        PGresult* res;
+};
+
+std::ostream& operator<< (std::ostream& os,const Table& table);
 
 int main()
 {
@@ -37,28 +53,46 @@ int main()
     else {
         std::cout << " Connessione avvenuta correttamente \n"  ;
 
-        PGresult *res;
-        res = PQexec(conn, "SELECT * FROM libero_adesso");
+        Marina marina;
+        marina.printFreeDocks(conn);
+        PQfinish(conn);
+    }
+}
 
-        checkResults(res,conn);
+void Marina::printFreeDocks(PGconn* conn){
+    PGresult *res = PQexec(conn, "SELECT * FROM molo where occupato = false");
+    checkResults(res,conn);
 
-        int tuple = PQntuples(res);
-        int campi = PQnfields(res);
-        
-        for(int i = 0; i < campi; ++i){
-            std::cout << PQfname(res,i) << "\t\t";
+    Table t(res);
+    std::cout << t;
+}
+
+void Dbable::checkResults ( PGresult * res , const PGconn * conn ) {
+    if ( PQresultStatus(res) != PGRES_TUPLES_OK) {
+        std::cout << " Risultati inconsistenti ! " << PQerrorMessage(conn) << std::endl ;
+            PQclear(res) ;
+            exit (1) ;
+        }
+}
+
+Table::Table(PGresult* re) : res(re){}
+
+
+int Table::getRowsCount() const{return PQntuples(res);}
+int Table::getColsCount() const{return PQnfields(res);}
+
+std::ostream& operator<<(std::ostream& os,const Table& table){
+    for(int i = 0; i < table.getColsCount(); ++i){
+            std::cout << PQfname(table.res,i) << "\t\t";
         }
 
         std::cout << std::endl;
 
-        for(int i = 0; i < tuple; ++i){
-            for(int j = 0; j < campi; ++j){
-                std::cout << PQgetvalue(res,i,j) << "\t\t";
+        for(int i = 0; i < table.getRowsCount(); ++i){
+            for(int j = 0; j < table.getColsCount(); ++j){
+                std::cout << PQgetvalue(table.res,i,j) << "\t\t";
             }
             std::cout << std::endl;
         }
-
-        PQclear(res);
-        PQfinish(conn) ;
-    }
+    return os;
 }
