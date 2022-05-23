@@ -44,6 +44,7 @@ int main()
     sprintf ( conninfo , "user=%s password=%s dbname=%s host=%s port=%d" , PG_USER , PG_PASS , PG_DB , PG_HOST , PG_PORT ) ;
 
 
+
     PGconn *conn = PQconnectdb(conninfo); //Connessione al database
     if ( PQstatus ( conn ) != CONNECTION_OK ) {
         std::cout << " Errore di connessione " << PQerrorMessage(conn);
@@ -53,11 +54,43 @@ int main()
     else {
         std::cout << " Connessione avvenuta correttamente \n"  ;
 
-        Marina marina;
-        marina.printFreeDocks(conn);
-        PQfinish(conn);
+        
+        
     }
+
+
+    std::cout<< "------------------------------";
+    std::cout<< "Scegli un'opzione dal menù \n";
+    std::cout<< "1. Ormeggia Imbarcazione\n";
+    std::cout<< "2. Disormeggia Imbarcazione\n";
+    std::cout<< "------------------------------";
+
+    int i = 0;
+
+    std::cin >> i;
+
+    switch (i)
+    {
+    case(1):
+        //Fai cose relative all'inserimento barca
+        break;
+    case(2):
+        //Fai cose relative al Disormeggio della barca
+        break;    
+    default:
+        //Di che c'è stato un errore e rimostra il menù
+        break;
+    }
+
+    Marina marina;
+    marina.printFreeDocks(conn);
+
+
+    //Pulizia finale
+    PQfinish(conn);
 }
+
+//Implementazioni ---------------------------------------------
 
 void Marina::printFreeDocks(PGconn* conn){
     PGresult *res = PQexec(conn, "SELECT * FROM molo where occupato = false");
