@@ -12,13 +12,7 @@
 \subsection{Entrate di ogni anno divise in ricevute e da ricevere}
 \subsection{Quantità di moli di ogni marina}
 
-\begin{lstlisting}
-CREATE VIEW NumeroMoliMarina(Marina,Numero_moli) AS
-SELECT M.nome, COUNT(idmolo) FROM "Molo"
-JOIN "Marina" M on M.coordinate_geografiche = "Molo".marina group by M.nome;
-\end{lstlisting}
-
-\subsection{Moli disponibili in un certo periodo per una barca in un certo marina}
+\subsection{Moli disponibili in un certo periodo per determinate dimensioni di barca}
 
 \begin{lstlisting}
 SELECT idmolo,dimensioni,marina from "Molo"

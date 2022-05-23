@@ -218,7 +218,7 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati, utilizzando il camelCase, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.\\
 
-\textbf{Imbarcazione}(\underline{\textit{codiceInternazionale}}, \underline{id}, cliente, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
+\textbf{Imbarcazione}(\underline{\textit{MMSI}}, \underline{id}, cliente, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
 
 \textbf{Molo} (\underline{\textit{id}}, occupato, profonditaMinima, larghezza, lunghezza, prezzoGiorno);
 
@@ -278,6 +278,11 @@ Non viene gestito il vincolo relativo a fattura, per via di una dipendenza circo
 
 \paragraph{Molo}
 Per gestire la consistenza di \textbf{Molo} si possono utilizzare dei trigger che la controllino ad ogni variazione dei dati. Ma per ridurre la complessità si è deciso anche qui di lasciare l'onere della consistenza al programmatore. In caso di riscontrate inconsistenze sarà comunque sempre possibile fare affidamento sulle soste le quali saranno sempre consistenti.
+
+\paragraph{Sosta}
+Un altro vincolo purtroppo non gestito è la palese impossibilità di inserire un'imbarcazione in un molo più piccolo di essa. Questo vincolo non è gestibile, se non con soluzioni inutilmente complesse, in quanto al momento Postgres non permette di fare controlli su altre tabelle al momento dell'inserimento di un dato. Si può però comunque notare che questo vincolo sarà rispettato fisicamente nella realtà.
+
+\paragraph{Prenotazione} In prenotazione, per lo stesso motivo posto al paragrafo superiore non sarà possibile controllare nelle soste o nei moli se al moemento della prenotazione sono già occupati. Questo vincolo è però in buona parte rispettato dato che nelle soste si inseriscono solo date attuali o postume e non date relative al futuro, mentre in Prenotazioni si inseriscono date future. Si nota quindi come i problemi affrontati dalle due entità non collidano in molti posti, e sarà in buona parte necessario controllare solo in Prenotazione. Si lascia in ogni caso al programmatore l'onere di mantenere il vincolo.
 
 \subsubsection{Vincoli gestiti}
 
