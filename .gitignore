@@ -8,3 +8,4 @@ codice
 *.log
 *.fls
 src_relazione_tex/*.pdf
+src_cProgram/codice.exe
