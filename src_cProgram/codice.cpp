@@ -35,10 +35,10 @@ int main()
         exit (1) ;
     }
     else {
-        std::cout << " Connessione avvenuta correttamente " ;
+        std::cout << " Connessione avvenuta correttamente \n"  ;
 
         PGresult *res;
-        res = PQexec(conn, "SELECT * FROM imbarcazione");
+        res = PQexec(conn, "SELECT * FROM libero_adesso");
 
         checkResults(res,conn);
 
