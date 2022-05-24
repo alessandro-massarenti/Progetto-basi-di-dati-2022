@@ -224,6 +224,9 @@ CREATE TABLE Consumo
     primary key (cliente, allacciamento, inizio)
 );
 
+CREATE INDEX idx_molo
+ON Molo(id);
+
 -- Views
 create view molo_occupato as
 select molo, arrivo, partenza

@@ -65,6 +65,6 @@ AND mar.citta = 'Portoferraio';
 
 \section{Indicizzazione}
 
-Essendo modificata pochissime volte\footnote{Ovvero solo in caso di ristrutturazioni del marina} e letta spesso in moltissime operazioni, l'entità \textbf{Molo} è importante che venga indicizzata tramite B-Tree, in questo modo, leggerne gli attributi relativi alle dimensioni è reso decisamente più efficiente.
+Essendo modificata pochissime volte\footnote{Ovvero solo in caso di ristrutturazioni del marina} e letta spesso in moltissime operazioni, l'entità \textbf{Molo} è importante che venga indicizzata tramite B-Tree, in questo modo, entrando per mezzo dell'id sarà decisamente più efficiente leggerne attributi come ad esempio le dimensioni o lo stato di occupazione.
 
 Sono stati in secondo luogo, come precedentemente descritto al punto \ref{vincoli_gestiti} , utilizzati dei search tree per utilizzare al meglio i costraint relativi alle date ed orari di \textbf{prenotazioni} e \textbf{soste}.
