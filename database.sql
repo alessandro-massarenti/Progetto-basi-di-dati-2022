@@ -224,6 +224,7 @@ CREATE TABLE Consumo
     primary key (cliente, allacciamento, inizio)
 );
 
+--Indice
 CREATE INDEX idx_molo
 ON Molo(id);
 
