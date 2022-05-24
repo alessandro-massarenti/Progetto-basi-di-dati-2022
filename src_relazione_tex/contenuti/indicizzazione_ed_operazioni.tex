@@ -64,7 +64,7 @@ AND mar.citta = 'Portoferraio';
 \end{lstlisting}
 
 \section{Indicizzazione}
-\subsection{Identificazione delle tabelle da indicizzare}
 
-Essendo modificata pochissime volte e letta spesso ed in moltissime operazioni, la relazione \textbf{Molo} è importante che venga indicizzata tramite B-Tree, in questo modo, leggerne le dimensioni diventa particolarmente più efficiente 
-\subsection{Creazione dell'indice}
+Essendo modificata pochissime volte\footnote{Ovvero solo in caso di ristrutturazioni del marina} e letta spesso in moltissime operazioni, l'entità \textbf{Molo} è importante che venga indicizzata tramite B-Tree, in questo modo, leggerne gli attributi relativi alle dimensioni è reso decisamente più efficiente.
+
+Sono stati in secondo luogo, come precedentemente descritto al punto \ref{vincoli_gestiti} , utilizzati dei search tree per utilizzare al meglio i costraint relativi alle date ed orari di \textbf{prenotazioni} e \textbf{soste}.
