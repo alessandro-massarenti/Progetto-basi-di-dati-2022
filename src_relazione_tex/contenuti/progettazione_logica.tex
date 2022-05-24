@@ -298,3 +298,6 @@ Se un \textbf{Molo} è già occupato in un determinato periodo esso non sarà oc
 
 Come precedentemente accennato per implementare questo costraint sono state fatte delle modifiche alle chiavi di imbarcazione e di cliente, aggiungendo una chiave intera in modo da poter utilizzare i GIST\footnote{Generalized Search Tree, ovvero un albero di ricerca molto simile al B-Tree} nella versione standard di Postgres\footnote{DBMS scelto per il progetto presente}.
 
+\paragraph{fattura e consumo}
+
+In fattura e consumo viene implementato un semplice check per controllare che le date di inizio, di fine, di emissione e di pagamento siano coerenti relativamente alle loro entità
