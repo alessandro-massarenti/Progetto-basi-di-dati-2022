@@ -220,6 +220,7 @@ CREATE TABLE Consumo
     fine          int,
     quantita      decimal,
     fattura       int references Fattura (id),
+    check(inizio < fine),
     primary key (cliente, allacciamento, inizio)
 );
 
@@ -661,6 +662,20 @@ values  ('Lavanderia', 1),
         ('Officina', 3),
         ('Bar Aperto', 3);
 
---Manca consumo
+insert into public.consumo (cliente, allacciamento, inizio, fine, quantita, fattura)
+values  ('PRSFNZ86H17G224I', 'Acqua', '2022-05-23 16:12:23.622000', null, 55, null),
+        ('FRIFME76P50G224A', 'Acqua', '2022-05-23 16:12:23.622000', null, 27, null),
+        ('PRSFNZ86H17G224I', 'Elettricità', '2022-05-23 16:12:23.622000', null, 30, null),
+        ('SPSLRA03M70G224G', 'Elettricità', '2022-05-23 16:12:23.622000', null, 65, null),
+        ('BRNRNS61D64G224W', 'Elettricità', '2022-05-23 16:12:23.622000', null, 70, null),
+        ('BRNRNS61D64G224W', 'Acqua', '2022-05-23 16:12:23.622000', null, 30, null),
+        ('FRIFME76P50G224A', 'Elettricità', '2022-05-26 16:12:23.622000', null, 40, null),
+        ('GLLGNN81A54G224W', 'Acqua', '2022-05-26 16:12:23.622000', null, 20, null),
+        ('GLLGNN81A54G224W', 'Acqua', '2022-05-04 16:12:23.622000', null, 57, null),
+        ('FRIFME76P50G224A', 'Elettricità', '2022-05-23 16:12:23.622000', null, 25, null),
+        ('GLLGNN81A54G224W', 'Elettricità', '2022-05-23 16:12:23.622000', null, 50, null),
+        ('BRNRNS61D64G224W', 'Elettricità', '2022-05-26 16:12:23.622000', null, 98, null),
+        ('PRSFNZ86H17G224I', 'Acqua', '2022-05-30 16:12:23.622000', null, 30, null),
+        ('SPSLRA03M70G224G', 'Acqua', '2022-05-25 16:12:23.622000', null, 75, null);
 
 
