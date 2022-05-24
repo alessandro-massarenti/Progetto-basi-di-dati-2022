@@ -1,7 +1,7 @@
 #include <iostream>
 #include "dependencies/include/libpq-fe.h"
 
-# define PG_HOST "localhost" // oppure " localhost " o " postgresql "
+# define PG_HOST "localhost" // oppure "localhost" o "postgresql"
 # define PG_USER "amassare" // il vostro nome utente
 # define PG_DB "progetto_amassare_fzontaro" // il nome del database
 # define PG_PASS "%zNqTm:0wF4x" // la vostra password
@@ -19,7 +19,7 @@ class Dbable{
         virtual ~Dbable(){};
 };
 
-class Marina: Dbable{
+class Marina:public Dbable{
 public: 
     void printFreeDocks(PGconn* conn);
 };
@@ -40,8 +40,8 @@ std::ostream& operator<< (std::ostream& os,const Table& table);
 int main()
 {
 
-    char conninfo [250];
-    sprintf ( conninfo , "user=%s password=%s dbname=%s host=%s port=%d" , PG_USER , PG_PASS , PG_DB , PG_HOST , PG_PORT ) ;
+    char conninfo[250];
+    sprintf(conninfo , "user=%s password=%s dbname=%s host=%s port=%d" , PG_USER , PG_PASS , PG_DB , PG_HOST , PG_PORT );
 
 
 
@@ -52,10 +52,7 @@ int main()
         exit (1) ;
     }
     else {
-        std::cout << " Connessione avvenuta correttamente \n"  ;
-
-        
-        
+        std::cout << " Connessione avvenuta correttamente \n"; 
     }
 
 
@@ -100,7 +97,7 @@ void Marina::printFreeDocks(PGconn* conn){
     std::cout << t;
 }
 
-void Dbable::checkResults ( PGresult * res , const PGconn * conn ) {
+void Dbable::checkResults (PGresult * res , const PGconn * conn ) {
     if ( PQresultStatus(res) != PGRES_TUPLES_OK) {
         std::cout << " Risultati inconsistenti ! " << PQerrorMessage(conn) << std::endl ;
             PQclear(res) ;
@@ -116,16 +113,16 @@ int Table::getColsCount() const{return PQnfields(res);}
 
 std::ostream& operator<<(std::ostream& os,const Table& table){
     for(int i = 0; i < table.getColsCount(); ++i){
-            std::cout << PQfname(table.res,i) << "\t\t";
+            os << PQfname(table.res,i) << "\t\t";
         }
 
-        std::cout << std::endl;
+        os << std::endl;
 
         for(int i = 0; i < table.getRowsCount(); ++i){
             for(int j = 0; j < table.getColsCount(); ++j){
-                std::cout << PQgetvalue(table.res,i,j) << "\t\t";
+                os << PQgetvalue(table.res,i,j) << "\t\t";
             }
-            std::cout << std::endl;
+            os << std::endl;
         }
     return os;
 }
