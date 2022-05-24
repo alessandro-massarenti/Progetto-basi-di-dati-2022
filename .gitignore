@@ -9,3 +9,5 @@ codice
 *.fls
 src_relazione_tex/*.pdf
 .vscode
+src_cProgram/.idea
+src_cProgram/cmake-build-debug
