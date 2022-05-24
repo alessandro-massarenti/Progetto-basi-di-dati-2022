@@ -67,4 +67,6 @@ AND mar.citta = 'Portoferraio';
 
 Essendo modificata pochissime volte\footnote{Ovvero solo in caso di ristrutturazioni del marina} e letta spesso in moltissime operazioni, l'entità \textbf{Molo} è importante che venga indicizzata tramite B-Tree, in questo modo, entrando per mezzo dell'id sarà decisamente più efficiente leggerne attributi come ad esempio le dimensioni o lo stato di occupazione.
 
-Sono stati in secondo luogo, come precedentemente descritto al punto \ref{vincoli_gestiti} , utilizzati dei search tree per utilizzare al meglio i costraint relativi alle date ed orari di \textbf{prenotazioni} e \textbf{soste}.
+L'indice appena descritto sarebbe poi comunque utile anche in caso di utilizzo su larga scala con migliaia di moli, oppure nel caso si volesse adattare la base dati all'utilizzo con una serie marina contenenti molti moli. I risultati di efficienza aumentata sarebbero quindi ancora più evidenti e utili.
+
+Sono stati poi, come precedentemente descritto al punto \ref{vincoli_gestiti} , utilizzati dei search tree per utilizzare al meglio i costraint relativi alle date ed orari di \textbf{prenotazioni} e \textbf{soste}.
