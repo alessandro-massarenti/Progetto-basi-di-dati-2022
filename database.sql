@@ -113,8 +113,8 @@ DROP TABLE IF EXISTS Fattura;
 CREATE TABLE Fattura
 (
     id       SERIAL NOT NULL,
-    cliente  CHAR(16)  not null references Cliente (persona),
-    scadenza date      not null,
+    cliente  CHAR(16)  NOT NULL references Cliente (persona),
+    scadenza date      NOT NULL,
     pagato   timestamp,
 
     check ( pagato > scadenza ),
@@ -205,11 +205,11 @@ CREATE TABLE AperturaServizio
 DROP TABLE IF EXISTS Consumo;
 CREATE TABLE Consumo
 (
-    cliente       CHAR(16) not null references Cliente (persona),
-    allacciamento varchar not null references Allacciamento (nome),
-    inizio        timestamp not null ,
+    cliente       CHAR(16) NOT NULL references Cliente (persona),
+    allacciamento varchar NOT NULL references Allacciamento (nome),
+    inizio        timestamp NOT NULL ,
     fine          timestamp ,
-    quantita      decimal not null ,
+    quantita      decimal NOT NULL ,
     fattura       int references Fattura (id),
     check(inizio < fine),
     primary key (cliente, allacciamento, inizio)
