@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS Addetto;
 CREATE TABLE Addetto
 (
     persona         CHAR(16) NOT NULL references Persona (CF),
-    servizio        VARCHAR  NOT NULL,
+    servizio        VARCHAR  NOT NULL references Servizio(nome),
     inizioContratto DATE     NOT NULL,
     fineContratto   DATE,
 
@@ -488,10 +488,14 @@ values ('GLLGNN81A54G224W', '1981-01-14', 'Giovanna', 'Galli'),
        ('BRNLGU61S23G224M', '1961-11-23', 'Luigi', 'Bruno');
 
 insert into addetto (persona, servizio, iniziocontratto, finecontratto)
-values ('GLLGNN81A54G224W', 'Lavanderia', '2022-05-24', null),
-       ('CTTTMS64B16G224U', 'nord', '2022-05-14', null),
-       ('RZZPLP63L70G224M', 'Bacino di carenaggio', '2019-05-04', null),
-       ('MRTMRM92T65G224D', 'Officina', '2022-05-19', null);
+values  ('GLLGNN81A54G224W', 'Lavanderia', '2022-05-24', null),
+        ('RZZPLP63L70G224M', 'Bacino di carenaggio', '2019-05-04', null),
+        ('MRTMRM92T65G224D', 'Officina', '2022-05-19', null),
+        ('BRNNIO80S51G224L', 'Bar Aperto', '2022-05-01', '2024-05-25'),
+        ('GLLSNA90A05G224V', 'Falegnameria', '2022-05-06', '2024-05-02'),
+        ('VTLSSA77C53G224W', 'Gru sud', '2022-05-02', '2023-05-25'),
+        ('GRCBRM70T30G224L', 'Gru nord', '2022-05-01', '2023-05-25'),
+        ('CTTTMS64B16G224U', 'Gru nord', '2012-05-03', '2022-05-01');
 
 insert into cliente (persona, id, cittadinanza, residenza, quantitasoste, scontopersonale)
 values ('GLLGNN81A54G224W', 2, 'ita', 'Napoli', null, null),
@@ -546,50 +550,6 @@ values (1, 'Lun', '08:00:00', '12:00:00'),
        (11, 'Ven', '13:00:00', '18:00:00');
 
 insert into imbarcazione (mmsi, id, cliente, bandiera, nomecapitano, npostiletto, nome, pescaggio, larghezza, loa)
-values ('8815920', 11, 'GLLGNN81A54G224W', 'ita', 'Marco', 6, 'ZENIT', 6, 11, 36),
-       ('8814093', 1, 'SPSLRA03M70G224G', 'ita', 'Mirko', 14, 'CELESTINA', 6, 8, 42),
-       ('9017575', 2, 'BRNRNS61D64G224W', 'ita', 'Luca', 18, 'NAUTILUS', 7, 9, 47),
-       ('5337771', 30, 'PRSFNZ86H17G224I', 'ger', 'Nunzio', 9, 'STADT KIEL', 5, 7, 28),
-       ('9855288', 31, 'BRNRNS61D64G224W', 'spa', 'Mirko', 2, 'ECO TERRA', 6, 9, 28),
-       ('9832236', 32, 'FRIFME76P50G224A', 'spa', 'Luca', 4, 'BENCHI EXPRESS', 5, 9, 26),
-       ('9809631', 33, 'PRSFNZ86H17G224I', 'spa', 'Sara', 2, 'ESPALMADOR JET', 6, 9, 28),
-       ('9264489', 34, 'FRIMRV60S67G224G', 'spa', 'Filippo', 5, 'AIGUES DE FORMENTERA', 5, 9, 27),
-       ('9844239', 35, 'BTTDPE87L24G224C', 'spa', 'Nicola', 6, 'ECO LUX', 6, 9, 28),
-       ('9866897', 37, 'BTTDPE87L24G224C', 'fra', 'Luca', 2, 'MERCATOR', 4, 8, 19),
-       ('9099391', 38, 'RSSCTN98M28G224B', 'fra', 'Sara', 3, 'BROCELIANDE', 5, 8, 18),
-       ('8229212', 39, 'MTATSE95R28G224U', 'fra', 'Filippo', 2, 'LE VICOMTE', 4, 7, 16),
-       ('8215510', 44, 'RSSCTN98M28G224B', 'nor', 'Nicola', 2, 'NCTB 7', 5, 9, 14),
-       ('9921207', 45, 'MTATSE95R28G224U', 'nor', 'Nunzio', 2, 'FOX INSPECTOR', 5, 8, 14),
-       ('7945106', 6, 'SPSLRA03M70G224G', 'ita', 'Nunzio', 8, 'SEMPRE AVANTI T II', 5, 3.5, 10),
-       ('5217555', 3, 'FRIFME76P50G224A', 'ita', 'Sara', 22, 'ALA', 8, 3, 10),
-       ('8745917', 10, 'GLLGNN81A54G224W', 'ger', 'Luca', 8, 'HORIZONT', 1, 1.5, 5),
-       ('7945144', 9, 'PRSFNZ86H17G224I', 'ita', 'Mirko', 7, 'ERIDANO', 2, 1.6, 5),
-       ('9112026', 4, 'PRSFNZ86H17G224I', 'ita', 'Filippo', 14, 'EUROFAST', 2.4, 2, 8),
-       ('8836340', 7, 'BRNRNS61D64G224W', 'ita', 'Gaetano', 9, 'GIORGIONE', 2, 1.7, 6),
-       ('9212553', 8, 'FRIFME76P50G224A', 'ita', 'Marco', 10, 'MAZZORBO', 1.3, 1, 5),
-       ('8877124', 5, 'GLLGNN81A54G224W', 'ita', 'Nicola', 9, 'AZZURRA SECONDA', 2.5, 2, 9),
-       ('9180322', 43, 'BTTDPE87L24G224C', 'nor', 'Filippo', 4, 'BERGEN KREDS', 3.1, 3, 12),
-       ('9831581', 40, 'MRTSVN62M13G224Z', 'fra', 'Nicola', 2, 'LA TRINITE', 2, 3, 13),
-       ('8745890', 29, 'FRIFME76P50G224A', 'ger', 'Nicola', 8, 'DANA', 4, 1.3, 7),
-       ('8745943', 28, 'BRNRNS61D64G224W', 'ger', 'Filippo', 6, 'NORDLICHT', 3.5, 3.5, 11),
-       ('9850991', 36, 'FRIMRV60S67G224G', 'fra', 'Mirko', 4, 'TIGERS III', 4, 1.9, 7),
-       ('9137765', 42, 'FRIMRV60S67G224G', 'nor', 'Sara', 2, 'VOLLEROSA', 2, 2.5, 12),
-       ('8745929', 27, 'SPSLRA03M70G224G', 'ger', 'Sara', 7, 'INSEL RUEGEN', 3.5, 1.8, 6.5),
-       ('9868041', 41, 'MRTSVN62M13G224Z', 'nor', 'Luca', 3, 'FROY STADT', 4, 4, 15.5);
-
-insert into fattura (id, cliente, scadenza, pagato)
-values (11, 'SPSLRA03M70G224G', '2022-07-02', '2022-07-24 15:32:26.000000'),
-       (1, 'RSSCTN98M28G224B', '2022-07-02', null),
-       (2, 'PRSFNZ86H17G224I', '2022-05-25', null),
-       (3, 'MTATSE95R28G224U', '2022-05-26', null),
-       (4, 'MRTSVN62M13G224Z', '2022-05-25', null),
-       (5, 'GLLGNN81A54G224W', '2022-07-02', null),
-       (6, 'FRIMRV60S67G224G', '2022-05-26', null),
-       (7, 'FRIFME76P50G224A', '2022-07-02', '2022-07-24 18:26:52.000000'),
-       (8, 'BTTDPE87L24G224C', '2022-05-25', null),
-       (9, 'BRNRNS61D64G224W', '2022-05-26', null);
-
-insert into imbarcazione (mmsi, id, cliente, bandiera, nomecapitano, npostiletto, nome, pescaggio, larghezza, loa)
 values ('8815920  ', 11, 'GLLGNN81A54G224W', 'ita', 'Marco', 6, 'ZENIT', 6, 11, 36),
        ('8814093  ', 1, 'SPSLRA03M70G224G', 'ita', 'Mirko', 14, 'CELESTINA', 6, 8, 42),
        ('9017575  ', 2, 'BRNRNS61D64G224W', 'ita', 'Luca', 18, 'NAUTILUS', 7, 9, 47),
@@ -641,6 +601,51 @@ values ('8815920  ', 11, 'GLLGNN81A54G224W', 'ita', 'Marco', 6, 'ZENIT', 6, 11, 
        ('5618181  ', 62, 'SLVRST98P02G224K', 'pan', 'Oreste', 3, 'Supreme', 4, 5, 28),
        ('5189111  ', 63, 'BNDRMO78P17G224H', 'cia', 'Romeo', 2, 'Salina', 5, 2, 7),
        ('1181855  ', 64, 'GRCLRS80T10G224B', 'cia', 'Loris', 4, 'Meloria', 2.3, 1.8, 8);
+
+insert into fattura (id, cliente, scadenza, pagato)
+values (11, 'SPSLRA03M70G224G', '2022-07-02', '2022-07-24 15:32:26.000000'),
+       (1, 'RSSCTN98M28G224B', '2022-07-02', null),
+       (2, 'PRSFNZ86H17G224I', '2022-05-25', null),
+       (3, 'MTATSE95R28G224U', '2022-05-26', null),
+       (4, 'MRTSVN62M13G224Z', '2022-05-25', null),
+       (5, 'GLLGNN81A54G224W', '2022-07-02', null),
+       (6, 'FRIMRV60S67G224G', '2022-05-26', null),
+       (7, 'FRIFME76P50G224A', '2022-07-02', '2022-07-24 18:26:52.000000'),
+       (8, 'BTTDPE87L24G224C', '2022-05-25', null),
+       (9, 'BRNRNS61D64G224W', '2022-05-26', null);
+
+insert into sosta (imbarcazione, molo, arrivo, id, partenza, fattura)
+values  (1, 122, '2022-05-23 16:24:29.715000 +00:00', 4, 'infinity', 11),
+        (27, 8, '2022-05-23 17:58:28.539000 +00:00', 20, 'infinity', 11),
+        (38, 48, '2022-05-23 17:54:10.384000 +00:00', 18, 'infinity', 1),
+        (44, 46, '2022-05-23 17:53:28.090000 +00:00', 16, 'infinity', 1),
+        (4, 4, '2022-05-23 17:51:00.425000 +00:00', 10, 'infinity', 2),
+        (30, 53, '2022-05-23 18:04:41.176000 +00:00', 33, 'infinity', 2),
+        (9, 2, '2022-05-23 17:49:25.267000 +00:00', 8, 'infinity', 2),
+        (33, 55, '2022-05-23 18:05:27.551000 +00:00', 35, 'infinity', 2),
+        (39, 47, '2022-05-23 17:53:45.558000 +00:00', 17, 'infinity', 3),
+        (41, 50, '2022-05-23 18:03:53.323000 +00:00', 28, 'infinity', 4),
+        (11, 69, '2022-05-23 16:12:23.622000 +00:00', 3, 'infinity', 5),
+        (5, 5, '2022-05-23 17:51:43.102000 +00:00', 11, 'infinity', 5),
+        (10, 1, '2022-05-23 17:26:02.266000 +00:00', 7, 'infinity', 5),
+        (42, 12, '2022-05-23 18:01:40.055000 +00:00', 24, 'infinity', 6),
+        (36, 10, '2022-05-23 18:01:07.745000 +00:00', 22, 'infinity', 6),
+        (8, 23, '2022-05-23 17:25:31.346000 +00:00', 6, 'infinity', 7),
+        (3, 6, '2022-05-23 17:52:03.545000 +00:00', 12, '2022-05-24 17:20:37.084000 +00:00', 7),
+        (32, 51, '2022-05-23 18:04:10.394000 +00:00', 29, 'infinity', 7),
+        (29, 9, '2022-05-23 17:58:46.047000 +00:00', 21, 'infinity', 7),
+        (35, 56, '2022-05-23 18:05:43.786000 +00:00', 36, 'infinity', 8),
+        (37, 49, '2022-05-23 17:54:49.793000 +00:00', 19, 'infinity', 8),
+        (43, 13, '2022-05-23 18:02:07.340000 +00:00', 25, 'infinity', 8),
+        (28, 11, '2022-05-23 18:01:20.817000 +00:00', 23, 'infinity', 9),
+        (31, 54, '2022-05-23 18:05:05.651000 +00:00', 34, 'infinity', 9),
+        (7, 3, '2022-05-23 17:50:30.986000 +00:00', 9, 'infinity', 9),
+        (2, 123, '2022-02-23 17:20:26.530000 +00:00', 5, '2022-03-23 17:20:37.084000 +00:00', 9),
+        (6, 7, '2022-05-23 17:52:38.822000 +00:00', 13, '2022-05-25 10:42:59.648000 +00:00', 11),
+        (40, 41, '2022-05-23 18:03:32.148000 +00:00', 27, '2022-05-25 10:42:59.648000 +00:00', 4),
+        (45, 45, '2022-05-23 17:52:58.439000 +00:00', 15, '2022-05-25 10:42:59.648000 +00:00', 3),
+        (34, 52, '2022-05-23 18:04:22.121000 +00:00', 30, '2022-05-25 10:42:59.648000 +00:00', 6),
+        (3, 14, '2022-05-24 17:37:06.500000 +00:00', 37, '2022-05-28 17:38:06.500000 +00:00', 7);
 
 insert into prenotazione (cliente, molo, prevarrivo, prevpartenza, sosta)
 values (33, 14, '2022-05-24 17:37:06.500000 +00:00', '2022-05-27 17:38:06.500000 +00:00', 37),
@@ -716,5 +721,18 @@ values ('PRSFNZ86H17G224I', 'Acqua', '2022-05-23 16:12:23.622000', null, 55, nul
        ('BRNRNS61D64G224W', 'Elettricità', '2022-05-26 16:12:23.622000', null, 98, null),
        ('PRSFNZ86H17G224I', 'Acqua', '2022-05-30 16:12:23.622000', null, 30, null),
        ('SPSLRA03M70G224G', 'Acqua', '2022-05-25 16:12:23.622000', null, 75, null);
+
+-- checkup finale delle sequenze
+SELECT setval('cliente_id_seq', (select max(id) as max from cliente), true);
+
+SELECT setval('fattura_id_seq', (select max(id) as max from fattura), true);
+
+SELECT setval('imbarcazione_id_seq', (select max(id) as max from imbarcazione), true);
+
+SELECT setval('molo_id_seq', (select max(id) as max from molo), true);
+
+SELECT setval('periodoapertura_id_seq', (select max(id) as max from periodoapertura), true);
+
+SELECT setval('sosta_id_seq', (select max(id) as max from sosta), true);
 
 
