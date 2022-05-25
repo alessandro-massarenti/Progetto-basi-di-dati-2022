@@ -5,12 +5,12 @@
 DROP TABLE IF EXISTS Molo;
 CREATE TABLE Molo
 (
-    id               SERIAL,
-    occupato         BOOLEAN,
-    profonditaMinima DOUBLE PRECISION,
-    larghezza        DOUBLE PRECISION,
-    lunghezza        DOUBLE PRECISION,
-    prezzoGiorno     DECIMAL,
+    id               SERIAL NOT NULL,
+    occupato         BOOLEAN NOT NULL,
+    profonditaMinima DOUBLE PRECISION NOT NULL,
+    larghezza        DOUBLE PRECISION NOT NULL,
+    lunghezza        DOUBLE PRECISION NOT NULL,
+    prezzoGiorno     DECIMAL NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE Molo
 DROP TABLE IF EXISTS Servizio;
 CREATE TABLE Servizio
 (
-    nome VARCHAR,
+    nome VARCHAR NOT NULL,
     PRIMARY KEY (nome)
 );
 
@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS Cliente;
 CREATE TABLE Cliente
 (
     persona         CHAR(16) NOT NULL references Persona (CF),
-    id              SERIAL,
+    id              SERIAL NOT NULL,
     cittadinanza    VARCHAR  NOT NULL,
     residenza       VARCHAR  NOT NULL,
     quantitaSoste   INT,
@@ -94,12 +94,12 @@ DROP TABLE IF EXISTS Imbarcazione;
 CREATE TABLE Imbarcazione
 (
     MMSI         CHAR(9)          NOT NULL,
-    id           SERIAL,
+    id           SERIAL NOT NULL,
     cliente      CHAR(16) references Cliente (persona),
     bandiera     VARCHAR          NOT NULL,
     nomeCapitano VARCHAR          NOT NULL,
     nPostiLetto  INT              NOT NULL,
-    nome         VARCHAR,
+    nome         VARCHAR NOT NULL,
     pescaggio    DOUBLE PRECISION NOT NULL,
     larghezza    DOUBLE PRECISION NOT NULL,
     LOA          DOUBLE PRECISION NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE Imbarcazione
 DROP TABLE IF EXISTS Fattura;
 CREATE TABLE Fattura
 (
-    id       SERIAL,
+    id       SERIAL NOT NULL,
     cliente  CHAR(16)  not null references Cliente (persona),
     scadenza date      not null,
     pagato   timestamp,
@@ -132,7 +132,7 @@ CREATE TABLE Sosta
     imbarcazione int         NOT NULL references Imbarcazione (id),
     molo         int         NOT NULL references Molo (id),
     arrivo       TIMESTAMPTZ NOT NULL,
-    id           SERIAL,
+    id           SERIAL NOT NULL,
     partenza     TIMESTAMPTZ NOT NULL default 'infinity',
     fattura      INT references Fattura (id),
     CHECK ( arrivo < partenza ),
@@ -205,11 +205,11 @@ CREATE TABLE AperturaServizio
 DROP TABLE IF EXISTS Consumo;
 CREATE TABLE Consumo
 (
-    cliente       CHAR(16) references Cliente (persona),
-    allacciamento varchar references Allacciamento (nome),
-    inizio        timestamp,
-    fine          int,
-    quantita      decimal,
+    cliente       CHAR(16) not null references Cliente (persona),
+    allacciamento varchar not null references Allacciamento (nome),
+    inizio        timestamp not null ,
+    fine          timestamp ,
+    quantita      decimal not null ,
     fattura       int references Fattura (id),
     check(inizio < fine),
     primary key (cliente, allacciamento, inizio)
