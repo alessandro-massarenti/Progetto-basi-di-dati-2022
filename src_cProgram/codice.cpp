@@ -23,12 +23,103 @@ using std::endl;
 using std::string;
 using std::cin;
 
-PGconn* connect(const char* host, const char* user, const char* db, const char* pass, const char* port) {
+
+class ResultTable {
+private:
+    PGresult *res;
+    int righe,colonne;
+public:
+    explicit ResultTable(PGresult *r) : res(r),righe(PQntuples(res)), colonne(PQnfields(res)) {}
+    friend std::ostream &operator<<(std::ostream &os, const ResultTable &t);
+    int getRighe() const{return righe;}
+    int getColonne() const{return colonne;}
+private:
+    static void printLine(int campi, const size_t *maxChar) {
+        for (int j = 0; j < campi; ++j) {
+            cout << '+';
+            for (int k = 0; k < maxChar[j] + 2; ++k)
+                cout << '-';
+        }
+        cout << "+\n";
+    }
+    static void traduciBool(string & val) {
+        if (val == "t") {
+            val = "si";
+            return;
+        }
+        if (val == "f") {
+            val = "no";
+            return;
+        }
+    }
+};
+
+std::ostream &operator<<(std::ostream &os, const ResultTable &t) {
+    // Preparazione dati
+
+    string v[t.getRighe() + 1][t.getColonne()];
+
+    for (int i = 0; i < t.getColonne(); ++i) {
+        string s = PQfname(t.res, i);
+        v[0][i] = s;
+    }
+    //Vengono tradotti i bool
+    for (int i = 0; i < t.getRighe(); ++i)
+        for (int j = 0; j < t.getColonne(); ++j) {
+            v[i+1][j] = PQgetvalue(t.res, i, j);
+            ResultTable::traduciBool(v[i+1][j]);
+        }
+
+    size_t maxChar[t.getColonne()];
+    for (int i = 0; i < t.getColonne(); ++i) {
+        maxChar[i] = 0;
+        for (int j = 0; j < t.getRighe() + 1; ++j) {
+            maxChar[i] = v[j][i].size() > maxChar[i] ? v[j][i].size() : maxChar[i];
+        }
+        cout << maxChar[i] << endl;
+    }
+
+    // Stampa effettiva delle tuple
+    ResultTable::printLine(t.getColonne(), maxChar);
+
+    //Stampa intestazione
+    for (int j = 0; j < t.getColonne(); ++j) {
+        cout << "| ";
+        cout << v[0][j];
+        for (int k = 0; k < maxChar[j] - v[0][j].size() + 1; ++k)
+            cout << ' ';
+        if (j == t.getColonne() - 1)
+            cout << "|";
+    }
+    cout << endl;
+
+
+    ResultTable::printLine(t.getColonne(), maxChar);
+
+    for (int i = 1; i < t.getRighe() + 1; ++i) {
+        for (int j = 0; j < t.getColonne(); ++j) {
+            cout << "| ";
+
+            cout << v[i][j];
+
+            for (int k = 0; k < (maxChar[j] - v[i][j].size()) + 1; ++k)
+                cout << ' ';
+        }
+        cout << "|";
+        cout << endl;
+    }
+
+    ResultTable::printLine(t.getColonne(), maxChar);
+    return os;
+}
+
+
+PGconn *connect(const char *host, const char *user, const char *db, const char *pass, const char *port) {
     char conninfo[256];
     sprintf(conninfo, "user=%s password=%s dbname=\'%s\' hostaddr=%s port=%s",
             user, pass, db, host, port);
 
-    PGconn* conn = PQconnectdb(conninfo);
+    PGconn *conn = PQconnectdb(conninfo);
 
     if (PQstatus(conn) != CONNECTION_OK) {
         std::cerr << "Errore di connessione" << endl << PQerrorMessage(conn);
@@ -38,103 +129,21 @@ PGconn* connect(const char* host, const char* user, const char* db, const char* 
 
     return conn;
 }
-PGresult* execute(PGconn* conn, const char* query) {
-    PGresult* res = PQexec(conn, query);
+
+PGresult *execute(PGconn *conn, const char *query) {
+    PGresult *res = PQexec(conn, query);
     if (PQresultStatus(res) != PGRES_TUPLES_OK) {
         cout << " Risultati inconsistenti!" << PQerrorMessage(conn) << endl;
         PQclear(res);
         exit(1);
     }
-
     return res;
 }
 
-void printLine(int campi, int* maxChar) {
-    for (int j = 0; j < campi; ++j) {
-        cout << '+';
-        for (int k = 0; k < maxChar[j] + 2; ++k)
-            cout << '-';
-    }
-    cout << "+\n";
-}
-void printQuery(PGresult* res) {
-    // Preparazione dati
-    const int tuple = PQntuples(res), campi = PQnfields(res);
-    string v[tuple + 1][campi];
+int main(int argc, char **argv) {
+    PGconn *conn = connect(PG_HOST, PG_USER, PG_DB, PG_PASS, PG_PORT);
 
-    for (int i = 0; i < campi; ++i) {
-        string s = PQfname(res, i);
-        v[0][i] = s;
-    }
-    for (int i = 0; i < tuple; ++i)
-        for (int j = 0; j < campi; ++j) {
-            if (string(PQgetvalue(res, i, j)) == "t" || string(PQgetvalue(res, i, j)) == "f")
-                if (string(PQgetvalue(res, i, j)) == "t")
-                    v[i + 1][j] = "si";
-                else
-                    v[i + 1][j] = "no";
-            else
-                v[i + 1][j] = PQgetvalue(res, i, j);
-        }
-
-    int maxChar[campi];
-    for (int i = 0; i < campi; ++i)
-        maxChar[i] = 0;
-
-    for (int i = 0; i < campi; ++i) {
-        for (int j = 0; j < tuple + 1; ++j) {
-            int size = v[j][i].size();
-            maxChar[i] = size > maxChar[i] ? size : maxChar[i];
-        }
-    }
-
-    // Stampa effettiva delle tuple
-    printLine(campi, maxChar);
-    for (int j = 0; j < campi; ++j) {
-        cout << "| ";
-        cout << v[0][j];
-        for (int k = 0; k < maxChar[j] - v[0][j].size() + 1; ++k)
-            cout << ' ';
-        if (j == campi - 1)
-            cout << "|";
-    }
-    cout << endl;
-    printLine(campi, maxChar);
-
-    for (int i = 1; i < tuple + 1; ++i) {
-        for (int j = 0; j < campi; ++j) {
-            cout << "| ";
-            cout << v[i][j];
-            for (int k = 0; k < maxChar[j] - v[i][j].size() + 1; ++k)
-                cout << ' ';
-            if (j == campi - 1)
-                cout << "|";
-        }
-        cout << endl;
-    }
-    printLine(campi, maxChar);
-}
-
-char* chooseParam(PGconn* conn, const char* query, const char* table) {
-    PGresult* res = execute(conn, query);
-    printQuery(res);
-
-    const int tuple = PQntuples(res), campi = PQnfields(res);
-    int val;
-    cout << "Inserisci il numero del " << table << " scelto: ";
-    cin >> val;
-    while (val <= 0 || val > tuple) {
-        cout << "Valore non valido\n";
-        cout << "Inserisci il numero del " << table << " scelto: ";
-        cin >> val;
-    }
-    return PQgetvalue(res, val - 1, 0);
-}
-
-int main(int argc, char** argv) {
-    PGconn* conn = connect(PG_HOST, PG_USER, PG_DB, PG_PASS, PG_PORT);
-
-    const char* query[6] = {QUERY_1,
+    const char *query[6] = {QUERY_1,
                             QUERY_2,
                             QUERY_3,
                             QUERY_4,
@@ -155,7 +164,7 @@ int main(int argc, char** argv) {
         int q = 0;
         cin >> q;
         while (q < 0 || q > 6) {
-            cout << "Le query vanno da 1 a 6...\n";
+            cout << "Le query vanno da 1 a 5...\n";
             cout << "Query da eseguire (0 per uscire): ";
             cin >> q;
         }
@@ -164,9 +173,11 @@ int main(int argc, char** argv) {
 
         int i = 0;
         switch (q) {
-            default:
-                printQuery(execute(conn, query[q - 1]));
+            default:{
+                ResultTable rt(execute(conn, query[q - 1]));
+                cout << rt;
                 break;
+            }
         }
         string a = "";
         cout << "Press any key and press enter..";
