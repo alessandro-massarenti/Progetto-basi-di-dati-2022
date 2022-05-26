@@ -101,10 +101,13 @@ spese as(
     join allacciamento a2 on consumo.allacciamento = a2.nome
 )
 
-select distinct id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
+select distinct id, scadenza, pagato, nome, cognome,
+    intestazione_fattura.cliente, tipo, prezzo
 from spese, intestazione_fattura
 where spese.fattura = intestazione_fattura.id;
 \end{lstlisting}
+
+\includegraphics[width = \linewidth]{img/result_fattura.png}
 
 \section{Indicizzazione}
 
