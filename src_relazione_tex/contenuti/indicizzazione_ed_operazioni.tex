@@ -72,20 +72,20 @@ limit 5;
 \subsection{Stampa fattura di un cliente}
 
 \begin{lstlisting}
--- stampa la fattura di un cliente
+ -- stampa la fattura di un cliente
 
 with intestazione_fattura as(
-select fattura.*, p.nome, p.cognome from fattura
-join cliente c on c.persona = fattura.cliente
-join persona p on c.persona = p.cf
-where cliente = 'GLLGNN81A54G224W'),
+    select fattura.*, p.nome, p.cognome from fattura
+    join cliente c on c.persona = fattura.cliente
+    join persona p on c.persona = p.cf
+    where cliente = 'GLLGNN81A54G224W'),
 
 spese as(
     select sosta.fattura,
-           i.cliente,
-           'sosta' as tipo,
-           ROUND((tstzrange_subdiff(sosta.partenza,sosta.arrivo)
-           /86400.0 * m.prezzogiorno)::numeric,2)  as prezzo
+            i.cliente,
+            'sosta' as tipo,
+            ROUND((tstzrange_subdiff(sosta.partenza,sosta.arrivo)
+            /86400.0 * m.prezzogiorno)::numeric,2)  as prezzo
     from sosta
     join imbarcazione i on i.id = sosta.imbarcazione
     join molo m on sosta.molo = m.id
@@ -93,20 +93,15 @@ spese as(
 
     union all
     select consumo.fattura,
-           consumo.cliente,
-           'consumo' as tipo,
-           ROUND((consumo.quantita * a2.prezzounitario)::numeric,2) as prezzo
+            consumo.cliente,
+            'consumo' as tipo,
+            ROUND((consumo.quantita * a2.prezzounitario)::numeric,2) as prezzo
     from consumo
     join fornitura f on consumo.allacciamento = f.allacciamento
     join allacciamento a2 on consumo.allacciamento = a2.nome
 )
 
-select id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
-from spese, intestazione_fattura
-where spese.fattura = intestazione_fattura.id;
-)
-
-select id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
+select distinct id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
 from spese, intestazione_fattura
 where spese.fattura = intestazione_fattura.id;
 \end{lstlisting}

@@ -25,7 +25,7 @@ spese as(
     join allacciamento a2 on consumo.allacciamento = a2.nome
 )
 
-select id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
+select distinct id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
 from spese, intestazione_fattura
 where spese.fattura = intestazione_fattura.id;
 -----------------------------------------------------
