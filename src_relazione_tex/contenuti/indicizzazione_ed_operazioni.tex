@@ -8,59 +8,107 @@
 
 \section{Query}
 
-\subsection{Classifica clienti più spendenti}
-\subsection{Entrate di ogni anno divise in ricevute e da ricevere}
-\subsection{Quantità di moli di ogni marina}
-
-\subsection{Moli disponibili in un certo periodo per determinate dimensioni di barca}
-
+\subsection{Consumi del marina nel mese indicato}
 \begin{lstlisting}
-SELECT idmolo,dimensioni,marina from "Molo"
---SELECT count(idmolo) from "Molo"
-JOIN "Dimensioni" d on d.id_dimensioni = "Molo".dimensioni
+--Calcola consumi del marina nel mese indicato
 
-WHERE idmolo not in (
-SELECT molo FROM "sosta"
-WHERE data_arrivo<='2022-01-20 22:16:37.000000'
-AND '2022-12-26 8:16:37.000000' <= data_partenza)
+select allacciamento,
+       sum(quantita) as quantita_consumata,
+       a.unitamisura, a.prezzounitario,
+       sum(quantita) * a.prezzounitario as totale_bollette
+from consumo
+join allacciamento a on consumo.allacciamento = a.nome
+where inizio between '05-01-2020' and '05-31-2025'
+group by allacciamento, unitamisura, prezzounitario;
 
-AND idmolo not in (
-SELECT molo FROM "Prenotazione"
-WHERE previsione_arrivo<='2022-01-20 22:16:37.000000'
-AND '2022-12-26 8:16:37.000000' <= previsione_partenza)
-
-AND lunghezza >= 9 and larghezza>= 3 and pescaggio >= 3
-AND marina = '{45.47186543638522000,12.44861260105955800}'
-ORDER BY dimensioni ASC;
-LIMIT 10;
 \end{lstlisting}
 
-\subsection{Tutte le soste fatte dall'imbarcazione "Alexandra"}
-
-Tutte le soste effettuate dall'imbarcazione "Alexandra" in uno dei marina ed in che date è arrivata in quel marina
+\subsection{Clienti con più di 2 di prenotazioni che iniziano nel quinquiennio 2020->2025}
 
 \begin{lstlisting}
-SELECT Mar.nome, I.nome, sosta.data_arrivo  FROM sosta
-JOIN "Imbarcazione"  I on sosta.imbarcazione = I.codice_internazionale
-JOIN "Molo" M on M.idmolo = sosta.molo
-JOIN "Marina" Mar on M.marina = Mar.coordinate_geografiche
+--Ritorna i clienti con più di 2 di prenotazioni che iniziano nel quinquiennio 2020->2025
+--Questa query è utile in ottica di creazione di uno sconto per chi fa molte prenotazioni
 
-WHERE I.nome = 'Alexandra';
+select count(cliente) as conteggio, p.nome, p.cognome, c.persona
+from prenotazione
+join cliente c on prenotazione.cliente = c.id
+join persona p on c.persona = p.cf
+where prevarrivo between '01-01-2020' and '12-31-2025'
+group by c.persona,p.nome, p.cognome
+having count(cliente) >= 2
+order by conteggio desc;
 \end{lstlisting}
 
-\subsection{Clienti con barca norvegese che hanno sostato a Portoferraio nel 2022}
+\subsection{Conteggio soste di ogni imbarcazione}
 
 \begin{lstlisting}
-SELECT DISTINCT P.nome,P.cognome FROM sosta
-JOIN "Imbarcazione" I on I.codice_internazionale = sosta.imbarcazione
-JOIN "Molo" M on M.idmolo = sosta.molo
-JOIN "Marina" mar on M.marina = mar.coordinate_geografiche
-JOIN "Cliente" C on I.proprietario = C.persona
-JOIN "Persona" P on C.persona = P.cf
-WHERE data_arrivo>= '2022-01-01 00:00:00.000000'
-AND data_partenza <= '2022-12-31 00:00:00.000000'
-AND I.bandiera = 'Norvegia'
-AND mar.citta = 'Portoferraio';
+--Conteggia le soste delle imbarcazioni
+
+select count(imbarcazione) as qt_soste, imbarcazione.nome, mmsi,p.nome as nome_proprietario,p.cognome as cognome_proprietario
+from sosta
+join imbarcazione on sosta.imbarcazione = imbarcazione.id
+join cliente c on imbarcazione.cliente = c.persona
+join persona p on c.persona = p.cf
+group by sosta.imbarcazione, imbarcazione.nome, mmsi,p.nome,p.cognome
+order by qt_soste desc;
+\end{lstlisting}
+
+\subsection{Controllo dei posti disponibili per una certa imbarcazione}
+\begin{lstlisting}
+--controllo dei posti disponibili per una certa imbarcazione
+
+select distinct molo.id as id_molo,molo.prezzogiorno,
+    molo.profonditaminima,molo.larghezza,molo.lunghezza, molo.occupato
+from molo,imbarcazione
+where occupato=false
+and molo.larghezza > imbarcazione.larghezza
+and molo.profonditaminima > imbarcazione.pescaggio
+and molo.lunghezza > imbarcazione.loa
+and imbarcazione.mmsi = '8836340'
+order by prezzogiorno
+limit 5;
+\end{lstlisting}
+
+\subsection{Stampa fattura di un cliente}
+
+\begin{lstlisting}
+-- stampa la fattura di un cliente
+
+with intestazione_fattura as(
+select fattura.*, p.nome, p.cognome from fattura
+join cliente c on c.persona = fattura.cliente
+join persona p on c.persona = p.cf
+where cliente = 'GLLGNN81A54G224W'),
+
+spese as(
+    select sosta.fattura,
+           i.cliente,
+           'sosta' as tipo,
+           ROUND((tstzrange_subdiff(sosta.partenza,sosta.arrivo)
+           /86400.0 * m.prezzogiorno)::numeric,2)  as prezzo
+    from sosta
+    join imbarcazione i on i.id = sosta.imbarcazione
+    join molo m on sosta.molo = m.id
+    where partenza != 'infinity'
+
+    union all
+    select consumo.fattura,
+           consumo.cliente,
+           'consumo' as tipo,
+           ROUND((consumo.quantita * a2.prezzounitario)::numeric,2) as prezzo
+    from consumo
+    join fornitura f on consumo.allacciamento = f.allacciamento
+    join allacciamento a2 on consumo.allacciamento = a2.nome
+)
+
+select id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
+from spese, intestazione_fattura
+where spese.fattura = intestazione_fattura.id;
+)
+
+select id, scadenza, pagato, nome, cognome, intestazione_fattura.cliente, tipo, prezzo
+from spese, intestazione_fattura
+where spese.fattura = intestazione_fattura.id;
 \end{lstlisting}
 
 \section{Indicizzazione}
