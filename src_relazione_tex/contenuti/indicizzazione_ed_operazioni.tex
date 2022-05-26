@@ -23,6 +23,8 @@ group by allacciamento, unitamisura, prezzounitario;
 
 \end{lstlisting}
 
+\includegraphics[width=\linewidth]{img/result_consumi.png}
+
 \subsection{Clienti con più di 2 di prenotazioni che iniziano nel quinquiennio 2020->2025}
 
 \begin{lstlisting}
@@ -39,6 +41,8 @@ having count(cliente) >= 2
 order by conteggio desc;
 \end{lstlisting}
 
+\includegraphics[width=\linewidth]{img/result_2prenotazioni.png}
+
 \subsection{Conteggio soste di ogni imbarcazione}
 
 \begin{lstlisting}
@@ -52,6 +56,10 @@ join persona p on c.persona = p.cf
 group by sosta.imbarcazione, imbarcazione.nome, mmsi,p.nome,p.cognome
 order by qt_soste desc;
 \end{lstlisting}
+
+\includegraphics[width=\linewidth]{img/result_sosteimb.png}
+
+Il risultato contiene tante righe quante le imbarcazioni, è stato quindi troncato per limitare il consumo di spazio.
 
 \subsection{Controllo dei posti disponibili per una certa imbarcazione}
 \begin{lstlisting}
@@ -68,6 +76,8 @@ and imbarcazione.mmsi = '8836340'
 order by prezzogiorno
 limit 5;
 \end{lstlisting}
+
+\includegraphics[width=\linewidth]{img/result_molidisponibili.png}
 
 \subsection{Stampa fattura di un cliente}
 
