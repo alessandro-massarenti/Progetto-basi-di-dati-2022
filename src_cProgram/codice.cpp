@@ -49,6 +49,25 @@ int main(int argc, char **argv) {
                             QUERY_3
     };
 
+    //Esecuzione prepared statement 4
+    PGresult*  res = PQprepare(conn,"q1",QUERY_4,1,0);
+    if (PQresultStatus(res) != 1)
+    {
+        std::cout << "problemi nella preparazione!" << PQerrorMessage(conn) << std::endl;
+        PQclear(res);
+        res = 0;
+        exit(1);
+    }
+
+    res = PQprepare(conn,"q2",QUERY_5,1,0);
+    if (PQresultStatus(res) != 1)
+    {
+        std::cout << "problemi nella preparazione!" << PQerrorMessage(conn) << std::endl;
+        PQclear(res);
+        res = 0;
+        exit(1);
+    }
+
     int q = -1;
     while (q != 0) {
         printMenu();
@@ -59,15 +78,6 @@ int main(int argc, char **argv) {
         }if(q!=0){
             switch (q) {
                 case(4):{
-                    //Esecuzione prepared statement 4
-                    PGresult*  res = PQprepare(conn,"q1",QUERY_4,q,0);
-                    if (PQresultStatus(res) != 1)
-                    {
-                        std::cout << "problemi nella preparazione!" << PQerrorMessage(conn) << std::endl;
-                        PQclear(res);
-                        res = 0;
-                        exit(1);
-                    }
 
                     std::cout << "inserisci l'mmsi dell'imbarcazione, ad esempio: 8836340\n";
                     std::string prova;
@@ -78,7 +88,15 @@ int main(int argc, char **argv) {
                     break;
                 }
                 case(5):{
-                    //Esequzione prepared statement 5
+
+
+                    std::cout << "inserisci il CF del cliente, ad esempio: GLLGNN81A54G224W\n";
+                    std::string prova;
+                    std::cin >> prova;
+                    const char * parameter = prova.c_str();
+                    ResultTable rt(PQexecPrepared(conn,"q2",1,&parameter,0,0,0));
+                    std::cout << rt;
+                    break;
 
                     break;
                 }
@@ -141,7 +159,6 @@ std::ostream &operator<<(std::ostream &os, const ResultTable &t) {
         for (int j = 0; j < t.getRighe() + 1; ++j) {
             maxChar[i] = v[j][i].size() > maxChar[i] ? v[j][i].size() : maxChar[i];
         }
-        std::cout << maxChar[i] << std::endl;
     }
 
     // Stampa effettiva delle tuple
