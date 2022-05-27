@@ -1,4 +1,3 @@
-codice
 */.DS_Store
 .DS_Store
 *.aux
@@ -11,4 +10,5 @@ src_relazione_tex/*.pdf
 .vscode
 src_cProgram/.idea
 src_cProgram/cmake-build-debug
+src_cProgram/codice
 *.out
