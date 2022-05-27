@@ -10,8 +10,6 @@
 
 \subsection{Consumi del marina nel mese indicato}
 \begin{lstlisting}
---Calcola consumi del marina nel mese indicato
-
 select allacciamento,
        sum(quantita) as quantita_consumata,
        a.unitamisura, a.prezzounitario,
@@ -23,14 +21,15 @@ group by allacciamento, unitamisura, prezzounitario;
 
 \end{lstlisting}
 
-\includegraphics[width=\linewidth]{img/result_consumi.png}
+Ritorna i consumi del marina nel mese indicato, dando un'idea delle bollette che dovrà pagare.\\
+\begin{center}
+    \includegraphics[width=\linewidth]{img/result_consumi.png}
+\end{center}
+
 
 \subsection{Clienti con più di 2 di prenotazioni che iniziano nel quinquiennio 2020->2025}
 
 \begin{lstlisting}
---Ritorna i clienti con più di 2 di prenotazioni che iniziano nel quinquiennio 2020->2025
---Questa query è utile in ottica di creazione di uno sconto per chi fa molte prenotazioni
-
 select count(cliente) as conteggio, p.nome, p.cognome, c.persona
 from prenotazione
 join cliente c on prenotazione.cliente = c.id
@@ -41,6 +40,9 @@ having count(cliente) >= 2
 order by conteggio desc;
 \end{lstlisting}
 
+Ritorna i clienti che hanno fatto almeno due prenotazioni nel quinquiennio presente.
+Questa è una tipica ricerca fatta per scopi di marketing, volendo comprendere meglio il ritorno delle persone nel marina.
+
 \begin{center}
     \includegraphics[width= 0.7\linewidth]{img/result_2prenotazioni.png}
 \end{center}
@@ -48,8 +50,6 @@ order by conteggio desc;
 \subsection{Conteggio soste di ogni imbarcazione}
 
 \begin{lstlisting}
---Conteggia le soste delle imbarcazioni
-
 select count(imbarcazione) as qt_soste, imbarcazione.nome, mmsi,p.nome as nome_proprietario,p.cognome as cognome_proprietario
 from sosta
 join imbarcazione on sosta.imbarcazione = imbarcazione.id
@@ -59,6 +59,8 @@ group by sosta.imbarcazione, imbarcazione.nome, mmsi,p.nome,p.cognome
 order by qt_soste desc;
 \end{lstlisting}
 
+Ritorna quante volte ogni imbarcazione ha sostato nel marina per stilarne una classifica.
+
 \begin{center}
     \includegraphics[width= 0.8\linewidth]{img/result_sosteimb.png}
 \end{center}
@@ -67,8 +69,6 @@ Il risultato contiene tante righe quante le imbarcazioni, è stato quindi tronca
 
 \subsection{Controllo dei posti disponibili per una certa imbarcazione}
 \begin{lstlisting}
---controllo dei posti disponibili per una certa imbarcazione
-
 select distinct molo.id as id_molo,molo.prezzogiorno,
     molo.profonditaminima,molo.larghezza,molo.lunghezza, molo.occupato
 from molo,imbarcazione
@@ -81,6 +81,8 @@ order by prezzogiorno
 limit 5;
 \end{lstlisting}
 
+Relativamente ad un'imbarcazione già inserita ci dice quali sono i 5 migliori moli in cui può sostare.
+
 \begin{center}
     \includegraphics[width= 0.8\linewidth]{img/result_molidisponibili.png}
 \end{center}
@@ -88,8 +90,6 @@ limit 5;
 \subsection{Stampa fattura di un cliente}
 
 \begin{lstlisting}
- -- stampa la fattura di un cliente
-
 with intestazione_fattura as(
     select fattura.*, p.nome, p.cognome from fattura
     join cliente c on c.persona = fattura.cliente
@@ -123,12 +123,20 @@ from spese, intestazione_fattura
 where spese.fattura = intestazione_fattura.id;
 \end{lstlisting}
 
+Stampa le fatture a carico di un cliente senza contare gli sconti dei clienti occasionali.
+
+\begin{center}
+    
 \includegraphics[width = \linewidth]{img/result_fattura.png}
+\end{center}
+
 
 \section{Indicizzazione}
 
-Essendo modificata pochissime volte\footnote{Ovvero solo in caso di ristrutturazioni del marina} e letta spesso in moltissime operazioni, l'entità \textbf{Molo} è importante che venga indicizzata tramite B-Tree, in questo modo, entrando per mezzo dell'id sarà decisamente più efficiente leggerne attributi come ad esempio le dimensioni o lo stato di occupazione.
+\begin{lstlisting}
+    CREATE INDEX idx_molo ON Molo USING btree(lunghezza,larghezza,profonditaminima);
+\end{lstlisting}
 
-L'indice appena descritto sarebbe poi comunque utile anche in caso di utilizzo su larga scala con migliaia di moli, oppure nel caso si volesse adattare la base dati all'utilizzo con una serie marina contenenti molti moli. I risultati di efficienza aumentata sarebbero quindi ancora più evidenti e utili.
+Viene creato un indice su molo usando le dimensioni per migliorarne la velocità d'accesso nel momento di ricerca di un molo di dimensioni adeguate.
 
 Sono stati poi, come precedentemente descritto al punto \ref{vincoli_gestiti} , utilizzati dei search tree per utilizzare al meglio i costraint relativi alle date ed orari di \textbf{prenotazioni} e \textbf{soste}.

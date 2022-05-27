@@ -1,0 +1,31 @@
+\section{Esecuzione programma C++}
+  Verificare all'interno del sorgente cpp che i parametri di connessione
+  al database corrispondano (sono quelli di default, quindi se si sono apportate
+  modifiche sarà necessario cambiarli).
+  \begin{lstlisting}[language=c++]
+    //Parametri database
+    #define PG_HOST "127.0.0.1" // Indirizzo Host
+    #define PG_USER "postgres" // Nome utente
+    #define PG_DB "progetto_amassare_fzontaro" //Nome del database
+    #define PG_PASS "******" //Password
+    #define PG_PORT "5432"
+  \end{lstlisting}
+
+  \noindent
+  Per prima cosa è necessario compilare il programma utilizzando il comando:
+  
+  \begin{lstlisting}[language=bash]
+    $compilatore_cpp query.cpp -lpq -o query
+  \end{lstlisting}
+
+  \noindent
+  Per eseguirlo (su sistemi UNIX like), basta utilizzare il comando:
+  \begin{lstlisting}[language=bash]
+    ./query
+  \end{lstlisting}
+
+  \noindent
+  All'avvio del programma, verrà mostrata all'utente la lista delle query, potrà digitare un numero da 1 a 5 per eseguirle. Se la query selezionata utilizza dei parametri, verranno richiesti in input.
+  \newline
+  Tutte le query sono contenute all'interno di un unico file cpp.
+  

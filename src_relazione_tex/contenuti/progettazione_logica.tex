@@ -203,9 +203,9 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 \paragraph{Cliente} A \textbf{Cliente} oltre alla sua chiave primaria \textit{Codice fiscale} viene aggiunto un id autoincrementante utilizzato come chiave\footnote{Chiave unica}. Questo è stato scelto per poter utilizzare il costraint relativo alla sovrapposizione delle prenotazioni. Infatti esso funziona solo con attributi interi e non con Varchar.
 
-\paragraph{Addetto} Addetto concettualmente eredita la chiave primaria di \textbf{Persona} ma come da progettazione concettuale mantiene la chiave su \underline{Servizio gestito, Data inizio contratto}. Come chiave primaria si sceglie quindi di utilizzare il \textit{codice fiscale} derivante da \textbf{persona} perché più leggero.
+\paragraph{Addetto} Addetto concettualmente eredita la chiave primaria di \textbf{Persona} ma come da progettazione concettuale mantiene la chiave su \underline{Servizio gestito, Data inizio contratto}. Come chiave primaria si sceglie quindi di utilizzare il \textit{codice fiscale} derivante da \textbf{persona} perché più comodo e leggero.
 
-\paragraph{Periodo di apertura} Per ridurre lo spazio utilizzato nella tabella che rappresenta la relazione \textit{Apertura}, a \textbf{Periodo di apertura} abbiamo aggiunto una chiave primaria tramite id autoincrementante. Chiaramente non abbiamo rimosso la chiave unica già presente, infatti essa garantisce l'unicità delle triple presenti.
+\paragraph{Periodo di apertura} Per ridurre lo spazio utilizzato nella tabella che rappresenta la relazione \textit{Apertura}, a \textbf{Periodo di apertura} abbiamo aggiunto una chiave primaria tramite id autoincrementante.
 
 \paragraph{Sosta} Per semplificare il lavoro con le prenotazioni trasformate in \textbf{Sosta} a sosta viene aggiunto un id autoincrementante come chiave. Questo id verrà utilizzato da \textbf{Prenotazione} per definire se la prenotazione è stata trasformata in sosta.
 
@@ -277,12 +277,12 @@ Non è stato purtroppo possibile mantenere fede a tutti i vincoli posti nella pr
 Non viene gestito il vincolo relativo a fattura, per via di una dipendenza circolare tra la generazione della fattura e la creazione delle sue righe. Si considera quindi la fattura con zero linee come "\textit{fattura da riempire}".
 
 \paragraph{Molo}
-Per gestire la consistenza di \textbf{Molo} si possono utilizzare dei trigger che la controllino ad ogni variazione dei dati. Ma per ridurre la complessità si è deciso anche qui di lasciare l'onere della consistenza al programmatore. In caso di riscontrate inconsistenze sarà comunque sempre possibile fare affidamento sulle soste le quali saranno sempre consistenti.
+Per gestire la consistenza di \textbf{Molo} si possono utilizzare dei trigger che la controllino ad ogni variazione dei dati, si è deciso però di lasciare l'onere al programmatore. In caso di riscontrate inconsistenze sarà comunque sempre possibile fare affidamento sulle soste le quali saranno sempre consistenti.
 
 \paragraph{Sosta}
-Un altro vincolo purtroppo non gestito è la palese impossibilità di inserire un'imbarcazione in un molo più piccolo di essa. Questo vincolo non è gestibile, se non con soluzioni inutilmente complesse, in quanto al momento Postgres non permette di fare controlli su altre tabelle al momento dell'inserimento di un dato. Si può però comunque notare che questo vincolo sarà rispettato fisicamente nella realtà.
+Un altro vincolo purtroppo non gestito è la palese impossibilità di inserire un'imbarcazione in un molo più piccolo di essa. Questo vincolo non è gestibile, se non con soluzioni esageratamente complesse. Si può però comunque notare che questo vincolo sarà rispettato fisicamente nella realtà.
 
-\paragraph{Prenotazione} In prenotazione, per lo stesso motivo posto al paragrafo superiore non sarà possibile controllare nelle soste o nei moli se al moemento della prenotazione sono già occupati. Questo vincolo è però in buona parte rispettato dato che nelle soste si inseriscono solo date attuali o postume e non date relative al futuro, mentre in Prenotazioni si inseriscono date future. Si nota quindi come i problemi affrontati dalle due entità non collidano in molti posti, e sarà in buona parte necessario controllare solo in Prenotazione. Si lascia in ogni caso al programmatore l'onere di mantenere il vincolo.
+\paragraph{Prenotazione} In prenotazione,non sarà possibile controllare nelle soste o nei moli se al moemento della prenotazione sono già occupati. Questo vincolo è però in buona parte rispettato dato che nelle soste si inseriscono solo date attuali o postume e non date relative al futuro, mentre in Prenotazioni si inseriscono date future. Si nota quindi come i concetti affrontati dalle due entità non collidano spesso. Si lascia in ogni caso al programmatore l'onere di mantenere il vincolo.
 
 \subsubsection{Vincoli gestiti}\label{vincoli_gestiti}
 

@@ -1,3 +1,12 @@
+
+
+CREATE DATABASE "GestioneServiziPortuali"  ENCODING = 'UTF8';
+
+
+ALTER DATABASE "GestioneServiziPortuali" OWNER TO postgres;
+
+\connect "GestioneServiziPortuali"
+
 -- Tabelle inizializzate rispettando i riferimenti
 
 -- Molo
@@ -216,7 +225,7 @@ CREATE TABLE Consumo
 );
 
 --Indice
-CREATE INDEX idx_molo ON Molo (id);
+CREATE INDEX idx_molo ON Molo USING btree(lunghezza,larghezza,profonditaminima);
 
 -- Dati
 ----------------------------------------------------------------
