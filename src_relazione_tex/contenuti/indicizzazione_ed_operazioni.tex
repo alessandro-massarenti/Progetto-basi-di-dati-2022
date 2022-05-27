@@ -41,7 +41,9 @@ having count(cliente) >= 2
 order by conteggio desc;
 \end{lstlisting}
 
-\includegraphics[width=\linewidth]{img/result_2prenotazioni.png}
+\begin{center}
+    \includegraphics[width= 0.7\linewidth]{img/result_2prenotazioni.png}
+\end{center}
 
 \subsection{Conteggio soste di ogni imbarcazione}
 
@@ -57,7 +59,9 @@ group by sosta.imbarcazione, imbarcazione.nome, mmsi,p.nome,p.cognome
 order by qt_soste desc;
 \end{lstlisting}
 
-\includegraphics[width=\linewidth]{img/result_sosteimb.png}
+\begin{center}
+    \includegraphics[width= 0.8\linewidth]{img/result_sosteimb.png}
+\end{center}
 
 Il risultato contiene tante righe quante le imbarcazioni, è stato quindi troncato per limitare il consumo di spazio.
 
@@ -77,7 +81,9 @@ order by prezzogiorno
 limit 5;
 \end{lstlisting}
 
-\includegraphics[width=\linewidth]{img/result_molidisponibili.png}
+\begin{center}
+    \includegraphics[width= 0.8\linewidth]{img/result_molidisponibili.png}
+\end{center}
 
 \subsection{Stampa fattura di un cliente}
 

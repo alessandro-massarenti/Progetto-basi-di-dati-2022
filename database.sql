@@ -216,45 +216,7 @@ CREATE TABLE Consumo
 );
 
 --Indice
-CREATE INDEX idx_molo
-    ON Molo (id);
-
--- Views utili
--- Le views con *_rid sono views che utilizzano solamente la ridondanza per calcolare le risposte
-
-create view molo_occupato_rid as
-select molo, arrivo, partenza
-from sosta
-where partenza > now() AT TIME ZONE 'Europe/Rome'
-and arrivo < now() AT TIME ZONE 'Europe/Rome';
-
-create view molo_occupato as
-select id from Molo
-where occupato = true;
-
-create view molo_libero_fino_a_rid as
-SELECT molo, arrivo as libero_fino_a
-FROM sosta
-WHERE molo NOT IN (select molo from molo_occupato_rid)
-  and arrivo > now() AT TIME ZONE 'Europe/Rome';
-
-create view molo_libero_da_rid as
-SELECT molo, arrivo as libero_da
-FROM sosta
-WHERE molo NOT IN (select molo from molo_occupato_rid)
-  and partenza < now() AT TIME ZONE 'Europe/Rome';
-
-create view libero_adesso_rid as
-select coalesce(molo_libero_da_rid.molo, mlfa.molo) as molo,
-       max(molo_libero_da_rid.libero_da)            as libero_da,
-       min(mlfa.libero_fino_a)                  as libero_fino_a
-from molo_libero_da_rid
-full join molo_libero_fino_a_rid mlfa on molo_libero_da_rid.molo = mlfa.molo
-group by (molo_libero_da_rid.molo, mlfa.molo);
-
-create view moli_liberi as
-select id as molo , libero_da,libero_fino_a, molo.occupato as occupato_ora
-from molo left join libero_adesso_rid on libero_adesso_rid.molo = molo.id;
+CREATE INDEX idx_molo ON Molo (id);
 
 -- Dati
 ----------------------------------------------------------------
