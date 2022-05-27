@@ -218,35 +218,35 @@ Tutte le chiavi primarie sono definite utilizzando le chiavi della progettazione
 
 Per questione di compatibilità con il \textit{DBMS} alcuni nomi di attributi entità e relazioni sono stati normalizzati, utilizzando il camelCase, togliendo gli accenti, accorciando i nomi molto lunghi e con altre piccole accortezze.\\
 
-\textbf{Imbarcazione}(\underline{\textit{MMSI}}, \underline{id}, cliente, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
+La \underline{\textbf{chiave primaria}} è la prima delle chiavi indicate dalla \underline{\textbf{sottilineatura}}, ovvero la chiave indicata in \textbf{grassetto}.\\
 
-\textbf{Molo} (\underline{\textit{id}}, occupato, profonditaMinima, larghezza, lunghezza, prezzoGiorno);
+\textit{Imbarcazione}(\underline{\textbf{MMSI}}, \underline{id}, cliente, bandiera, nomeCapitano, nPostiLetto, nome, pescaggio, larghezza, LOA);
 
-\textbf{Servizio} (\underline{\textit{nome}});
+\textit{Molo} (\underline{\textbf{id}}, occupato, profonditaMinima, larghezza, lunghezza, prezzoGiorno);
 
-\textbf{Addetto} (\underline{\textit{persona}}, \underline{servizio, inizioContratto}, fineContratto);
+\textit{Servizio} (\underline{\textbf{nome}});
 
-\textbf{Cliente} (\underline{\textit{persona}}, \underline{id}, cittadinanza, residenza, quantitaSoste, scontoPersonale);
+\textit{Addetto} (\underline{\textbf{persona}}, \underline{servizio, inizioContratto}, fineContratto);
 
-\textbf{Persona} (\underline{\textit{CF}}, dataNascita, nome, cognome);
+\textit{Cliente} (\underline{\textbf{persona}}, \underline{id}, cittadinanza, residenza, quantitaSoste, scontoPersonale);
 
-\textbf{Prenotazione} (\underline{\textit{cliente, prevArrivo, molo}}, prevPartenza, sosta);
+\textit{Persona} (\underline{\textbf{CF}}, dataNascita, nome, cognome);
 
-\textbf{Sosta} (\underline{\textit{imbarcazione, molo, arrivo}}, \underline{id}, partenza, fattura);
+\textit{Prenotazione} (\underline{\textbf{cliente, prevArrivo, molo}}, prevPartenza, sosta);
 
-\textbf{Allacciamento} (\underline{\textit{nome}}, prezzoUnitario, unitaMisura);
+\textit{Sosta} (\underline{\textbf{imbarcazione, molo, arrivo}}, \underline{id}, partenza, fattura);
 
-\textbf{Fornitura} (\underline{\textit{allacciamento, molo}});
+\textit{Allacciamento} (\underline{\textbf{nome}}, prezzoUnitario, unitaMisura);
 
-\textbf{PeriodoApertura} (\underline{\textit{id}}, \underline{giorno, apertura, chiusura});
+\textit{Fornitura} (\underline{\textbf{allacciamento, molo}});
 
-\textbf{AperturaServizio} (\underline{\textit{servizio, periodoApertura}});
+\textit{PeriodoApertura} (\underline{\textbf{id}}, \underline{giorno, apertura, chiusura});
 
-\textbf{Consumo}(\underline{\textit{cliente, allaciamento, inizio}}, fine, quantita, fattura);
+\textit{AperturaServizio} (\underline{\textbf{servizio, periodoApertura}});
 
-\textbf{Fattura}(\underline{\textit{id}},\underline{cliente, scadenza}, pagato);\\
+\textit{Consumo}(\underline{\textbf{cliente, allaciamento, inizio}}, fine, quantita, fattura);
 
-La chiave primaria è la prima delle chiavi indicate dalla sottilineatura.
+\textit{Fattura}(\underline{\textbf{id}},\underline{cliente, scadenza}, pagato);\\
 
 \subsection{Vincoli di integrità referenziali}
 
