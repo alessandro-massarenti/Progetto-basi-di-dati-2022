@@ -5,7 +5,7 @@ CREATE DATABASE "GestioneServiziPortuali"  ENCODING = 'UTF8';
 
 ALTER DATABASE "GestioneServiziPortuali" OWNER TO postgres;
 
-\connect "GestioneServiziPortuali"
+--\connect "GestioneServiziPortuali"
 
 -- Tabelle inizializzate rispettando i riferimenti
 
