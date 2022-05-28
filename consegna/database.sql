@@ -1,4 +1,4 @@
-
+-- Creazione del database
 
 CREATE DATABASE "GestioneServiziPortuali"  ENCODING = 'UTF8';
 
